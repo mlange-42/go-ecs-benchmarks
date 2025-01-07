@@ -2,6 +2,8 @@ package util
 
 import (
 	"fmt"
+	"os"
+	"path"
 	"strings"
 	"testing"
 )
@@ -17,7 +19,9 @@ type Benchmark struct {
 	F    func(b *testing.B, n int)
 }
 
-func RunBenchmarks(title string, benchmarks Benchmarks, format func(Benchmarks) string) {
+func RunBenchmarks(file string, benchmarks Benchmarks, format func(Benchmarks) string) {
+	fmt.Println("Running", file)
+
 	benchmarks.time = make([][]float64, len(benchmarks.Benches))
 
 	for i := range benchmarks.time {
@@ -25,26 +29,29 @@ func RunBenchmarks(title string, benchmarks Benchmarks, format func(Benchmarks) 
 	}
 
 	for i, n := range benchmarks.N {
+		fmt.Println("   N =", n)
 		for j := range benchmarks.Benches {
 			bench := &benchmarks.Benches[j]
+			fmt.Println("       ", bench.Name)
 			res := testing.Benchmark(func(b *testing.B) {
 				bench.F(b, n)
 			})
 			benchmarks.time[j][i] = float64(res.T.Nanoseconds()) / float64(res.N*n)
 		}
 	}
-	fmt.Printf("## %s\n\n%s", title, format(benchmarks))
+
+	os.WriteFile(path.Join("results", file), []byte(format(benchmarks)), 0666)
 }
 
 func ToCSV(benchmarks Benchmarks) string {
 	b := strings.Builder{}
 
-	b.WriteString("N;")
+	b.WriteString("N,")
 	for j := range benchmarks.Benches {
 		bench := &benchmarks.Benches[j]
 		b.WriteString(bench.Name)
 		if j < len(benchmarks.Benches)-1 {
-			b.WriteString(";")
+			b.WriteString(",")
 		}
 	}
 	b.WriteString("\n")
@@ -57,7 +64,7 @@ func ToCSV(benchmarks Benchmarks) string {
 			tStr := fmt.Sprintf("%f", t)
 			b.WriteString(tStr)
 			if j < len(benchmarks.Benches)-1 {
-				b.WriteString(";")
+				b.WriteString(",")
 			}
 		}
 		b.WriteString("\n")
