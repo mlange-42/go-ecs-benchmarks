@@ -25,7 +25,7 @@ All components used in the benchmarks have two `float64` fields.
 `N` entities with components `Position` and `Velocity`.
 Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![create2comp](https://github.com/user-attachments/assets/f1b613a1-4609-4318-a7a0-98e511a3a881)
+![query2comp](https://github.com/user-attachments/assets/5f0ac10d-8f39-4d5c-9915-0dcae22a442c)
 
 | N | Arche | Arche (cached) | Donburi | Ento | ggecs | uot |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -81,9 +81,9 @@ Query all `[Position, Velocity]` entities, and add the velocity vector to the po
 
 ### Create entities
 
-Create `N` entities with components `Position` and `Velocity`.
+![create2comp](https://github.com/user-attachments/assets/f1b613a1-4609-4318-a7a0-98e511a3a881)
 
-![query2comp](https://github.com/user-attachments/assets/5f0ac10d-8f39-4d5c-9915-0dcae22a442c)
+Create `N` entities with components `Position` and `Velocity`.
 
 | N | Arche | Arche (batch) | Donburi | Ento | ggecs | uot |
 | --- | --- | --- | --- | --- | --- | --- |
