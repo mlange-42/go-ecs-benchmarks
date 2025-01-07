@@ -33,6 +33,10 @@ def plot(file: str):
     fig.savefig(os.path.join(results_dir, f"{file}.png"))
     plt.close(fig)
 
+    md = to_markdown(data)
+    with open(os.path.join(results_dir, f"{file}.md"), "w") as f:
+        f.write(md)
+
 
 def plot_bars(data: pd.DataFrame, ax):
     cols = data.columns[1:]
@@ -85,6 +89,33 @@ def plot_lines(data: pd.DataFrame, ax):
     ax.set_xticklabels(labels)
 
     ax.legend(framealpha=0.5)
+
+
+def to_markdown(data: pd.DataFrame) -> str:
+    s = ""
+    s += "| " + " | ".join(data.columns) + " |\n"
+    s += "| " + " | ".join(["---"] * len(data.columns)) + " |\n"
+
+    for i, row in data.iterrows():
+        if row.N < 1000:
+            n = "%d" % (row.N)
+        elif row.N < 1_000_000:
+            n = "%dk" % (row.N//1000)
+        else:
+            n = "%dM" % (row.N//1000000)
+        
+        vals = [to_time(v) for v in row.iloc[1:]]
+        s += "| " + " | ".join([n] + vals) + " |\n"
+
+    return s
+
+
+def to_time(v: float) -> str:
+    if v < 1_000:
+        return f"{v:.2f}ns"
+    if v < 1_000_000:
+        return f"{(v/1_000):.2f}us"
+    return f"{(v/1_000_000):.2f}ms"
 
 
 if __name__ == "__main__":
