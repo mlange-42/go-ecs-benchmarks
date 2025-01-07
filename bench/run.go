@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/mlange-42/go-ecs-benchmarks/bench/create2comp"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query1in10"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query2comp"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query32arch"
@@ -18,5 +19,7 @@ func RunAll() {
 
 	util.RunBenchmarks("query2comp.csv", query2comp.Benchmarks(), util.ToCSV)
 	util.RunBenchmarks("query1in10.csv", query1in10.Benchmarks(), util.ToCSV)
-	util.RunBenchmarks("query128arch.csv", query32arch.Benchmarks(), util.ToCSV)
+	util.RunBenchmarks("query32arch.csv", query32arch.Benchmarks(), util.ToCSV)
+
+	util.RunBenchmarks("create2comp.csv", create2comp.Benchmarks(), util.ToCSV)
 }
