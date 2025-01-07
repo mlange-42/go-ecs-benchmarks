@@ -1,4 +1,4 @@
-package create2comp
+package create2compalloc
 
 import (
 	"testing"
@@ -18,15 +18,6 @@ func runGGEcs(b *testing.B, n int) {
 		world := ecs.NewWorld(1024)
 		world.Register(ecs.NewComponentRegistry[comps.Position](PositionComponentID))
 		world.Register(ecs.NewComponentRegistry[comps.Velocity](VelocityComponentID))
-
-		entities := make([]ecs.EntityID, 0, n)
-		for range n {
-			e := world.NewEntity(PositionComponentID, VelocityComponentID)
-			entities = append(entities, e)
-		}
-		for _, e := range entities {
-			world.RemEntity(e)
-		}
 
 		b.StartTimer()
 		for range n {

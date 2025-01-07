@@ -11,6 +11,7 @@ files = [
     "query1in10",
     "query32arch",
     "create2comp",
+    "create2comp_alloc"
     "add_remove",
 ]
 

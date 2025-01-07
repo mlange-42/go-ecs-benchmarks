@@ -1,4 +1,4 @@
-package create2comp
+package create2compalloc
 
 import (
 	"testing"
@@ -15,15 +15,6 @@ func runDonburi(b *testing.B, n int) {
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		world := donburi.NewWorld()
-
-		entities := make([]donburi.Entity, 0, n)
-		for range n {
-			e := world.Create(position, velocity)
-			entities = append(entities, e)
-		}
-		for _, e := range entities {
-			world.Remove(e)
-		}
 
 		b.StartTimer()
 		for range n {

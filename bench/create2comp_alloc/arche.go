@@ -1,4 +1,4 @@
-package create2comp
+package create2compalloc
 
 import (
 	"testing"
@@ -16,9 +16,6 @@ func runArche(b *testing.B, n int) {
 		velID := ecs.ComponentID[comps.Velocity](&world)
 		ids := []ecs.ID{posID, velID}
 
-		ecs.NewBuilder(&world, ids...).NewBatch(n)
-		world.Batch().RemoveEntities(ecs.All(ids...))
-
 		b.StartTimer()
 		for range n {
 			world.NewEntity(ids...)
@@ -35,9 +32,6 @@ func runArcheBatched(b *testing.B, n int) {
 		posID := ecs.ComponentID[comps.Position](&world)
 		velID := ecs.ComponentID[comps.Velocity](&world)
 		ids := []ecs.ID{posID, velID}
-
-		ecs.NewBuilder(&world, ids...).NewBatch(n)
-		world.Batch().RemoveEntities(ecs.All(ids...))
 
 		b.StartTimer()
 		ecs.NewBuilder(&world, ids...).NewBatch(n)

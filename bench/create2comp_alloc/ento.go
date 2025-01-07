@@ -1,4 +1,4 @@
-package create2comp
+package create2compalloc
 
 import (
 	"testing"
@@ -14,15 +14,6 @@ func runEnto(b *testing.B, n int) {
 			WithDenseComponents(comps.Position{}).
 			WithDenseComponents(comps.Velocity{}).
 			Build(1024)
-
-		entities := make([]*ento.Entity, 0, n)
-		for range n {
-			e := world.AddEntity(comps.Position{}, comps.Velocity{})
-			entities = append(entities, e)
-		}
-		for _, e := range entities {
-			world.RemoveEntity(e)
-		}
 
 		b.StartTimer()
 		for range n {
