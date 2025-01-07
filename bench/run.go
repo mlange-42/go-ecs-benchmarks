@@ -15,10 +15,6 @@ func RunAll() {
 	if err != nil && !os.IsExist(err) {
 		log.Fatal(err)
 	}
-	err = os.Mkdir("plots", os.ModePerm)
-	if err != nil && !os.IsExist(err) {
-		log.Fatal(err)
-	}
 
 	util.RunBenchmarks("query2comp.csv", query2comp.Benchmarks(), util.ToCSV)
 	util.RunBenchmarks("query2comp1of10.csv", query2comp1of10.Benchmarks(), util.ToCSV)

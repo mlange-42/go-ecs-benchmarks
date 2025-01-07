@@ -1,0 +1,30 @@
+name: Benchmarks
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  benchmarks:
+    name: Run benchmarks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.23.x'
+      - name: Install dependencies
+        run: go get .
+      - name: Run benchmarks
+        run: |
+          go run .
+      - name: Archive benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results
+          path: results

@@ -5,7 +5,6 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 results_dir = "results"
-plot_dir = "plots"
 
 files = [
     "query2comp",
@@ -27,8 +26,8 @@ def plot(file: str):
     
     fig.tight_layout()
 
-    fig.savefig(os.path.join(plot_dir, f"{file}.svg"))
-    fig.savefig(os.path.join(plot_dir, f"{file}.png"))
+    fig.savefig(os.path.join(results_dir, f"{file}.svg"))
+    fig.savefig(os.path.join(results_dir, f"{file}.png"))
     plt.close(fig)
 
 def plot_bars(data: pd.DataFrame, ax):
@@ -51,8 +50,6 @@ def plot_bars(data: pd.DataFrame, ax):
 
     labels = [str(n) if n < 1000 else f"{n//1000}k" if n < 1000000 else f"{n//1000000}M" for n in data.N]
     ax.set_xticklabels(labels)
-
-    #ax.legend(framealpha=0.5)
 
 
 def plot_lines(data: pd.DataFrame, ax):
