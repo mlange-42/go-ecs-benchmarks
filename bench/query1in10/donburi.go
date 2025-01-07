@@ -1,11 +1,10 @@
-package query2compfrag
+package query1in10
 
 import (
 	"testing"
 
 	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
 	"github.com/yohamta/donburi"
-	"github.com/yohamta/donburi/component"
 	"github.com/yohamta/donburi/filter"
 )
 
@@ -15,20 +14,12 @@ func runDonburi(b *testing.B, n int) {
 
 	var position = donburi.NewComponentType[comps.Position]()
 	var velocity = donburi.NewComponentType[comps.Velocity]()
-	var c1 = donburi.NewComponentType[comps.C1]()
-	var c2 = donburi.NewComponentType[comps.C2]()
-	var c3 = donburi.NewComponentType[comps.C3]()
-	var c4 = donburi.NewComponentType[comps.C4]()
-	var c5 = donburi.NewComponentType[comps.C5]()
 
-	extraIDs := []component.IComponentType{c1, c2, c3, c4, c5}
-	ids := []component.IComponentType{}
-
+	for i := 0; i < n*9; i++ {
+		world.Create(position)
+	}
 	for i := 0; i < n; i++ {
-		ids = append(ids, position, velocity, extraIDs[i%len(extraIDs)])
-		world.Create(ids...)
-
-		ids = ids[:0]
+		world.Create(position, velocity)
 	}
 
 	query := donburi.NewQuery(filter.Contains(position, velocity))

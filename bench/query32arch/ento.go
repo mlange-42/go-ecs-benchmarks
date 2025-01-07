@@ -1,4 +1,4 @@
-package query2comp1of10
+package query32arch
 
 import (
 	"testing"
@@ -12,16 +12,29 @@ func runEnto(b *testing.B, n int) {
 	world := ento.NewWorldBuilder().
 		WithDenseComponents(comps.Position{}).
 		WithDenseComponents(comps.Velocity{}).
+		WithDenseComponents(comps.C1{}).
+		WithDenseComponents(comps.C2{}).
+		WithDenseComponents(comps.C3{}).
+		WithDenseComponents(comps.C4{}).
+		WithDenseComponents(comps.C5{}).
 		Build(1024)
 
 	system := PosVelSystem{}
 	world.AddSystems(&system)
 
-	for i := 0; i < n*9; i++ {
-		world.AddEntity(comps.Position{})
-	}
+	extraComps := []any{comps.C1{}, comps.C2{}, comps.C3{}, comps.C4{}, comps.C5{}}
+	ids := []any{}
 	for i := 0; i < n; i++ {
-		world.AddEntity(comps.Position{}, comps.Velocity{})
+		ids = append(ids, comps.Position{}, comps.Velocity{})
+		for j, id := range extraComps {
+			m := 1 << j
+			if i&m == m {
+				ids = append(ids, id)
+			}
+		}
+		world.AddEntity(ids...)
+
+		ids = ids[:0]
 	}
 	b.StartTimer()
 

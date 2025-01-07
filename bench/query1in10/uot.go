@@ -1,4 +1,4 @@
-package query2compfrag
+package query1in10
 
 import (
 	"testing"
@@ -11,14 +11,17 @@ func runUot(b *testing.B, n int) {
 	b.StopTimer()
 	world := ecs.NewWorld()
 
-	extraComps := []any{comps.C1{}, comps.C2{}, comps.C3{}, comps.C4{}, comps.C5{}}
-
+	for i := 0; i < 9*n; i++ {
+		id := world.NewId()
+		ecs.Write(world, id,
+			ecs.C(comps.Position{}),
+		)
+	}
 	for i := 0; i < n; i++ {
 		id := world.NewId()
 		ecs.Write(world, id,
 			ecs.C(comps.Position{}),
 			ecs.C(comps.Velocity{}),
-			ecs.C(extraComps[i%len(extraComps)]),
 		)
 	}
 	query := ecs.Query2[comps.Position, comps.Velocity](world)
