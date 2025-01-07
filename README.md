@@ -81,9 +81,22 @@ Query all `[Position, Velocity]` entities, and add the velocity vector to the po
 
 ### Create entities
 
-![create2comp](https://github.com/user-attachments/assets/f1b613a1-4609-4318-a7a0-98e511a3a881)
+Create `N` entities with components `Position` and `Velocity`.
+
+The operation is performed once before benchmarking,
+to exclude things like archetype creation and memory allocation.
+See the benchmark below for entity creation with allocation.
+
+### Create entities, allocating
 
 Create `N` entities with components `Position` and `Velocity`.
+
+Each round is performed on a fresh world.
+Thus, low `N` values might be biased by things like archetype creation and memory allocation,
+which may be handled differently by different implementations.
+See the benchmark above for entity creation without allocation.
+
+![create2comp](https://github.com/user-attachments/assets/f1b613a1-4609-4318-a7a0-98e511a3a881)
 
 | N | Arche | Arche (batch) | Donburi | Ento | ggecs | uot |
 | --- | --- | --- | --- | --- | --- | --- |

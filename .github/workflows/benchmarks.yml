@@ -22,7 +22,7 @@ jobs:
         run: go get .
       - name: Run benchmarks
         run: |
-          go run .
+          go run . -test.benchtime=0.1s
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
