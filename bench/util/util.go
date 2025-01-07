@@ -57,7 +57,7 @@ func ToCSV(benchmarks Benchmarks) string {
 	b.WriteString("\n")
 
 	for i, n := range benchmarks.N {
-		b.WriteString(fmt.Sprintf("%d;", n))
+		b.WriteString(fmt.Sprintf("%d,", n))
 		for j := range benchmarks.Benches {
 			t := benchmarks.time[j][i]
 

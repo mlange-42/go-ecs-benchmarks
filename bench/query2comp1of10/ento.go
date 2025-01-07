@@ -1,26 +1,27 @@
-package posvel
+package query2comp1of10
 
 import (
 	"testing"
 
+	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
 	"github.com/wfranczyk/ento"
 )
 
 func runEnto(b *testing.B, n int) {
 	b.StopTimer()
 	world := ento.NewWorldBuilder().
-		WithDenseComponents(Position{}).
-		WithSparseComponents(Velocity{}).
+		WithDenseComponents(comps.Position{}).
+		WithDenseComponents(comps.Velocity{}).
 		Build(1024)
 
 	system := PosVelSystem{}
 	world.AddSystems(&system)
 
-	for i := 0; i < n*5; i++ {
-		world.AddEntity(Position{})
+	for i := 0; i < n*9; i++ {
+		world.AddEntity(comps.Position{})
 	}
 	for i := 0; i < n; i++ {
-		world.AddEntity(Position{}, Velocity{})
+		world.AddEntity(comps.Position{}, comps.Velocity{})
 	}
 	b.StartTimer()
 
@@ -30,8 +31,8 @@ func runEnto(b *testing.B, n int) {
 }
 
 type PosVelSystem struct {
-	Pos *Position `ento:"required"`
-	Vel *Velocity `ento:"required"`
+	Pos *comps.Position `ento:"required"`
+	Vel *comps.Velocity `ento:"required"`
 }
 
 func (s *PosVelSystem) Update(entity *ento.Entity) {

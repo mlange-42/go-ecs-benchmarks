@@ -7,7 +7,11 @@ from matplotlib import pyplot as plt
 results_dir = "results"
 plot_dir = "plots"
 
-files = ["query.csv"]
+files = [
+    "query2comp",
+    "query2comp1of10",
+    "query2comp_frag",
+    ]
 
 
 def plot_all():
@@ -15,7 +19,7 @@ def plot_all():
         plot(f)
 
 def plot(file: str):
-    data = pd.read_csv(os.path.join(results_dir, file))
+    data = pd.read_csv(os.path.join(results_dir, f"{file}.csv"))
     fig, ax = plt.subplots(ncols=2, figsize=(10, 4))
 
     plot_bars(data, ax[0])
@@ -42,10 +46,13 @@ def plot_bars(data: pd.DataFrame, ax):
     ax.set_yticklabels(["1ns", "10ns", "100ns", "1μs"])
 
     ax.set_xlabel("#Entities")
-    ax.set_xticks(range(len(data.index)))
-    ax.set_xticklabels(data.N)
 
-    ax.legend(framealpha=0.5)
+    ax.set_xticks(range(len(data.index)))
+
+    labels = [str(n) if n < 1000 else f"{n//1000}k" if n < 1000000 else f"{n//1000000}M" for n in data.N]
+    ax.set_xticklabels(labels)
+
+    #ax.legend(framealpha=0.5)
 
 
 def plot_lines(data: pd.DataFrame, ax):
@@ -66,7 +73,9 @@ def plot_lines(data: pd.DataFrame, ax):
     ax.set_xlabel("#Entities")
 
     ax.set_xticks(data.N)
-    ax.set_xticklabels(data.N)
+
+    labels = [str(n) if n < 1000 else f"{n//1000}k" if n < 1000000 else f"{n//1000000}M" for n in data.N]
+    ax.set_xticklabels(labels)
 
     ax.legend(framealpha=0.5)
 

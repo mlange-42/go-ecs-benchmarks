@@ -1,8 +1,9 @@
-package posvel
+package query2comp
 
 import (
 	"testing"
 
+	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/filter"
 )
@@ -11,12 +12,9 @@ func runDonburi(b *testing.B, n int) {
 	b.StopTimer()
 	world := donburi.NewWorld()
 
-	var position = donburi.NewComponentType[Position]()
-	var velocity = donburi.NewComponentType[Velocity]()
+	var position = donburi.NewComponentType[comps.Position]()
+	var velocity = donburi.NewComponentType[comps.Velocity]()
 
-	for i := 0; i < n*5; i++ {
-		world.Create(position)
-	}
 	for i := 0; i < n; i++ {
 		world.Create(position, velocity)
 	}

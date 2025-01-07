@@ -4,7 +4,9 @@ import (
 	"log"
 	"os"
 
-	posvel "github.com/mlange-42/go-ecs-benchmarks/bench/pos_vel"
+	"github.com/mlange-42/go-ecs-benchmarks/bench/query2comp"
+	"github.com/mlange-42/go-ecs-benchmarks/bench/query2comp1of10"
+	query2compfrag "github.com/mlange-42/go-ecs-benchmarks/bench/query2comp_frag"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/util"
 )
 
@@ -18,5 +20,7 @@ func RunAll() {
 		log.Fatal(err)
 	}
 
-	util.RunBenchmarks("query.csv", posvel.Benchmarks(), util.ToCSV)
+	util.RunBenchmarks("query2comp.csv", query2comp.Benchmarks(), util.ToCSV)
+	util.RunBenchmarks("query2comp1of10.csv", query2comp1of10.Benchmarks(), util.ToCSV)
+	util.RunBenchmarks("query2comp_frag.csv", query2compfrag.Benchmarks(), util.ToCSV)
 }
