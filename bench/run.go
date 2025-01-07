@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	addremove "github.com/mlange-42/go-ecs-benchmarks/bench/add_remove"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/create2comp"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query1in10"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query2comp"
@@ -22,4 +23,5 @@ func RunAll() {
 	util.RunBenchmarks("query32arch.csv", query32arch.Benchmarks(), util.ToCSV)
 
 	util.RunBenchmarks("create2comp.csv", create2comp.Benchmarks(), util.ToCSV)
+	util.RunBenchmarks("add_remove.csv", addremove.Benchmarks(), util.ToCSV)
 }

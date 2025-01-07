@@ -3,8 +3,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/marioolofo/go-gameengine-ecs v0.9.0 h1:J0awhWBm7CVmtDa62ouA3X7uuUTS+zcENIeBwSRumvE=
 github.com/marioolofo/go-gameengine-ecs v0.9.0/go.mod h1:oigfVORaCpMEaktM5fmk/jScla/M7dEMCnJlyZmYiLo=
-github.com/mlange-42/arche v0.14.5 h1:aZZPpHfK7BPagLnTnhlKLyPEnuqz7+7mfFPkMCnVOtU=
-github.com/mlange-42/arche v0.14.5/go.mod h1:xJ7dI3619d4oAEur0Y1WA6nhZ7dCS8VYqydIojtWmXo=
+github.com/mlange-42/arche v0.14.6-0.20250107175557-964b6b479bb4 h1:ATLezJA99FehzATdmfDEg6cquF7KIYjPycVGtlKFrA4=
+github.com/mlange-42/arche v0.14.6-0.20250107175557-964b6b479bb4/go.mod h1:xJ7dI3619d4oAEur0Y1WA6nhZ7dCS8VYqydIojtWmXo=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
