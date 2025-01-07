@@ -1,4 +1,4 @@
-package query2compfrag
+package query1in10
 
 import (
 	"testing"
@@ -12,23 +12,16 @@ func runEnto(b *testing.B, n int) {
 	world := ento.NewWorldBuilder().
 		WithDenseComponents(comps.Position{}).
 		WithDenseComponents(comps.Velocity{}).
-		WithDenseComponents(comps.C1{}).
-		WithDenseComponents(comps.C2{}).
-		WithDenseComponents(comps.C3{}).
-		WithDenseComponents(comps.C4{}).
-		WithDenseComponents(comps.C5{}).
 		Build(1024)
 
 	system := PosVelSystem{}
 	world.AddSystems(&system)
 
-	extraComps := []any{comps.C1{}, comps.C2{}, comps.C3{}, comps.C4{}, comps.C5{}}
-	ids := []any{}
+	for i := 0; i < n*9; i++ {
+		world.AddEntity(comps.Position{})
+	}
 	for i := 0; i < n; i++ {
-		ids = append(ids, comps.Position{}, comps.Velocity{}, extraComps[i%len(extraComps)])
-		world.AddEntity(ids...)
-
-		ids = ids[:0]
+		world.AddEntity(comps.Position{}, comps.Velocity{})
 	}
 	b.StartTimer()
 

@@ -1,4 +1,4 @@
-package query2comp1of10
+package query1in10
 
 import (
 	"testing"

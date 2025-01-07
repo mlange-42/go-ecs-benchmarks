@@ -1,4 +1,4 @@
-package query2compfrag
+package query32arch
 
 import (
 	"testing"
@@ -33,7 +33,13 @@ func runGGEcs(b *testing.B, n int) {
 
 	ids := []ecs.ComponentID{}
 	for i := 0; i < n; i++ {
-		ids = append(ids, PositionComponentID, VelocityComponentID, extraIDs[i%len(extraIDs)])
+		ids = append(ids, PositionComponentID, VelocityComponentID)
+		for j, id := range extraIDs {
+			m := 1 << j
+			if i&m == m {
+				ids = append(ids, id)
+			}
+		}
 		_ = world.NewEntity(ids...)
 
 		ids = ids[:0]

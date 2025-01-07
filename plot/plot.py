@@ -8,8 +8,8 @@ results_dir = "results"
 
 files = [
     "query2comp",
-    "query2comp1of10",
-    "query2comp_frag",
+    "query1in10",
+    "query32arch",
     ]
 
 
