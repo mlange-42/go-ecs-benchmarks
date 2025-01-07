@@ -12,23 +12,28 @@ func runDonburi(b *testing.B, n int) {
 	var position = donburi.NewComponentType[comps.Position]()
 	var velocity = donburi.NewComponentType[comps.Velocity]()
 
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		world := donburi.NewWorld()
+	world := donburi.NewWorld()
 
-		entities := make([]donburi.Entity, 0, n)
+	entities := make([]donburi.Entity, 0, n)
+	for range n {
+		e := world.Create(position, velocity)
+		entities = append(entities, e)
+	}
+	for _, e := range entities {
+		world.Remove(e)
+	}
+	entities = entities[:0]
+
+	for i := 0; i < b.N; i++ {
+		b.StartTimer()
 		for range n {
 			e := world.Create(position, velocity)
 			entities = append(entities, e)
 		}
+		b.StopTimer()
 		for _, e := range entities {
 			world.Remove(e)
 		}
-
-		b.StartTimer()
-		for range n {
-			world.Create(position, velocity)
-		}
-		b.StopTimer()
+		entities = entities[:0]
 	}
 }
