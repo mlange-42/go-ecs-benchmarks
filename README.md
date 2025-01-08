@@ -131,3 +131,27 @@ One iteration is performed before the benchmarking starts, to exclude memory all
 | 16k | 114.70ns | 28.60ns | 522.67ns | 139.11ns | 580.68ns | 817.44ns |
 | 256k | 115.21ns | 29.41ns | 505.87ns | 195.28ns | 717.39ns | 1.31us |
 | 1M | 114.88ns | 30.65ns | 524.19ns | 246.51ns | 903.32ns | 1.48us |
+
+## Running the benchmarks
+
+Run the benchmarks using the following command:
+
+```shell
+go run . -test.benchtime=0.25s
+```
+
+> On PowerShell use this instead:  
+> `go run . --% -test.benchtime=0.25s`
+
+The `benchtime` limit is required for some of the benchmarks that have a high
+overhead that is not measured. They would take forever otherwise.
+
+To create the plots, run `plot/plot.py`. The following packages are required:
+- numpy
+- pandas
+- matplotlib
+
+```
+pip install -r ./plot/requirements.txt
+python plot/plot.py
+```

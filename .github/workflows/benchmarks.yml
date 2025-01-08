@@ -20,16 +20,17 @@ jobs:
           go-version: '1.23.x'
       - name: Install dependencies
         run: go get .
-      - name: Run benchmarks
-        run: |
-          go run . -test.benchtime=0.25s
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+          cache: 'pip'
       - name: Install Python dependencies
         run: |
-          pip install numpy pandas matplotlib
+          pip install -r ./plot/requirements.txt
+      - name: Run benchmarks
+        run: |
+          go run . -test.benchtime=0.25s
       - name: Plot results
         run: |
           python plot/plot.py

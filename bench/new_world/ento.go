@@ -15,7 +15,7 @@ func runEnto(b *testing.B, n int) {
 			WithDenseComponents(comps.Position{}).
 			WithDenseComponents(comps.Velocity{}).
 			Build(1024)
-		b.StopTimer()
-		assert.NotNil(b, world)
 	}
+	b.StopTimer()
+	assert.NotNil(b, world)
 }

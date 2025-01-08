@@ -19,8 +19,8 @@ func runGGEcs(b *testing.B, n int) {
 		world = ecs.NewWorld(1024)
 		world.Register(ecs.NewComponentRegistry[comps.Position](PositionComponentID))
 		world.Register(ecs.NewComponentRegistry[comps.Velocity](VelocityComponentID))
-		b.StopTimer()
-		e := world.NewEntity()
-		assert.True(b, world.IsAlive(e))
 	}
+	b.StopTimer()
+	e := world.NewEntity()
+	assert.True(b, world.IsAlive(e))
 }

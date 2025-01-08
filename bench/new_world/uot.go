@@ -11,7 +11,7 @@ func runUot(b *testing.B, n int) {
 	var world *ecs.World
 	for i := 0; i < b.N; i++ {
 		world = ecs.NewWorld()
-		b.StopTimer()
-		assert.NotNil(b, world)
 	}
+	b.StopTimer()
+	assert.NotNil(b, world)
 }
