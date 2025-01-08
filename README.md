@@ -2,7 +2,7 @@
 
 Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
-> Disclaimer: This repository is maintained by the developer of
+> Disclaimer: This repository is maintained by the author of
 > [Arche](https://github.com/mlange-42/arche), an archetype-based ECS for Go.
 
 ## Benchmark candidates
