@@ -24,6 +24,8 @@ In case you are a developer or user of an implementation included here,
 feel free to check the benchmarked code for any possible improvements.
 Open an issue if you want a version update.
 
+[![Star History Chart](https://api.star-history.com/svg?repos=mlange-42/arche,yohamta/donburi,wwfranczyk/ento,marioolofo/go-gameengine-ecs,unitoftime/ecs&type=Date)](https://star-history.com/#mlange-42/arche&yohamta/donburi&wwfranczyk/ento&marioolofo/go-gameengine-ecs&unitoftime/ecs&Date)
+
 ## Benchmarks
 
 Last run: Wed, 08 Jan 2025 00:42:22 UTC  
