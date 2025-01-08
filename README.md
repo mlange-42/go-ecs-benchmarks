@@ -144,7 +144,7 @@ go run . -test.benchtime=0.25s
 > `go run . --% -test.benchtime=0.25s`
 
 The `benchtime` limit is required for some of the benchmarks that have a high
-overhead that is not measured. They would take forever otherwise.
+setup cost which is not timed. They would take forever otherwise.
 
 To create the plots, run `plot/plot.py`. The following packages are required:
 - numpy

@@ -24,6 +24,7 @@ func runArche(b *testing.B, n int) {
 		b.StartTimer()
 		for range n {
 			e := world.NewEntity(ids...)
+			// Just for fairness, because the others need to do that, too.
 			entities = append(entities, e)
 		}
 		b.StopTimer()

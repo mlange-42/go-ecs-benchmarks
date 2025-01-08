@@ -25,16 +25,14 @@ def plot_all():
 def plot(file: str):
     data = pd.read_csv(os.path.join(results_dir, f"{file}.csv"))
 
-    multi = data.nrows() > 1
+    multi = len(data.index) > 1
     if multi:
         fig, ax = plt.subplots(ncols=2, figsize=(10, 4))
+        plot_bars(data, ax[0], legend=False)
+        plot_lines(data, ax[1], legend=True)
     else:
         fig, ax = plt.subplots(ncols=1, figsize=(5, 4))
-
-    plot_bars(data, ax[0])
-
-    if multi:
-        plot_lines(data, ax[1])
+        plot_bars(data, ax, legend=True)
 
     fig.tight_layout()
 
@@ -47,7 +45,7 @@ def plot(file: str):
         f.write(md)
 
 
-def plot_bars(data: pd.DataFrame, ax):
+def plot_bars(data: pd.DataFrame, ax, legend: bool):
     cols = data.columns[1:]
     width = 1.0 / (1.5 * len(cols))
 
@@ -70,9 +68,12 @@ def plot_bars(data: pd.DataFrame, ax):
         for n in data.N
     ]
     ax.set_xticklabels(labels)
+    
+    if legend:
+        ax.legend(framealpha=0.5)
 
 
-def plot_lines(data: pd.DataFrame, ax):
+def plot_lines(data: pd.DataFrame, ax, legend: bool):
     cols = data.columns[1:]
     width = 1.0 / (1.5 * len(cols))
 
@@ -97,7 +98,8 @@ def plot_lines(data: pd.DataFrame, ax):
     ]
     ax.set_xticklabels(labels)
 
-    ax.legend(framealpha=0.5)
+    if legend:
+        ax.legend(framealpha=0.5)
 
 
 def to_markdown(data: pd.DataFrame) -> str:
