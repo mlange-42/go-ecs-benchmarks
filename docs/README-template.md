@@ -24,12 +24,6 @@ In case you are a developer or user of an implementation included here,
 feel free to check the benchmarked code for any possible improvements.
 Open an issue if you want a version update.
 
-<p align="center">
-<a title="Star History Chart" href="https://star-history.com/#mlange-42/arche&yohamta/donburi&wwfranczyk/ento&marioolofo/go-gameengine-ecs&unitoftime/ecs&Date">
-<img src="https://api.star-history.com/svg?repos=mlange-42/arche,yohamta/donburi,wwfranczyk/ento,marioolofo/go-gameengine-ecs,unitoftime/ecs&type=Date" alt="Star History Chart" width="600"/>
-</a>
-</p>
-
 ## Benchmarks
 
 ${info}
@@ -116,6 +110,16 @@ ${add_remove}
 - Register two components (if applicable)
 
 ${new_world}
+
+### Popularity
+
+Given that all tested projects are on Github, we can use the star history as a proxy here.
+
+<p align="center">
+<a title="Star History Chart" href="https://star-history.com/#mlange-42/arche&yohamta/donburi&wwfranczyk/ento&marioolofo/go-gameengine-ecs&unitoftime/ecs&Date">
+<img src="https://api.star-history.com/svg?repos=mlange-42/arche,yohamta/donburi,wwfranczyk/ento,marioolofo/go-gameengine-ecs,unitoftime/ecs&type=Date" alt="Star History Chart" width="600"/>
+</a>
+</p>
 
 ## Running the benchmarks
 
