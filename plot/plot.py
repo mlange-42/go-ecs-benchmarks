@@ -1,10 +1,13 @@
 import os
+from string import Template
 
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
+from matplotlib.figure import Figure
 
 results_dir = "results"
+template = "docs/README-template.md"
 
 files = [
     "query2comp",
@@ -18,13 +21,31 @@ files = [
 
 
 def plot_all():
+    template_vars = {
+        "info": "",
+    }
+
+    with open(os.path.join(results_dir, "info.md"), "r") as f:
+        template_vars["info"] = f.read()
+
     for f in files:
-        plot(f)
+        data = pd.read_csv(os.path.join(results_dir, f"{f}.csv"))
+        fig = plot(data)
+        fig.savefig(os.path.join(results_dir, f"{f}.svg"))
+        fig.savefig(os.path.join(results_dir, f"{f}.png"))
+        plt.close(fig)
+        
+        md = to_markdown(data)
+        template_vars[f] = md
+        with open(os.path.join(results_dir, f"{f}.md"), "w") as f:
+            f.write(md)
+    
+    readme = update_readme(template, template_vars)
+    with open(os.path.join(results_dir, "README.md"), "w") as f:
+        f.write(readme)
 
 
-def plot(file: str):
-    data = pd.read_csv(os.path.join(results_dir, f"{file}.csv"))
-
+def plot(data: pd.DataFrame) -> Figure:
     multi = len(data.index) > 1
     if multi:
         fig, ax = plt.subplots(ncols=2, figsize=(10, 4))
@@ -35,14 +56,7 @@ def plot(file: str):
         plot_bars(data, ax, legend=True)
 
     fig.tight_layout()
-
-    fig.savefig(os.path.join(results_dir, f"{file}.svg"))
-    fig.savefig(os.path.join(results_dir, f"{file}.png"))
-    plt.close(fig)
-
-    md = to_markdown(data)
-    with open(os.path.join(results_dir, f"{file}.md"), "w") as f:
-        f.write(md)
+    return fig
 
 
 def plot_bars(data: pd.DataFrame, ax, legend: bool):
@@ -127,6 +141,15 @@ def to_time(v: float) -> str:
     if v < 1_000_000:
         return f"{(v/1_000):.2f}us"
     return f"{(v/1_000_000):.2f}ms"
+
+
+def update_readme(template_file: str, values: dict) -> str:
+    with open(template_file, "r") as file:
+        file_content = file.read()
+
+    s = Template(file_content)
+    return s.substitute(values)
+    
 
 
 if __name__ == "__main__":
