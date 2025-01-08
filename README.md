@@ -1,5 +1,10 @@
 # Go ECS Benchmarks
 
+Comparative benchmarks for Go Entity Component System (ECS) implementations.
+
+> Disclaimer: This repository is maintained by the developer of
+> [Arche](https://github.com/mlange-42/arche), an archetype-based ECS for Go.
+
 ## Benchmark candidates
 
 | ECS | Type | Version |
@@ -10,13 +15,18 @@
 | [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | Archetype | v0.9.0 |
 | [unitoftime/ecs](https://github.com/unitoftime/ecs) | Archetype | v0.0.3 |
 
+Candidates are always displayed in alphabetical order.
+
+In case you develop or use a Go ECS that is not in the list and that want to see here,
+please open an issue or make a pull request.
+
 ## Benchmarks
 
 Last run: Wed, 08 Jan 2025 00:42:22 UTC  
 CPU: AMD EPYC 7763 64-Core Processor
 
-For each benchmark, the left plot panel and the table show time spent per entity,
-while the right panel shows total time.
+For each benchmark, the left plot panel and the table show the time spent per entity,
+while the right panel shows the total time.
 
 All components used in the benchmarks have two `float64` fields.
 
