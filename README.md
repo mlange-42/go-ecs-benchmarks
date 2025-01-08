@@ -24,11 +24,11 @@ In case you are a developer or user of an implementation included here,
 feel free to check the benchmarked code for any possible improvements.
 Open an issue if you want a version update.
 
-<center>
+<p align="center">
 <a title="Star History Chart" href="https://star-history.com/#mlange-42/arche&yohamta/donburi&wwfranczyk/ento&marioolofo/go-gameengine-ecs&unitoftime/ecs&Date">
 <img src="https://api.star-history.com/svg?repos=mlange-42/arche,yohamta/donburi,wwfranczyk/ento,marioolofo/go-gameengine-ecs,unitoftime/ecs&type=Date" alt="Star History Chart" width="600"/>
 </a>
-</center>
+</p>
 
 ## Benchmarks
 
