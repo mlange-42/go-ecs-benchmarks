@@ -11,6 +11,7 @@ import (
 	addremove "github.com/mlange-42/go-ecs-benchmarks/bench/add_remove"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/create2comp"
 	create2compalloc "github.com/mlange-42/go-ecs-benchmarks/bench/create2comp_alloc"
+	newworld "github.com/mlange-42/go-ecs-benchmarks/bench/new_world"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query1in10"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query2comp"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query32arch"
@@ -33,6 +34,7 @@ func RunAll() {
 	util.RunBenchmarks("create2comp.csv", create2comp.Benchmarks(), util.ToCSV)
 	util.RunBenchmarks("create2comp_alloc.csv", create2compalloc.Benchmarks(), util.ToCSV)
 	util.RunBenchmarks("add_remove.csv", addremove.Benchmarks(), util.ToCSV)
+	util.RunBenchmarks("new_world.csv", newworld.Benchmarks(), util.ToCSV)
 }
 
 func writeInfo() error {

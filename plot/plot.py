@@ -13,6 +13,7 @@ files = [
     "create2comp",
     "create2comp_alloc",
     "add_remove",
+    "new_world",
 ]
 
 
@@ -23,10 +24,17 @@ def plot_all():
 
 def plot(file: str):
     data = pd.read_csv(os.path.join(results_dir, f"{file}.csv"))
-    fig, ax = plt.subplots(ncols=2, figsize=(10, 4))
+
+    multi = data.nrows() > 1
+    if multi:
+        fig, ax = plt.subplots(ncols=2, figsize=(10, 4))
+    else:
+        fig, ax = plt.subplots(ncols=1, figsize=(5, 4))
 
     plot_bars(data, ax[0])
-    plot_lines(data, ax[1])
+
+    if multi:
+        plot_lines(data, ax[1])
 
     fig.tight_layout()
 
