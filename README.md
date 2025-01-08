@@ -20,6 +20,10 @@ Candidates are always displayed in alphabetical order.
 In case you develop or use a Go ECS that is not in the list and that want to see here,
 please open an issue or make a pull request.
 
+In case you are a developer or user of an implementation included here,
+feel free to check the benchmarked code for any possible improvements.
+Open an issue if you want a version update.
+
 ## Benchmarks
 
 Last run: Wed, 08 Jan 2025 00:42:22 UTC  
