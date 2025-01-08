@@ -9,7 +9,7 @@ import (
 
 func runArche(b *testing.B, n int) {
 	b.StopTimer()
-	world := ecs.NewWorld(ecs.NewConfig().WithCapacityIncrement(1024))
+	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
 	velID := ecs.ComponentID[comps.Velocity](&world)
@@ -33,7 +33,7 @@ func runArche(b *testing.B, n int) {
 
 func runArcheRegistered(b *testing.B, n int) {
 	b.StopTimer()
-	world := ecs.NewWorld(ecs.NewConfig().WithCapacityIncrement(1024))
+	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
 	velID := ecs.ComponentID[comps.Velocity](&world)
