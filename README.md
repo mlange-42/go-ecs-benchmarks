@@ -47,7 +47,7 @@ All components used in the benchmarks have two `float64` fields.
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query2comp](query2comp.svg)
+![query2comp](https://github.com/user-attachments/assets/f0ba6cea-e904-4f88-a783-a0c8cf2d5a62)
 
 | N | Arche | Arche (cached) | Donburi | Ento | ggecs | uot |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -69,7 +69,7 @@ Additionally, there are `9*N` entities with only `Position`.
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query1in10](query1in10.svg))
+![query1in10](https://github.com/user-attachments/assets/cc0af017-13ac-4278-8cb4-6ca8cf240e46)
 
 | N | Arche | Arche (cached) | Donburi | Ento | ggecs | uot |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -91,7 +91,7 @@ Each of these `N` entities has some combination of components
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query32arch](query32arch.svg))
+![query32arch](https://github.com/user-attachments/assets/863a3258-3a30-4b43-8866-e652f4f8310f)
 
 | N | Arche | Arche (cached) | Donburi | Ento | ggecs | uot |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -114,7 +114,7 @@ The operation is performed once before benchmarking,
 to exclude things like archetype creation and memory allocation.
 See the benchmark below for entity creation with allocation.
 
-![create2comp](create2comp.svg))
+![create2comp](https://github.com/user-attachments/assets/00ae0147-821b-4158-ad61-b9d2382df638)
 
 | N | Arche | Arche (batch) | Donburi | Ento | ggecs | uot |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -138,7 +138,7 @@ Thus, low `N` values might be biased by things like archetype creation and memor
 which may be handled differently by different implementations.
 See the benchmark above for entity creation without allocation.
 
-![create2comp_alloc](create2comp_alloc.svg))
+![create2comp_alloc](https://github.com/user-attachments/assets/d8c7ab00-a915-4ef4-935a-79c11cd409e0)
 
 | N | Arche | Arche (batch) | Donburi | Ento | ggecs | uot |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -162,7 +162,7 @@ See the benchmark above for entity creation without allocation.
 
 One iteration is performed before the benchmarking starts, to exclude memory allocation.
 
-![add_remove](add_remove.svg))
+![add_remove](https://github.com/user-attachments/assets/c4f99d59-ecbd-475a-9f56-8b6e1e977820)
 
 | N | Arche | Arche (batch) | Donburi | Ento | ggecs | uot |
 | --- | --- | --- | --- | --- | --- | --- |
