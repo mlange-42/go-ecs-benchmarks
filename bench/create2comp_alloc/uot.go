@@ -12,13 +12,15 @@ func runUot(b *testing.B, n int) {
 		b.StopTimer()
 		world := ecs.NewWorld()
 
+		allIDs := []ecs.Component{
+			ecs.C(comps.Position{}),
+			ecs.C(comps.Velocity{}),
+		}
+
 		b.StartTimer()
 		for range n {
 			id := world.NewId()
-			ecs.Write(world, id,
-				ecs.C(comps.Position{}),
-				ecs.C(comps.Velocity{}),
-			)
+			ecs.Write(world, id, allIDs...)
 		}
 		b.StopTimer()
 	}

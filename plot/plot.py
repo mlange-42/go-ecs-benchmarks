@@ -18,6 +18,8 @@ files = [
     "create10comp",
     "add_remove",
     "add_remove_large",
+    "delete2comp",
+    "delete10comp",
     "new_world",
 ]
 

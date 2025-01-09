@@ -5,12 +5,15 @@ import (
 
 	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
 	"github.com/yohamta/donburi"
+	"github.com/yohamta/donburi/component"
 )
 
 func runDonburi(b *testing.B, n int) {
 	b.StopTimer()
-	var position = donburi.NewComponentType[comps.Position]()
-	var velocity = donburi.NewComponentType[comps.Velocity]()
+	allIDs := []component.IComponentType{
+		donburi.NewComponentType[comps.Position](),
+		donburi.NewComponentType[comps.Velocity](),
+	}
 
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
@@ -18,7 +21,7 @@ func runDonburi(b *testing.B, n int) {
 
 		b.StartTimer()
 		for range n {
-			world.Create(position, velocity)
+			world.Create(allIDs...)
 		}
 		b.StopTimer()
 	}

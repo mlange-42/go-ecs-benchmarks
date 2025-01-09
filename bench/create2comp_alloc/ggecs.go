@@ -19,9 +19,14 @@ func runGGEcs(b *testing.B, n int) {
 		world.Register(ecs.NewComponentRegistry[comps.Position](PositionComponentID))
 		world.Register(ecs.NewComponentRegistry[comps.Velocity](VelocityComponentID))
 
+		allIDs := []ecs.ComponentID{
+			PositionComponentID,
+			VelocityComponentID,
+		}
+
 		b.StartTimer()
 		for range n {
-			_ = world.NewEntity(PositionComponentID, VelocityComponentID)
+			_ = world.NewEntity(allIDs...)
 		}
 		b.StopTimer()
 	}
