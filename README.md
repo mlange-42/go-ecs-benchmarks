@@ -33,6 +33,9 @@ CPU: AMD EPYC 7763 64-Core Processor
 For each benchmark, the left plot panel and the table show the time spent per entity,
 while the right panel shows the total time.
 
+Note that the Y axis has logarithmic scale in all plots.
+So doubled bar or line height is not doubled time!
+
 All components used in the benchmarks have two `float64` fields.
 
 ### Query
