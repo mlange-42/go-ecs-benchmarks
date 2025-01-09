@@ -42,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: results
-          path: .
+          path: results
       - name: Plot results
         run: |
           python plot/plot.py
