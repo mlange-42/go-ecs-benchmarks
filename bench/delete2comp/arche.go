@@ -32,6 +32,7 @@ func runArche(b *testing.B, n int) {
 		entities = entities[:0]
 
 		if n < 64 {
+			// Speed up entity creation for low entity counts
 			for range n {
 				e := world.NewEntity(ids...)
 				entities = append(entities, e)

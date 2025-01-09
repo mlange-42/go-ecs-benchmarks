@@ -38,9 +38,10 @@ func runArche(b *testing.B, n int) {
 		}
 		b.StopTimer()
 
-		if n < 256 {
-			for _, e := range entities {
-				world.RemoveEntity(e)
+		if n < 64 {
+			// Speed up cleanup for low entity counts
+			for i := len(entities) - 1; i >= 0; i-- {
+				world.RemoveEntity(entities[i])
 			}
 		} else {
 			world.Batch().RemoveEntities(ecs.All(ids...))
