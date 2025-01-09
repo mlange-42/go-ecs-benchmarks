@@ -13,6 +13,7 @@ import (
 	"github.com/mlange-42/go-ecs-benchmarks/bench/create10comp"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/create2comp"
 	create2compalloc "github.com/mlange-42/go-ecs-benchmarks/bench/create2comp_alloc"
+	"github.com/mlange-42/go-ecs-benchmarks/bench/delete2comp"
 	newworld "github.com/mlange-42/go-ecs-benchmarks/bench/new_world"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query1in10"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query2comp"
@@ -38,6 +39,9 @@ func RunAll() {
 	util.RunBenchmarks("create10comp.csv", create10comp.Benchmarks(), util.ToCSV)
 	util.RunBenchmarks("add_remove.csv", addremove.Benchmarks(), util.ToCSV)
 	util.RunBenchmarks("add_remove_large.csv", addremovelarge.Benchmarks(), util.ToCSV)
+
+	util.RunBenchmarks("delete2comp.csv", delete2comp.Benchmarks(), util.ToCSV)
+
 	util.RunBenchmarks("new_world.csv", newworld.Benchmarks(), util.ToCSV)
 }
 
