@@ -15,7 +15,8 @@ func Benchmarks() util.Benchmarks {
 			{Name: "uot", F: runUot},
 		},
 		N: []int{
-			1, 4, 16, 64, 256, 1024, 16_000, 256_000, 1_000_000,
+			// Leave out 1, as this runs for a very long time
+			4, 16, 64, 256, 1024, 16_000, 256_000, 1_000_000,
 		},
 	}
 }
