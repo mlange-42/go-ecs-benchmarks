@@ -19,8 +19,8 @@ type Benchmark struct {
 	F    func(b *testing.B, n int)
 }
 
-func RunBenchmarks(file string, benchmarks Benchmarks, format func(Benchmarks) string) {
-	fmt.Println("Running", file)
+func RunBenchmarks(name string, benchmarks Benchmarks, format func(Benchmarks) string) {
+	fmt.Println("Running", name)
 
 	benchmarks.time = make([][]float64, len(benchmarks.Benches))
 
@@ -40,7 +40,7 @@ func RunBenchmarks(file string, benchmarks Benchmarks, format func(Benchmarks) s
 		}
 	}
 
-	os.WriteFile(path.Join("results", file), []byte(format(benchmarks)), 0666)
+	os.WriteFile(path.Join("results", fmt.Sprintf("%s.csv", name)), []byte(format(benchmarks)), 0666)
 }
 
 func ToCSV(benchmarks Benchmarks) string {

@@ -24,6 +24,25 @@ import (
 	"github.com/shirou/gopsutil/cpu"
 )
 
+var benchmarks = map[string]func() util.Benchmarks{
+	"query2comp":  query2comp.Benchmarks,
+	"query1in10":  query1in10.Benchmarks,
+	"query32arch": query32arch.Benchmarks,
+
+	"random": random.Benchmarks,
+
+	"create2comp":       create2comp.Benchmarks,
+	"create2comp_alloc": create2compalloc.Benchmarks,
+	"create10comp":      create10comp.Benchmarks,
+	"add_remove":        addremove.Benchmarks,
+	"add_remove_large":  addremovelarge.Benchmarks,
+
+	"delete2comp":  delete2comp.Benchmarks,
+	"delete10comp": delete10comp.Benchmarks,
+
+	"new_world": newworld.Benchmarks,
+}
+
 func RunAll() {
 	if err := os.Mkdir("results", os.ModePerm); err != nil && !os.IsExist(err) {
 		log.Fatal(err)
@@ -31,23 +50,28 @@ func RunAll() {
 	if err := writeInfo(); err != nil {
 		log.Fatal(err)
 	}
+	for name, fn := range benchmarks {
+		util.RunBenchmarks(name, fn(), util.ToCSV)
+	}
+}
 
-	util.RunBenchmarks("query2comp.csv", query2comp.Benchmarks(), util.ToCSV)
-	util.RunBenchmarks("query1in10.csv", query1in10.Benchmarks(), util.ToCSV)
-	util.RunBenchmarks("query32arch.csv", query32arch.Benchmarks(), util.ToCSV)
+func Run(benches []string) {
+	if err := os.Mkdir("results", os.ModePerm); err != nil && !os.IsExist(err) {
+		log.Fatal(err)
+	}
+	if err := writeInfo(); err != nil {
+		log.Fatal(err)
+	}
 
-	util.RunBenchmarks("random.csv", random.Benchmarks(), util.ToCSV)
+	for _, b := range benches {
+		if _, ok := benchmarks[b]; !ok {
+			log.Fatalf("benchmark %s not found", b)
+		}
+	}
 
-	util.RunBenchmarks("create2comp.csv", create2comp.Benchmarks(), util.ToCSV)
-	util.RunBenchmarks("create2comp_alloc.csv", create2compalloc.Benchmarks(), util.ToCSV)
-	util.RunBenchmarks("create10comp.csv", create10comp.Benchmarks(), util.ToCSV)
-	util.RunBenchmarks("add_remove.csv", addremove.Benchmarks(), util.ToCSV)
-	util.RunBenchmarks("add_remove_large.csv", addremovelarge.Benchmarks(), util.ToCSV)
-
-	util.RunBenchmarks("delete2comp.csv", delete2comp.Benchmarks(), util.ToCSV)
-	util.RunBenchmarks("delete10comp.csv", delete10comp.Benchmarks(), util.ToCSV)
-
-	util.RunBenchmarks("new_world.csv", newworld.Benchmarks(), util.ToCSV)
+	for _, b := range benches {
+		util.RunBenchmarks(b, benchmarks[b](), util.ToCSV)
+	}
 }
 
 func writeInfo() error {

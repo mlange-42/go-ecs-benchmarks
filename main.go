@@ -11,5 +11,12 @@ func main() {
 	testing.Init()
 	flag.Parse()
 
-	bench.RunAll()
+	args := flag.Args()
+
+	if len(args) == 0 {
+		bench.RunAll()
+		return
+	}
+
+	bench.Run(args)
 }
