@@ -91,6 +91,17 @@ See the benchmark above for entity creation without allocation.
 
 ${create2comp_alloc}
 
+### Create large entities
+
+- Create `N` entities with 10 components `C1`, ..., `C10`.
+
+The operation is performed once before benchmarking,
+to exclude things like archetype creation and memory allocation.
+
+![create10comp](create10comp.svg)
+
+${create10comp}
+
 ### Add/remove component
 
 `N` entities with component `Position`.

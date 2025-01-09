@@ -15,6 +15,7 @@ files = [
     "query32arch",
     "create2comp",
     "create2comp_alloc",
+    "create10comp",
     "add_remove",
     "add_remove_large",
     "new_world",
