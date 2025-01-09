@@ -35,6 +35,7 @@ Note that the Y axis has logarithmic scale in all plots.
 So doubled bar or line height is not doubled time!
 
 All components used in the benchmarks have two `float64` fields.
+The initial capacity of the world is set to 1024 where this is supported.
 
 ### Query
 
