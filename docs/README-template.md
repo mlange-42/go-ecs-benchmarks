@@ -131,6 +131,26 @@ One iteration is performed before the benchmarking starts, to exclude memory all
 
 ${add_remove_large}
 
+### Delete entities
+
+`N` entities with components `Position` and `Velocity`.
+
+* Delete all entities
+
+![delete2comp](delete2comp.svg)
+
+${delete2comp}
+
+### Delete large entities
+
+`N` entities with 10 components `C1`, ..., `C10`.
+
+* Delete all entities
+
+![delete10comp](delete10comp.svg)
+
+${delete10comp}
+
 ### Create world
 
 - Create a new world

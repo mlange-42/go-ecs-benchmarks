@@ -1,4 +1,4 @@
-package create2comp
+package delete2comp
 
 import (
 	"testing"
@@ -18,31 +18,23 @@ func runGGEcs(b *testing.B, n int) {
 	world.Register(ecs.NewComponentRegistry[comps.Position](PositionComponentID))
 	world.Register(ecs.NewComponentRegistry[comps.Velocity](VelocityComponentID))
 
-	allIDs := []ecs.ComponentID{
-		PositionComponentID,
-		VelocityComponentID,
-	}
-
 	entities := make([]ecs.EntityID, 0, n)
 	for range n {
-		e := world.NewEntity(allIDs...)
+		e := world.NewEntity(PositionComponentID, VelocityComponentID)
 		entities = append(entities, e)
 	}
-	for _, e := range entities {
-		world.RemEntity(e)
-	}
-	entities = entities[:0]
 
 	for i := 0; i < b.N; i++ {
 		b.StartTimer()
-		for range n {
-			e := world.NewEntity(allIDs...)
-			entities = append(entities, e)
-		}
-		b.StopTimer()
 		for _, e := range entities {
 			world.RemEntity(e)
 		}
+		b.StopTimer()
+
 		entities = entities[:0]
+		for range n {
+			e := world.NewEntity(PositionComponentID, VelocityComponentID)
+			entities = append(entities, e)
+		}
 	}
 }
