@@ -9,7 +9,7 @@ on:
     - main
 
 jobs:
-  benchmarks:
+  benchmarks_fast:
     name: Run benchmarks
     runs-on: ubuntu-latest
     steps:
@@ -17,17 +17,48 @@ jobs:
       - uses: ./.github/actions/setup-go
       - name: Run benchmarks
         run: |
-          go run . -test.benchtime=0.25s query2comp
+          go run . -test.benchtime=0.5s \
+              query2comp \
+              query1in10 \
+              query32arch \
+              random \
+              add_remove \
+              add_remove_large \
+              new_world
+
       - name: Archive results
         uses: actions/upload-artifact@v4
         with:
-          name: results
-          path: results
+          name: results_fast
+          path: results/*
+
+  benchmarks_slow:
+    name: Run benchmarks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-go
+      - name: Run benchmarks
+        run: |
+          go run . -test.benchtime=0.25s \
+              create2comp \
+              create2comp_alloc \
+              create10comp \
+              delete2comp \
+              delete10comp \
+
+      - name: Archive results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results_slow
+          path: results/*
           
   plots:
     name: Plot benchmarks
     runs-on: ubuntu-latest
-    needs: benchmarks
+    needs:
+      - benchmarks_fast
+      - benchmarks_slow
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
@@ -38,11 +69,18 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip install -r ./plot/requirements.txt
-      - name: Download results
+
+      - name: Download results_fast
         uses: actions/download-artifact@v4
         with:
-          name: results
+          name: results_fast
           path: results
+      - name: Download results_slow
+        uses: actions/download-artifact@v4
+        with:
+          name: results_slow
+          path: results
+
       - name: Plot results
         run: |
           python plot/plot.py
