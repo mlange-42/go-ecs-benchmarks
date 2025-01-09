@@ -9,7 +9,7 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
 | ECS | Type | Version |
 |-----|------|---------|
-| [Arche](https://github.com/mlange-42/arche) | Archetype | v0.15.0 |
+| [Arche](https://github.com/mlange-42/arche) | Archetype | v0.15.1 |
 | [Donburi](https://github.com/yohamta/donburi) | Archetype | v1.15.6 |
 | [ento](https://github.com/wwfranczyk/ento) | Sparse Set | v0.1.0 |
 | [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | Archetype | v0.9.0 |
@@ -50,7 +50,7 @@ Additionally, there are `9*N` entities with only `Position`.
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query1in10](query1in10.svg))
+![query1in10](query1in10.svg)
 
 ${query1in10}
 
@@ -62,7 +62,7 @@ Each of these `N` entities has some combination of components
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query32arch](query32arch.svg))
+![query32arch](query32arch.svg)
 
 ${query32arch}
 
@@ -74,7 +74,7 @@ The operation is performed once before benchmarking,
 to exclude things like archetype creation and memory allocation.
 See the benchmark below for entity creation with allocation.
 
-![create2comp](create2comp.svg))
+![create2comp](create2comp.svg)
 
 ${create2comp}
 
@@ -87,22 +87,46 @@ Thus, low `N` values might be biased by things like archetype creation and memor
 which may be handled differently by different implementations.
 See the benchmark above for entity creation without allocation.
 
-![create2comp_alloc](create2comp_alloc.svg))
+![create2comp_alloc](create2comp_alloc.svg)
 
 ${create2comp_alloc}
 
+### Create large entities
+
+- Create `N` entities with 10 components `C1`, ..., `C10`.
+
+The operation is performed once before benchmarking,
+to exclude things like archetype creation and memory allocation.
+
+![create10comp](create10comp.svg)
+
+${create10comp}
+
 ### Add/remove component
 
-`N` entities with components `Position`.
+`N` entities with component `Position`.
 
 - Query all `[Position]` entities and add `Velocity`.
 - Query all `[Position, Velocity]` entities and remove `Velocity`.
 
 One iteration is performed before the benchmarking starts, to exclude memory allocation.
 
-![add_remove](add_remove.svg))
+![add_remove](add_remove.svg)
 
 ${add_remove}
+
+### Add/remove component, large entity
+
+`N` entities with component `Position` and 10 further components `C1`, ..., `C10`.
+
+- Query all `[Position]` entities and add `Velocity`.
+- Query all `[Position, Velocity]` entities and remove `Velocity`.
+
+One iteration is performed before the benchmarking starts, to exclude memory allocation.
+
+![add_remove_large](add_remove_large.svg)
+
+${add_remove_large}
 
 ### Create world
 
@@ -134,6 +158,7 @@ go run . -test.benchtime=0.25s
 
 The `benchtime` limit is required for some of the benchmarks that have a high
 setup cost which is not timed. They would take forever otherwise.
+The benchmarks should take around 20-30 minutes to complete.
 
 To create the plots, run `plot/plot.py`. The following packages are required:
 - numpy

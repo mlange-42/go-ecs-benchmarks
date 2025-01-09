@@ -4,7 +4,7 @@ go 1.23.0
 
 require (
 	github.com/marioolofo/go-gameengine-ecs v0.9.0
-	github.com/mlange-42/arche v0.15.0
+	github.com/mlange-42/arche v0.15.1
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/stretchr/testify v1.10.0
 	github.com/unitoftime/ecs v0.0.3

@@ -9,6 +9,8 @@ import (
 	"time"
 
 	addremove "github.com/mlange-42/go-ecs-benchmarks/bench/add_remove"
+	addremovelarge "github.com/mlange-42/go-ecs-benchmarks/bench/add_remove_large"
+	"github.com/mlange-42/go-ecs-benchmarks/bench/create10comp"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/create2comp"
 	create2compalloc "github.com/mlange-42/go-ecs-benchmarks/bench/create2comp_alloc"
 	newworld "github.com/mlange-42/go-ecs-benchmarks/bench/new_world"
@@ -33,7 +35,9 @@ func RunAll() {
 
 	util.RunBenchmarks("create2comp.csv", create2comp.Benchmarks(), util.ToCSV)
 	util.RunBenchmarks("create2comp_alloc.csv", create2compalloc.Benchmarks(), util.ToCSV)
+	util.RunBenchmarks("create10comp.csv", create10comp.Benchmarks(), util.ToCSV)
 	util.RunBenchmarks("add_remove.csv", addremove.Benchmarks(), util.ToCSV)
+	util.RunBenchmarks("add_remove_large.csv", addremovelarge.Benchmarks(), util.ToCSV)
 	util.RunBenchmarks("new_world.csv", newworld.Benchmarks(), util.ToCSV)
 }
 
