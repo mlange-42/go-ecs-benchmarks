@@ -1,3 +1,4 @@
+import glob
 import os
 from string import Template
 
@@ -9,22 +10,7 @@ from matplotlib.figure import Figure
 results_dir = "results"
 template = "docs/README-template.md"
 
-files = [
-    "query2comp",
-    "query1in10",
-    "query32arch",
-    "random",
-    "create2comp",
-    "create2comp_alloc",
-    "create10comp",
-    "add_remove",
-    "add_remove_large",
-    "delete2comp",
-    "delete10comp",
-    "new_world",
-]
-
-default_colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+default_colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
 
 colors = {
     "Arche": default_colors[0],
@@ -44,6 +30,10 @@ def plot_all():
 
     with open(os.path.join(results_dir, "info.md"), "r") as f:
         template_vars["info"] = f.read()
+
+    files = glob.glob(os.path.join(results_dir, "*.csv"))
+    files = [os.path.split(f)[-1][:-4] for f in files]
+    print(f"{len(files)} files to plot: {' '.join(files)}")
 
     for f in files:
         data = pd.read_csv(os.path.join(results_dir, f"{f}.csv"))

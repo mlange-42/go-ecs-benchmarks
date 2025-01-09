@@ -196,7 +196,13 @@ go run . -test.benchtime=0.25s
 
 The `benchtime` limit is required for some of the benchmarks that have a high
 setup cost which is not timed. They would take forever otherwise.
-The benchmarks should take around 20-30 minutes to complete.
+The benchmarks can take up to one hour to complete.
+
+To run a selection of benchmarks, add their names as arguments:
+
+```shell
+go run . query2comp query1in10 query32arch
+```
 
 To create the plots, run `plot/plot.py`. The following packages are required:
 - numpy
