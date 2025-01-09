@@ -9,7 +9,7 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
 | ECS | Type | Version |
 |-----|------|---------|
-| [Arche](https://github.com/mlange-42/arche) | Archetype | v0.15.0 |
+| [Arche](https://github.com/mlange-42/arche) | Archetype | v0.15.1 |
 | [Donburi](https://github.com/yohamta/donburi) | Archetype | v1.15.6 |
 | [ento](https://github.com/wwfranczyk/ento) | Sparse Set | v0.1.0 |
 | [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | Archetype | v0.9.0 |
@@ -158,6 +158,7 @@ go run . -test.benchtime=0.25s
 
 The `benchtime` limit is required for some of the benchmarks that have a high
 setup cost which is not timed. They would take forever otherwise.
+The benchmarks should take around 20-30 minutes to complete.
 
 To create the plots, run `plot/plot.py`. The following packages are required:
 - numpy
