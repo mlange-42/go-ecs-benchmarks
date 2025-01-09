@@ -36,12 +36,12 @@ def plot_all():
         fig.savefig(os.path.join(results_dir, f"{f}.svg"))
         fig.savefig(os.path.join(results_dir, f"{f}.png"))
         plt.close(fig)
-        
+
         md = to_markdown(data)
         template_vars[f] = md
         with open(os.path.join(results_dir, f"{f}.md"), "w") as f:
             f.write(md)
-    
+
     readme = update_readme(template, template_vars)
     with open(os.path.join(results_dir, "README.md"), "w") as f:
         f.write(readme)
@@ -84,7 +84,7 @@ def plot_bars(data: pd.DataFrame, ax, legend: bool):
         for n in data.N
     ]
     ax.set_xticklabels(labels)
-    
+
     if legend:
         ax.legend(framealpha=0.5)
 
@@ -127,10 +127,10 @@ def to_markdown(data: pd.DataFrame) -> str:
         if row.N < 1000:
             n = "%d" % (row.N)
         elif row.N < 1_000_000:
-            n = "%dk" % (row.N//1000)
+            n = "%dk" % (row.N // 1000)
         else:
-            n = "%dM" % (row.N//1000000)
-        
+            n = "%dM" % (row.N // 1000000)
+
         vals = [to_time(v) for v in row.iloc[1:]]
         s += "| " + " | ".join([n] + vals) + " |\n"
 
@@ -151,7 +151,6 @@ def update_readme(template_file: str, values: dict) -> str:
 
     s = Template(file_content)
     return s.substitute(values)
-    
 
 
 if __name__ == "__main__":
