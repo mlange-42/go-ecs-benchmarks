@@ -17,7 +17,7 @@ jobs:
       - uses: ./.github/actions/setup-go
       - name: Run benchmarks
         run: |
-          go run . -test.benchtime=0.5s \
+          go run . -test.benchtime=1s \
               query2comp \
               query1in10 \
               query32arch \
@@ -40,7 +40,7 @@ jobs:
       - uses: ./.github/actions/setup-go
       - name: Run benchmarks
         run: |
-          go run . -test.benchtime=0.25s \
+          go run . -test.benchtime=0.1s \
               create2comp \
               create2comp_alloc \
               create10comp \
@@ -59,7 +59,7 @@ jobs:
       - uses: ./.github/actions/setup-go
       - name: Run benchmarks
         run: |
-          go run . -test.benchtime=0.25s \
+          go run . -test.benchtime=0.1s \
               delete2comp \
               delete10comp \
 
