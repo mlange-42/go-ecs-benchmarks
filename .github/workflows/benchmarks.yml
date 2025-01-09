@@ -17,7 +17,7 @@ jobs:
       - uses: ./.github/actions/setup-go
       - name: Run benchmarks
         run: |
-          go run . -test.benchtime=0.25s
+          go run . -test.benchtime=0.25s query2comp
       - name: Archive results
         uses: actions/upload-artifact@v4
         with:

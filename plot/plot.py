@@ -11,17 +11,17 @@ template = "docs/README-template.md"
 
 files = [
     "query2comp",
-    "query1in10",
-    "query32arch",
-    "random",
-    "create2comp",
-    "create2comp_alloc",
-    "create10comp",
-    "add_remove",
-    "add_remove_large",
-    "delete2comp",
-    "delete10comp",
-    "new_world",
+    #"query1in10",
+    #"query32arch",
+    #"random",
+    #"create2comp",
+    #"create2comp_alloc",
+    #"create10comp",
+    #"add_remove",
+    #"add_remove_large",
+    #"delete2comp",
+    #"delete10comp",
+    #"new_world",
 ]
 
 default_colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
