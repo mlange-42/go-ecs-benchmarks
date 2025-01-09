@@ -14,12 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: '1.23.x'
-      - name: Install dependencies
-        run: go get .
+      - uses: ./.github/actions/setup-go
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
