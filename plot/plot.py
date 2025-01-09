@@ -13,6 +13,7 @@ files = [
     "query2comp",
     "query1in10",
     "query32arch",
+    "random",
     "create2comp",
     "create2comp_alloc",
     "create10comp",
@@ -22,6 +23,18 @@ files = [
     "delete10comp",
     "new_world",
 ]
+
+default_colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+
+colors = {
+    "Arche": default_colors[0],
+    "Arche (batch)": default_colors[1],
+    "Arche (cached)": default_colors[1],
+    "Donburi": default_colors[2],
+    "Ento": default_colors[3],
+    "ggecs": default_colors[4],
+    "uot": default_colors[5],
+}
 
 
 def plot_all():
@@ -70,7 +83,7 @@ def plot_bars(data: pd.DataFrame, ax, legend: bool):
     for i, col in enumerate(cols):
         col_data = data[col]
         x = np.arange(len(col_data)) + i * width - 0.375
-        ax.bar(x, col_data, width=width, label=col)
+        ax.bar(x, col_data, width=width, color=colors[col], label=col)
 
     ax.set_ylabel("Time per entity")
     ax.set_yscale("log")
@@ -97,7 +110,7 @@ def plot_lines(data: pd.DataFrame, ax, legend: bool):
 
     for i, col in enumerate(cols):
         col_data = data[col]
-        ax.plot(data.N, col_data * data.N, label=col)
+        ax.plot(data.N, col_data * data.N, color=colors[col], label=col)
 
     ax.set_ylabel("Total time")
     ax.set_xscale("log")

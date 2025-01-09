@@ -72,3 +72,9 @@ func ToCSV(benchmarks Benchmarks) string {
 
 	return b.String()
 }
+
+func Swap[T any](slice []T) func(i, j int) {
+	return func(i, j int) {
+		slice[i], slice[j] = slice[j], slice[i]
+	}
+}
