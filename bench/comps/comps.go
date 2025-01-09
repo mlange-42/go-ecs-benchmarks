@@ -36,3 +36,28 @@ type C5 struct {
 	X float64
 	Y float64
 }
+
+type C6 struct {
+	X float64
+	Y float64
+}
+
+type C7 struct {
+	X float64
+	Y float64
+}
+
+type C8 struct {
+	X float64
+	Y float64
+}
+
+type C9 struct {
+	X float64
+	Y float64
+}
+
+type C10 struct {
+	X float64
+	Y float64
+}

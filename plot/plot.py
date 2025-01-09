@@ -16,6 +16,7 @@ files = [
     "create2comp",
     "create2comp_alloc",
     "add_remove",
+    "add_remove_large",
     "new_world",
 ]
 

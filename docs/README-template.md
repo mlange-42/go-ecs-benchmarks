@@ -50,7 +50,7 @@ Additionally, there are `9*N` entities with only `Position`.
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query1in10](query1in10.svg))
+![query1in10](query1in10.svg)
 
 ${query1in10}
 
@@ -62,7 +62,7 @@ Each of these `N` entities has some combination of components
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query32arch](query32arch.svg))
+![query32arch](query32arch.svg)
 
 ${query32arch}
 
@@ -74,7 +74,7 @@ The operation is performed once before benchmarking,
 to exclude things like archetype creation and memory allocation.
 See the benchmark below for entity creation with allocation.
 
-![create2comp](create2comp.svg))
+![create2comp](create2comp.svg)
 
 ${create2comp}
 
@@ -87,22 +87,35 @@ Thus, low `N` values might be biased by things like archetype creation and memor
 which may be handled differently by different implementations.
 See the benchmark above for entity creation without allocation.
 
-![create2comp_alloc](create2comp_alloc.svg))
+![create2comp_alloc](create2comp_alloc.svg)
 
 ${create2comp_alloc}
 
 ### Add/remove component
 
-`N` entities with components `Position`.
+`N` entities with component `Position`.
 
 - Query all `[Position]` entities and add `Velocity`.
 - Query all `[Position, Velocity]` entities and remove `Velocity`.
 
 One iteration is performed before the benchmarking starts, to exclude memory allocation.
 
-![add_remove](add_remove.svg))
+![add_remove](add_remove.svg)
 
 ${add_remove}
+
+### Add/remove component, large entity
+
+`N` entities with component `Position` and 10 further components `C1`, ..., `C10`.
+
+- Query all `[Position]` entities and add `Velocity`.
+- Query all `[Position, Velocity]` entities and remove `Velocity`.
+
+One iteration is performed before the benchmarking starts, to exclude memory allocation.
+
+![add_remove_large](add_remove_large.svg)
+
+${add_remove_large}
 
 ### Create world
 
