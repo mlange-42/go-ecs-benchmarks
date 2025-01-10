@@ -19,8 +19,8 @@ type Benchmark struct {
 	F    func(b *testing.B, n int)
 }
 
-func RunBenchmarks(file string, benchmarks Benchmarks, format func(Benchmarks) string) {
-	fmt.Println("Running", file)
+func RunBenchmarks(name string, benchmarks Benchmarks, format func(Benchmarks) string) {
+	fmt.Println("Running", name)
 
 	benchmarks.time = make([][]float64, len(benchmarks.Benches))
 
@@ -32,15 +32,17 @@ func RunBenchmarks(file string, benchmarks Benchmarks, format func(Benchmarks) s
 		fmt.Println("   N =", n)
 		for j := range benchmarks.Benches {
 			bench := &benchmarks.Benches[j]
-			fmt.Println("       ", bench.Name)
+			fmt.Printf("       %-20s", bench.Name)
 			res := testing.Benchmark(func(b *testing.B) {
 				bench.F(b, n)
 			})
-			benchmarks.time[j][i] = float64(res.T.Nanoseconds()) / float64(res.N*n)
+			nanos := float64(res.T.Nanoseconds()) / float64(res.N*n)
+			benchmarks.time[j][i] = nanos
+			fmt.Printf("%12s\n", toTime(nanos))
 		}
 	}
 
-	os.WriteFile(path.Join("results", file), []byte(format(benchmarks)), 0666)
+	os.WriteFile(path.Join("results", fmt.Sprintf("%s.csv", name)), []byte(format(benchmarks)), 0666)
 }
 
 func ToCSV(benchmarks Benchmarks) string {
@@ -71,4 +73,20 @@ func ToCSV(benchmarks Benchmarks) string {
 	}
 
 	return b.String()
+}
+
+func Swap[T any](slice []T) func(i, j int) {
+	return func(i, j int) {
+		slice[i], slice[j] = slice[j], slice[i]
+	}
+}
+
+func toTime(v float64) string {
+	if v < 1_000 {
+		return fmt.Sprintf("%.2fns", v)
+	}
+	if v < 1_000_000 {
+		return fmt.Sprintf("%.2fus", v/1000)
+	}
+	return fmt.Sprintf("%.2fms", v/1_000_000)
 }

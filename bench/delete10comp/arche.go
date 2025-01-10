@@ -39,9 +39,18 @@ func runArche(b *testing.B, n int) {
 		b.StopTimer()
 
 		entities = entities[:0]
-		query := world.Batch().NewQ(n, ids...)
-		for query.Next() {
-			entities = append(entities, query.Entity())
+
+		if n < 64 {
+			// Speed up entity creation for low entity counts
+			for range n {
+				e := world.NewEntity(ids...)
+				entities = append(entities, e)
+			}
+		} else {
+			query := world.Batch().NewQ(n, ids...)
+			for query.Next() {
+				entities = append(entities, query.Entity())
+			}
 		}
 	}
 }

@@ -1,0 +1,13 @@
+name: Set up Go
+description: Sets uo Go and installs dependencies
+
+runs:
+  using: "composite" # <-- makes it a re-usable
+  steps:
+    - name: Setup Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.23.x'
+    - name: Install dependencies
+      run: go get .
+      shell: bash

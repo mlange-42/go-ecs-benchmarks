@@ -28,7 +28,16 @@ func runArche(b *testing.B, n int) {
 			entities = append(entities, e)
 		}
 		b.StopTimer()
-		world.Batch().RemoveEntities(ecs.All(ids...))
+
+		if n < 64 {
+			// Speed up cleanup for low entity counts
+			for i := len(entities) - 1; i >= 0; i-- {
+				world.RemoveEntity(entities[i])
+			}
+		} else {
+			world.Batch().RemoveEntities(ecs.All(ids...))
+		}
+
 		entities = entities[:0]
 	}
 }

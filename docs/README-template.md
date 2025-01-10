@@ -35,6 +35,7 @@ Note that the Y axis has logarithmic scale in all plots.
 So doubled bar or line height is not doubled time!
 
 All components used in the benchmarks have two `float64` fields.
+The initial capacity of the world is set to 1024 where this is supported.
 
 ### Query
 
@@ -68,6 +69,20 @@ Each of these `N` entities has some combination of components
 ![query32arch](query32arch.svg)
 
 ${query32arch}
+
+### Component random access
+
+`N` entities with component `Position`.
+All entities are collected into a slice, and the slice is shuffled.
+
+* Iterate the shuffled entities.
+* For each entity, get its `Position` and sum up their `X` fields.
+
+Ento is left out here, as component access for a specific entity seems broken (see issue [ento/#2](https://github.com/wwfranczyk/ento/issues/2)).
+
+![random](random.svg)
+
+${random}
 
 ### Create entities
 
@@ -181,7 +196,13 @@ go run . -test.benchtime=0.25s
 
 The `benchtime` limit is required for some of the benchmarks that have a high
 setup cost which is not timed. They would take forever otherwise.
-The benchmarks should take around 20-30 minutes to complete.
+The benchmarks can take up to one hour to complete.
+
+To run a selection of benchmarks, add their names as arguments:
+
+```shell
+go run . query2comp query1in10 query32arch
+```
 
 To create the plots, run `plot/plot.py`. The following packages are required:
 - numpy
