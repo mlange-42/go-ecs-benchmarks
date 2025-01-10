@@ -32,11 +32,13 @@ func RunBenchmarks(name string, benchmarks Benchmarks, format func(Benchmarks) s
 		fmt.Println("   N =", n)
 		for j := range benchmarks.Benches {
 			bench := &benchmarks.Benches[j]
-			fmt.Println("       ", bench.Name)
+			fmt.Printf("       %-16s", bench.Name)
 			res := testing.Benchmark(func(b *testing.B) {
 				bench.F(b, n)
 			})
-			benchmarks.time[j][i] = float64(res.T.Nanoseconds()) / float64(res.N*n)
+			nanos := float64(res.T.Nanoseconds()) / float64(res.N*n)
+			benchmarks.time[j][i] = nanos
+			fmt.Printf("%12s\n", toTime(nanos))
 		}
 	}
 
@@ -77,4 +79,14 @@ func Swap[T any](slice []T) func(i, j int) {
 	return func(i, j int) {
 		slice[i], slice[j] = slice[j], slice[i]
 	}
+}
+
+func toTime(v float64) string {
+	if v < 1_000 {
+		return fmt.Sprintf("%.2fns", v)
+	}
+	if v < 1_000_000 {
+		return fmt.Sprintf("%.2fus", v/1000)
+	}
+	return fmt.Sprintf("%.2fms", v/1_000_000)
 }
