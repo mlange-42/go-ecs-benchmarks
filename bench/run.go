@@ -16,7 +16,7 @@ import (
 	"github.com/mlange-42/go-ecs-benchmarks/bench/delete10comp"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/delete2comp"
 	newworld "github.com/mlange-42/go-ecs-benchmarks/bench/new_world"
-	"github.com/mlange-42/go-ecs-benchmarks/bench/query1in10"
+	"github.com/mlange-42/go-ecs-benchmarks/bench/query256arch"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query2comp"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query32arch"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/random"
@@ -25,9 +25,9 @@ import (
 )
 
 var benchmarks = map[string]func() util.Benchmarks{
-	"query2comp":  query2comp.Benchmarks,
-	"query1in10":  query1in10.Benchmarks,
-	"query32arch": query32arch.Benchmarks,
+	"query2comp":   query2comp.Benchmarks,
+	"query32arch":  query32arch.Benchmarks,
+	"query256arch": query256arch.Benchmarks,
 
 	"random": random.Benchmarks,
 

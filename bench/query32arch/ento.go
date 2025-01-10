@@ -24,7 +24,7 @@ func runEnto(b *testing.B, n int) {
 
 	extraComps := []any{comps.C1{}, comps.C2{}, comps.C3{}, comps.C4{}, comps.C5{}}
 	ids := []any{}
-	for i := 0; i < n; i++ {
+	for i := range n {
 		ids = append(ids, comps.Position{}, comps.Velocity{})
 		for j, id := range extraComps {
 			m := 1 << j

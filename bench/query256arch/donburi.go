@@ -1,4 +1,4 @@
-package query32arch
+package query256arch
 
 import (
 	"testing"
@@ -20,21 +20,26 @@ func runDonburi(b *testing.B, n int) {
 	var c3 = donburi.NewComponentType[comps.C3]()
 	var c4 = donburi.NewComponentType[comps.C4]()
 	var c5 = donburi.NewComponentType[comps.C5]()
+	var c6 = donburi.NewComponentType[comps.C6]()
+	var c7 = donburi.NewComponentType[comps.C7]()
+	var c8 = donburi.NewComponentType[comps.C8]()
 
-	extraIDs := []component.IComponentType{c1, c2, c3, c4, c5}
+	extraIDs := []component.IComponentType{c1, c2, c3, c4, c5, c6, c7, c8}
+
+	for range n {
+		world.Create(position, velocity)
+	}
+
 	ids := []component.IComponentType{}
-
-	for i := range n {
-		ids = append(ids, position, velocity)
+	for i := range n * 4 {
+		ids = append(ids, position)
 		for j, id := range extraIDs {
 			m := 1 << j
 			if i&m == m {
 				ids = append(ids, id)
 			}
 		}
-
 		world.Create(ids...)
-
 		ids = ids[:0]
 	}
 

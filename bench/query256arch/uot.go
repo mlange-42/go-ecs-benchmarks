@@ -1,4 +1,4 @@
-package query32arch
+package query256arch
 
 import (
 	"testing"
@@ -11,11 +11,16 @@ func runUot(b *testing.B, n int) {
 	b.StopTimer()
 	world := ecs.NewWorld()
 
-	extraComps := []any{comps.C1{}, comps.C2{}, comps.C3{}, comps.C4{}, comps.C5{}}
+	extraComps := []any{comps.C1{}, comps.C2{}, comps.C3{}, comps.C4{}, comps.C5{}, comps.C6{}, comps.C7{}, comps.C8{}}
+
+	for range n {
+		id := world.NewId()
+		ecs.Write(world, id, ecs.C(comps.Position{}), ecs.C(comps.Velocity{}))
+	}
 
 	ids := []ecs.Component{}
-	for i := range n {
-		ids = append(ids, ecs.C(comps.Position{}), ecs.C(comps.Velocity{}))
+	for i := range n * 4 {
+		ids = append(ids, ecs.C(comps.Position{}))
 		for j, id := range extraComps {
 			m := 1 << j
 			if i&m == m {
@@ -28,6 +33,7 @@ func runUot(b *testing.B, n int) {
 
 		ids = ids[:0]
 	}
+
 	query := ecs.Query2[comps.Position, comps.Velocity](world)
 	b.StartTimer()
 

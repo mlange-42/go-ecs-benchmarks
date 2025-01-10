@@ -1,4 +1,4 @@
-package query1in10
+package query256arch
 
 import (
 	"github.com/mlange-42/go-ecs-benchmarks/bench/util"
@@ -15,7 +15,7 @@ func Benchmarks() util.Benchmarks {
 			{Name: "uot", F: runUot},
 		},
 		N: []int{
-			1, 4, 16, 64, 256, 1024, 16_000, 256_000,
+			1, 4, 16, 64, 256, 1024, 16_000, 256_000, 1_000_000,
 		},
 	}
 }
