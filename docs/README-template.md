@@ -47,28 +47,33 @@ The initial capacity of the world is set to 1024 where this is supported.
 
 ${query2comp}
 
-### Query sparse
+### Query fragmented, inner
 
-`N` entities with components `Position` and `Velocity`.
-Additionally, there are `9*N` entities with only `Position`.
-
-- Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
-
-![query1in10](query1in10.svg)
-
-${query1in10}
-
-### Query fragmented
+Query where the matching entities are fragmented over 32 archetypes.
 
 `N` entities with components `Position` and `Velocity`.
 Each of these `N` entities has some combination of components
-`C1`, `C2`, ..., `C5`, so entities are fragmented over 32 archetypes.
+`C1`, `C2`, ..., `C5`, so entities are fragmented over up to 32 archetypes.
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
 ![query32arch](query32arch.svg)
 
 ${query32arch}
+
+### Query fragmented, outer
+
+Query where there are 256 non-matching archetypes.
+
+`N` entities with components `Position` and `Velocity`.
+Another `4 * N` entities with `Position` and some combination of 8 components
+`C1`, ..., `C8`, so these entities are fragmented over up to 256 archetypes.
+
+- Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
+
+![query256arch](query256arch.svg)
+
+${query256arch}
 
 ### Component random access
 

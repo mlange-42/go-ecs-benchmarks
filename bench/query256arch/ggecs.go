@@ -1,4 +1,4 @@
-package query32arch
+package query256arch
 
 import (
 	"testing"
@@ -15,6 +15,9 @@ const (
 	C3ID
 	C4ID
 	C5ID
+	C6ID
+	C7ID
+	C8ID
 )
 
 func runGGEcs(b *testing.B, n int) {
@@ -28,12 +31,19 @@ func runGGEcs(b *testing.B, n int) {
 	world.Register(ecs.NewComponentRegistry[comps.C3](C3ID))
 	world.Register(ecs.NewComponentRegistry[comps.C4](C4ID))
 	world.Register(ecs.NewComponentRegistry[comps.C5](C5ID))
+	world.Register(ecs.NewComponentRegistry[comps.C5](C6ID))
+	world.Register(ecs.NewComponentRegistry[comps.C5](C7ID))
+	world.Register(ecs.NewComponentRegistry[comps.C5](C8ID))
 
-	extraIDs := []ecs.ComponentID{C1ID, C2ID, C3ID, C4ID, C5ID}
+	extraIDs := []ecs.ComponentID{C1ID, C2ID, C3ID, C4ID, C5ID, C6ID, C7ID, C8ID}
+
+	for range n {
+		_ = world.NewEntity(PositionComponentID, VelocityComponentID)
+	}
 
 	ids := []ecs.ComponentID{}
-	for i := range n {
-		ids = append(ids, PositionComponentID, VelocityComponentID)
+	for i := range n * 4 {
+		ids = append(ids, PositionComponentID)
 		for j, id := range extraIDs {
 			m := 1 << j
 			if i&m == m {
