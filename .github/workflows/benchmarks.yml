@@ -21,7 +21,6 @@ jobs:
               query2comp \
               query32arch \
               query256arch \
-              random \
 
       - name: Archive results
         uses: actions/upload-artifact@v4
@@ -38,6 +37,7 @@ jobs:
       - name: Run benchmarks
         run: |
           go run . -test.benchtime=1s \
+              random \
               add_remove \
               add_remove_large \
               new_world
