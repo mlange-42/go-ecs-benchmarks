@@ -14,14 +14,19 @@ func runEnto(b *testing.B, n int) {
 	}
 	rand.Shuffle(n, util.Swap(entities))
 
+	sum := 0.0
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
 		for _, e := range entities {
 			var comp *comps.Position
 			e.Get(comp)
-			comp.X++
+			sum += comp.X
 		}
+	}
+	b.StopTimer()
+	if sum > 0 {
+		log.Fatal("error")
 	}
 }
 */

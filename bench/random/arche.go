@@ -1,6 +1,7 @@
 package random
 
 import (
+	"log"
 	"math/rand/v2"
 	"testing"
 
@@ -22,12 +23,17 @@ func runArche(b *testing.B, n int) {
 	}
 	rand.Shuffle(n, util.Swap(entities))
 
+	sum := 0.0
 	b.StartTimer()
-
 	for i := 0; i < b.N; i++ {
+		sum := 0.0
 		for _, e := range entities {
 			pos := (*comps.Position)(world.Get(e, posID))
-			pos.X++
+			sum += pos.X
 		}
+	}
+	b.StopTimer()
+	if sum > 0 {
+		log.Fatal("error")
 	}
 }

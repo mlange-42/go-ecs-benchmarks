@@ -16,6 +16,7 @@ colors = {
     "Arche": default_colors[0],
     "Arche (batch)": default_colors[1],
     "Arche (cached)": default_colors[1],
+    "Arche (unchecked)": default_colors[1],
     "Donburi": default_colors[2],
     "Ento": default_colors[3],
     "ggecs": default_colors[4],

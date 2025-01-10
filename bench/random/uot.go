@@ -1,6 +1,7 @@
 package random
 
 import (
+	"log"
 	"math/rand/v2"
 	"testing"
 
@@ -24,12 +25,16 @@ func runUot(b *testing.B, n int) {
 	}
 	rand.Shuffle(n, util.Swap(entities))
 
+	sum := 0.0
 	b.StartTimer()
-
 	for i := 0; i < b.N; i++ {
 		for _, e := range entities {
 			pos := ecs.ReadPtr[comps.Position](world, e)
-			pos.X++
+			sum += pos.X
 		}
+	}
+	b.StopTimer()
+	if sum > 0 {
+		log.Fatal("error")
 	}
 }

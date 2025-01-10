@@ -32,7 +32,7 @@ func RunBenchmarks(name string, benchmarks Benchmarks, format func(Benchmarks) s
 		fmt.Println("   N =", n)
 		for j := range benchmarks.Benches {
 			bench := &benchmarks.Benches[j]
-			fmt.Printf("       %-16s", bench.Name)
+			fmt.Printf("       %-20s", bench.Name)
 			res := testing.Benchmark(func(b *testing.B) {
 				bench.F(b, n)
 			})

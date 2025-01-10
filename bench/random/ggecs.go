@@ -1,6 +1,7 @@
 package random
 
 import (
+	"log"
 	"math/rand/v2"
 	"testing"
 
@@ -27,11 +28,15 @@ func runGGEcs(b *testing.B, n int) {
 	rand.Shuffle(n, util.Swap(entities))
 
 	b.StartTimer()
-
+	sum := 0.0
 	for i := 0; i < b.N; i++ {
 		for _, e := range entities {
 			pos := (*comps.Position)(world.Component(e, PositionComponentID))
-			pos.X++
+			sum += pos.X
 		}
+	}
+	b.StopTimer()
+	if sum > 0 {
+		log.Fatal("error")
 	}
 }

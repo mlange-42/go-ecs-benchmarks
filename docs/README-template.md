@@ -76,7 +76,7 @@ ${query32arch}
 All entities are collected into a slice, and the slice is shuffled.
 
 * Iterate the shuffled entities.
-* For each entity, get its `Position` and increment the position's `X` field by 1.
+* For each entity, get its `Position` and sum up their `X` fields.
 
 Ento is left out here, as component access for a specific entity seems broken (see issue [ento/#2](https://github.com/wwfranczyk/ento/issues/2)).
 
