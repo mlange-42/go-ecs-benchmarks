@@ -10,7 +10,6 @@ func Benchmarks() util.Benchmarks {
 			{Name: "Arche", F: runArche},
 			{Name: "Arche (batch)", F: runArcheBatched},
 			{Name: "Donburi", F: runDonburi},
-			{Name: "Ento", F: runEnto},
 			{Name: "ggecs", F: runGGEcs},
 			{Name: "uot", F: runUot},
 		},

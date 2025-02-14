@@ -9,7 +9,6 @@ func Benchmarks() util.Benchmarks {
 		Benches: []util.Benchmark{
 			{Name: "Arche", F: runArche},
 			{Name: "Donburi", F: runDonburi},
-			//{Name: "Ento", F: runEnto}, // component access through the world seems broken
 			{Name: "ggecs", F: runGGEcs},
 			{Name: "uot", F: runUot},
 		},
