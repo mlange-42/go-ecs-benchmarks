@@ -8,7 +8,6 @@ require (
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/stretchr/testify v1.10.0
 	github.com/unitoftime/ecs v0.0.3
-	github.com/wfranczyk/ento v0.1.0
 	github.com/yohamta/donburi v1.15.6
 )
 
