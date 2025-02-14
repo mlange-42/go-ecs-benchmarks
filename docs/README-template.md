@@ -7,13 +7,13 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
 ## Benchmark candidates
 
-| ECS | Type | Version |
-|-----|------|---------|
-| [Arche](https://github.com/mlange-42/arche) | Archetype | v0.15.2 |
-| [Donburi](https://github.com/yohamta/donburi) | Archetype | v1.15.6 |
-| [ento](https://github.com/wwfranczyk/ento) | Sparse Set | v0.1.0 |
-| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | Archetype | v0.9.0 |
-| [unitoftime/ecs](https://github.com/unitoftime/ecs) | Archetype | v0.0.3 |
+| ECS | Version |
+|-----|---------|
+| [Arche](https://github.com/mlange-42/arche) | v0.15.2 |
+| [Donburi](https://github.com/yohamta/donburi) | v1.15.6 |
+| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 |
+| [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 |
+| [akmonengine/volt](https://github.com/akmonengine/volt) | v1.2.0 |
 
 Candidates are always displayed in alphabetical order.
 
@@ -183,8 +183,8 @@ ${new_world}
 Given that all tested projects are on Github, we can use the star history as a proxy here.
 
 <p align="center">
-<a title="Star History Chart" href="https://star-history.com/#mlange-42/arche&yohamta/donburi&wwfranczyk/ento&marioolofo/go-gameengine-ecs&unitoftime/ecs&Date">
-<img src="https://api.star-history.com/svg?repos=mlange-42/arche,yohamta/donburi,wwfranczyk/ento,marioolofo/go-gameengine-ecs,unitoftime/ecs&type=Date" alt="Star History Chart" width="600"/>
+<a title="Star History Chart" href="https://star-history.com/#mlange-42/arche&yohamta/donburi&marioolofo/go-gameengine-ecs&unitoftime/ecs&akmonengine/volt&Date">
+<img src="https://api.star-history.com/svg?repos=mlange-42/arche,yohamta/donburi,marioolofo/go-gameengine-ecs,unitoftime/ecs,akmonengine/volt&type=Date" alt="Star History Chart" width="600"/>
 </a>
 </p>
 
