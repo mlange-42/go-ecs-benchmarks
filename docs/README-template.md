@@ -13,7 +13,7 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 | [Donburi](https://github.com/yohamta/donburi) | v1.15.7 |
 | [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 |
 | [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 |
-| [akmonengine/volt](https://github.com/akmonengine/volt) | v1.2.0 |
+| [Volt](https://github.com/akmonengine/volt) | v1.2.0 |
 
 Candidates are always displayed in alphabetical order.
 
@@ -57,6 +57,8 @@ Each of these `N` entities has some combination of components
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
+> Volt is left out here, as it is not flexible enough for the required automated setup.
+
 ![query32arch](query32arch.svg)
 
 ${query32arch}
@@ -70,6 +72,8 @@ Another `4 * N` entities with `Position` and some combination of 8 components
 `C1`, ..., `C8`, so these entities are fragmented over up to 256 archetypes.
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
+
+> Volt is left out here, as it is not flexible enough for the required automated setup.
 
 ![query256arch](query256arch.svg)
 
