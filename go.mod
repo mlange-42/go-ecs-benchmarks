@@ -5,11 +5,11 @@ go 1.23.0
 require (
 	github.com/akmonengine/volt v1.2.0
 	github.com/marioolofo/go-gameengine-ecs v0.9.0
-	github.com/mlange-42/arche v0.15.2
+	github.com/mlange-42/arche v0.15.3
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/stretchr/testify v1.10.0
 	github.com/unitoftime/ecs v0.0.3
-	github.com/yohamta/donburi v1.15.6
+	github.com/yohamta/donburi v1.15.7
 )
 
 require (

@@ -9,8 +9,8 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
 | ECS | Version |
 |-----|---------|
-| [Arche](https://github.com/mlange-42/arche) | v0.15.2 |
-| [Donburi](https://github.com/yohamta/donburi) | v1.15.6 |
+| [Arche](https://github.com/mlange-42/arche) | v0.15.3 |
+| [Donburi](https://github.com/yohamta/donburi) | v1.15.7 |
 | [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 |
 | [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 |
 | [akmonengine/volt](https://github.com/akmonengine/volt) | v1.2.0 |
@@ -82,8 +82,6 @@ All entities are collected into a slice, and the slice is shuffled.
 
 * Iterate the shuffled entities.
 * For each entity, get its `Position` and sum up their `X` fields.
-
-Ento is left out here, as component access for a specific entity seems broken (see issue [ento/#2](https://github.com/wwfranczyk/ento/issues/2)).
 
 ![random](random.svg)
 
