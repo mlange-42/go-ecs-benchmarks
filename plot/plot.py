@@ -18,7 +18,8 @@ colors = {
     "Arche (cached)": default_colors[1],
     "Arche (unchecked)": default_colors[1],
     "Donburi": default_colors[2],
-    "Ento": default_colors[3],
+    "Ento": default_colors[3],  # TODO: remove
+    "Volt": default_colors[3],
     "ggecs": default_colors[4],
     "uot": default_colors[5],
 }
