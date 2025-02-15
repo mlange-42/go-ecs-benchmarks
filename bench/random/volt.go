@@ -1,0 +1,42 @@
+package random
+
+import (
+	"log"
+	"math/rand/v2"
+	"testing"
+
+	"github.com/akmonengine/volt"
+	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
+	"github.com/mlange-42/go-ecs-benchmarks/bench/util"
+)
+
+type voltConfig = volt.ComponentConfig[volt.ComponentInterface]
+
+func runVolt(b *testing.B, n int) {
+	b.StopTimer()
+	world := volt.CreateWorld(1024)
+
+	volt.RegisterComponent[comps.Position](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
+
+	entities := make([]volt.EntityId, 0, n)
+	for i := 0; i < n; i++ {
+		e := world.CreateEntity("-")
+		volt.AddComponent(world, e, comps.Position{})
+		entities = append(entities, e)
+	}
+	rand.Shuffle(n, util.Swap(entities))
+
+	sum := 0.0
+	b.StartTimer()
+	for i := 0; i < b.N; i++ {
+		sum := 0.0
+		for _, e := range entities {
+			pos := volt.GetComponent[comps.Position](world, e)
+			sum += pos.X
+		}
+	}
+	b.StopTimer()
+	if sum > 0 {
+		log.Fatal("error")
+	}
+}

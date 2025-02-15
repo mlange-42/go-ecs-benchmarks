@@ -18,9 +18,10 @@ colors = {
     "Arche (cached)": default_colors[1],
     "Arche (unchecked)": default_colors[1],
     "Donburi": default_colors[2],
-    "Ento": default_colors[3],
+    "Ento": default_colors[3],  # TODO: remove
     "ggecs": default_colors[4],
     "uot": default_colors[5],
+    "Volt": default_colors[6],
 }
 
 
@@ -70,6 +71,7 @@ def plot(data: pd.DataFrame) -> Figure:
 def plot_bars(data: pd.DataFrame, ax, legend: bool):
     cols = data.columns[1:]
     width = 1.0 / (1.5 * len(cols))
+    max_value = data.max()[1:].max()
 
     for i, col in enumerate(cols):
         col_data = data[col]
@@ -78,8 +80,13 @@ def plot_bars(data: pd.DataFrame, ax, legend: bool):
 
     ax.set_ylabel("Time per entity")
     ax.set_yscale("log")
-    ax.set_yticks([1, 10, 100, 1000])
-    ax.set_yticklabels(["1ns", "10ns", "100ns", "1μs"])
+
+    if max_value > 400:
+        ax.set_yticks([1, 10, 100, 1000])
+        ax.set_yticklabels(["1ns", "10ns", "100ns", "1μs"])
+    else:
+        ax.set_yticks([1, 10, 100])
+        ax.set_yticklabels(["1ns", "10ns", "100ns"])
 
     ax.set_xlabel("#Entities")
 
