@@ -142,8 +142,8 @@ All entities are collected into a slice, and the slice is shuffled.
 - Create `N` entities with components `Position` and `Velocity`.
 
 The operation is performed once before benchmarking,
-to exclude things like archetype creation and memory allocation.
-See the benchmark below for entity creation with allocation.
+to exclude memory allocation, archetype creation etc.
+See the benchmarks below for entity creation with allocation.
 
 ![create2comp](https://github.com/user-attachments/assets/a335d5f9-aef0-4b95-8d9d-a6fa277deb04)
 
@@ -165,9 +165,11 @@ See the benchmark below for entity creation with allocation.
 - Create `N` entities with components `Position` and `Velocity`.
 
 Each round is performed on a fresh world.
-Thus, low `N` values might be biased by things like archetype creation and memory allocation,
-which may be handled differently by different implementations.
-See the benchmark above for entity creation without allocation.
+This reflects the creation of the first entities with a certain components set in your game or application.
+As soon as things stabilize, the benchmarks for entity creation without allocation (above) apply.
+
+Low `N` values might be biased by things like archetype creation and memory allocation,
+which is handled differently by different implementations.
 
 ![create2comp_alloc](https://github.com/user-attachments/assets/56ea3d87-ccce-4178-b808-a8cea96c856a)
 
