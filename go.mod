@@ -1,6 +1,6 @@
 module github.com/mlange-42/go-ecs-benchmarks
 
-go 1.23.0
+go 1.24.0
 
 require (
 	github.com/akmonengine/volt v1.2.0

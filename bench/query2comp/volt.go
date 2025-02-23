@@ -10,7 +10,6 @@ import (
 type voltConfig = volt.ComponentConfig[volt.ComponentInterface]
 
 func runVolt(b *testing.B, n int) {
-	b.StopTimer()
 	world := volt.CreateWorld(1024)
 
 	volt.RegisterComponent[comps.Position](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
@@ -22,9 +21,8 @@ func runVolt(b *testing.B, n int) {
 	}
 
 	query := volt.CreateQuery2[comps.Position, comps.Velocity](world, []volt.OptionalComponent{})
-	b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		for result := range query.Foreach(nil) {
 			pos := result.A
 			vel := result.B
