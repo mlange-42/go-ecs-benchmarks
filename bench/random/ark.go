@@ -5,20 +5,19 @@ import (
 	"math/rand/v2"
 	"testing"
 
-	"github.com/mlange-42/arche/ecs"
+	"github.com/mlange-42/ark/ecs"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/util"
 )
 
-func runArche(b *testing.B, n int) {
+func runArk(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	posID := ecs.ComponentID[comps.Position](&world)
-
+	mapper := ecs.NewMap[comps.Position](&world)
 	entities := make([]ecs.Entity, 0, n)
-	query := world.Batch().NewQ(n, posID)
-	for query.Next() {
-		entities = append(entities, query.Entity())
+	for range n {
+		e := mapper.NewEntity(&comps.Position{})
+		entities = append(entities, e)
 	}
 	rand.Shuffle(n, util.Swap(entities))
 
@@ -26,7 +25,7 @@ func runArche(b *testing.B, n int) {
 	for b.Loop() {
 		sum := 0.0
 		for _, e := range entities {
-			pos := (*comps.Position)(world.Get(e, posID))
+			pos := mapper.Get(e)
 			sum += pos.X
 		}
 	}
