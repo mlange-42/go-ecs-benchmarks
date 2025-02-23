@@ -22,8 +22,7 @@ func runVolt(b *testing.B, n int) {
 
 	query := volt.CreateQuery2[comps.Position, comps.Velocity](world, []volt.OptionalComponent{})
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		for result := range query.Foreach(nil) {
 			pos := result.A
 			vel := result.B
@@ -31,7 +30,6 @@ func runVolt(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
-	b.StopTimer()
 
 	for result := range query.Foreach(nil) {
 		pos := result.A

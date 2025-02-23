@@ -24,8 +24,7 @@ func runDonburi(b *testing.B, n int) {
 
 	query := donburi.NewQuery(filter.Contains(position, velocity))
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query.Each(world, func(entry *donburi.Entry) {
 			pos := position.Get(entry)
 			vel := velocity.Get(entry)
@@ -34,7 +33,6 @@ func runDonburi(b *testing.B, n int) {
 			pos.Y += vel.Y
 		})
 	}
-	b.StopTimer()
 
 	query.Each(world, func(entry *donburi.Entry) {
 		pos := position.Get(entry)

@@ -19,14 +19,12 @@ func runUot(b *testing.B, n int) {
 	}
 	query := ecs.Query2[comps.Position, comps.Velocity](world)
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query.MapId(func(id ecs.Id, pos *comps.Position, vel *comps.Velocity) {
 			pos.X += vel.X
 			pos.Y += vel.Y
 		})
 	}
-	b.StopTimer()
 
 	query.MapId(func(id ecs.Id, pos *comps.Position, vel *comps.Velocity) {
 		if pos.X == 0 || pos.Y == 0 {
