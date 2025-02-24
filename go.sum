@@ -8,8 +8,8 @@ github.com/marioolofo/go-gameengine-ecs v0.9.0 h1:J0awhWBm7CVmtDa62ouA3X7uuUTS+z
 github.com/marioolofo/go-gameengine-ecs v0.9.0/go.mod h1:oigfVORaCpMEaktM5fmk/jScla/M7dEMCnJlyZmYiLo=
 github.com/mlange-42/arche v0.15.3 h1:vonT1aCIHmu3nnCopzmhzOP5+J2NswVTexa2UDyek34=
 github.com/mlange-42/arche v0.15.3/go.mod h1:bX5PDzTbf2pEIlwnjRu3IpVqduLsxve4rUblXV0Byj0=
-github.com/mlange-42/ark v0.0.0-20250223152834-5ed01843360a h1:EyVMq8CSJooeAISmwYvrw9lLlINpg48/zePVQc7IsBM=
-github.com/mlange-42/ark v0.0.0-20250223152834-5ed01843360a/go.mod h1:fuZlVyRNW+mXvYElMava0w8BDEEthT3CJl4YJ0lPasg=
+github.com/mlange-42/ark v0.1.0 h1:UqBMuhaT/FhNM8eKK+Qgryip7UrWo0wmPAS7H/r4yho=
+github.com/mlange-42/ark v0.1.0/go.mod h1:47KXHr5HLftLn4iyL8w04iv7KJUNUoDymEIotD41f3o=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/shirou/gopsutil v3.21.11+incompatible h1:+1+c1VGhc88SSonWP6foOcLhvnKlUeu/erjjvaPEYiI=
