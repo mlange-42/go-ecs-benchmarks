@@ -1,6 +1,7 @@
 package delete10comp
 
 import (
+	"strconv"
 	"testing"
 
 	"github.com/akmonengine/volt"
@@ -25,8 +26,8 @@ func runVolt(b *testing.B, n int) {
 	volt.RegisterComponent[comps.C10](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
 
 	entities := make([]volt.EntityId, 0, n)
-	for range n {
-		e, err := volt.CreateEntityWithComponents8(world, "-",
+	for id := range n {
+		e, err := volt.CreateEntityWithComponents8(world, strconv.Itoa(id),
 			comps.C1{}, comps.C2{}, comps.C3{}, comps.C4{},
 			comps.C5{}, comps.C6{}, comps.C7{}, comps.C8{},
 		)
@@ -45,8 +46,8 @@ func runVolt(b *testing.B, n int) {
 		b.StopTimer()
 
 		entities = entities[:0]
-		for range n {
-			e, err := volt.CreateEntityWithComponents8(world, "-",
+		for id := range n {
+			e, err := volt.CreateEntityWithComponents8(world, strconv.Itoa(id),
 				comps.C1{}, comps.C2{}, comps.C3{}, comps.C4{},
 				comps.C5{}, comps.C6{}, comps.C7{}, comps.C8{},
 			)

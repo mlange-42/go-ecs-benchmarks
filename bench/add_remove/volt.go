@@ -1,6 +1,7 @@
 package addremove
 
 import (
+	"strconv"
 	"testing"
 
 	"github.com/akmonengine/volt"
@@ -17,12 +18,12 @@ func runVolt(b *testing.B, n int) {
 	volt.RegisterComponent[comps.Velocity](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
 
 	for i := 0; i < n; i++ {
-		e := world.CreateEntity("-")
+		e := world.CreateEntity(strconv.Itoa(i))
 		volt.AddComponent(world, e, comps.Position{})
 	}
 
-	posMask := volt.CreateQuery1[comps.Position](world, []volt.OptionalComponent{})
-	posVelMask := volt.CreateQuery2[comps.Position, comps.Velocity](world, []volt.OptionalComponent{})
+	posMask := volt.CreateQuery1[comps.Position](world, volt.QueryConfiguration{})
+	posVelMask := volt.CreateQuery2[comps.Position, comps.Velocity](world, volt.QueryConfiguration{})
 
 	entities := make([]volt.EntityId, 0, n)
 

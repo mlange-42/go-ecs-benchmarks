@@ -1,6 +1,7 @@
 package addremovelarge
 
 import (
+	"strconv"
 	"testing"
 
 	"github.com/akmonengine/volt"
@@ -28,7 +29,7 @@ func runVolt(b *testing.B, n int) {
 	volt.RegisterComponent[comps.C10](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
 
 	for i := 0; i < n; i++ {
-		e, err := volt.CreateEntityWithComponents8(world, "-", comps.Position{},
+		e, err := volt.CreateEntityWithComponents8(world, strconv.Itoa(i), comps.Position{},
 			comps.C1{}, comps.C2{}, comps.C3{}, comps.C4{},
 			comps.C5{}, comps.C6{}, comps.C7{},
 		)
@@ -38,8 +39,8 @@ func runVolt(b *testing.B, n int) {
 		volt.AddComponents3(world, e, comps.C8{}, comps.C9{}, comps.C10{})
 	}
 
-	posMask := volt.CreateQuery1[comps.Position](world, []volt.OptionalComponent{})
-	posVelMask := volt.CreateQuery2[comps.Position, comps.Velocity](world, []volt.OptionalComponent{})
+	posMask := volt.CreateQuery1[comps.Position](world, volt.QueryConfiguration{})
+	posVelMask := volt.CreateQuery2[comps.Position, comps.Velocity](world, volt.QueryConfiguration{})
 
 	entities := make([]volt.EntityId, 0, n)
 
