@@ -1,6 +1,7 @@
 package query2comp
 
 import (
+	"strconv"
 	"testing"
 
 	"github.com/akmonengine/volt"
@@ -17,11 +18,11 @@ func runVolt(b *testing.B, n int) {
 	volt.RegisterComponent[comps.Velocity](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
 
 	for i := 0; i < n; i++ {
-		e := world.CreateEntity("-")
+		e := world.CreateEntity(strconv.Itoa(i))
 		volt.AddComponents2(world, e, comps.Position{}, comps.Velocity{})
 	}
 
-	query := volt.CreateQuery2[comps.Position, comps.Velocity](world, []volt.OptionalComponent{})
+	query := volt.CreateQuery2[comps.Position, comps.Velocity](world, volt.QueryConfiguration{})
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
