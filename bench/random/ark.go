@@ -23,7 +23,6 @@ func runArk(b *testing.B, n int) {
 
 	sum := 0.0
 	for b.Loop() {
-		sum := 0.0
 		for _, e := range entities {
 			pos := mapper.Get(e)
 			sum += pos.X

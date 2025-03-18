@@ -28,7 +28,6 @@ func runVolt(b *testing.B, n int) {
 
 	sum := 0.0
 	for b.Loop() {
-		sum := 0.0
 		for _, e := range entities {
 			pos := volt.GetComponent[comps.Position](world, e)
 			sum += pos.X
