@@ -29,7 +29,6 @@ func runArche(b *testing.B, n int) {
 }
 
 func runArcheRegistered(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
@@ -39,9 +38,8 @@ func runArcheRegistered(b *testing.B, n int) {
 
 	filter := ecs.All(posID, velID)
 	cf := world.Cache().Register(&filter)
-	b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query := world.Query(&cf)
 		for query.Next() {
 			pos := (*comps.Position)(query.Get(posID))
