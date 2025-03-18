@@ -14,7 +14,6 @@ import (
 type voltConfig = volt.ComponentConfig[volt.ComponentInterface]
 
 func runVolt(b *testing.B, n int) {
-	b.StopTimer()
 	world := volt.CreateWorld(1024)
 
 	volt.RegisterComponent[comps.Position](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
@@ -28,15 +27,13 @@ func runVolt(b *testing.B, n int) {
 	rand.Shuffle(n, util.Swap(entities))
 
 	sum := 0.0
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		sum := 0.0
 		for _, e := range entities {
 			pos := volt.GetComponent[comps.Position](world, e)
 			sum += pos.X
 		}
 	}
-	b.StopTimer()
 	if sum > 0 {
 		log.Fatal("error")
 	}

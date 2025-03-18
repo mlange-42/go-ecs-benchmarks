@@ -11,7 +11,6 @@ import (
 )
 
 func runDonburi(b *testing.B, n int) {
-	b.StopTimer()
 	world := donburi.NewWorld()
 
 	var position = donburi.NewComponentType[comps.Position]()
@@ -23,16 +22,14 @@ func runDonburi(b *testing.B, n int) {
 	}
 	rand.Shuffle(n, util.Swap(entities))
 
-	b.StartTimer()
 	sum := 0.0
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		for _, e := range entities {
 			entry := world.Entry(e)
 			pos := (*comps.Position)(entry.Component(position))
 			sum += pos.X
 		}
 	}
-	b.StopTimer()
 	if sum > 0 {
 		log.Fatal("error")
 	}
