@@ -23,12 +23,21 @@ func runVolt(b *testing.B, n int) {
 
 	query := volt.CreateQuery2[comps.Position, comps.Velocity](world, volt.QueryConfiguration{})
 
-	for b.Loop() {
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
 		for result := range query.Foreach(nil) {
 			pos := result.A
 			vel := result.B
 			pos.X += vel.X
 			pos.Y += vel.Y
+		}
+	}
+	b.StopTimer()
+
+	for result := range query.Foreach(nil) {
+		pos := result.A
+		if pos.X == 0 || pos.Y == 0 {
+			panic("assertion failed")
 		}
 	}
 }

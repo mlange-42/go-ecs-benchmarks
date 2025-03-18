@@ -18,18 +18,31 @@ func runGGEcs(b *testing.B, n int) {
 	world.Register(ecs.NewComponentRegistry[comps.Velocity](velocityComponentID))
 
 	for i := 0; i < n; i++ {
-		_ = world.NewEntity(positionComponentID, velocityComponentID)
+		e := world.NewEntity(positionComponentID, velocityComponentID)
+		vel := (*comps.Velocity)(world.Component(e, velocityComponentID))
+		vel.X = 1
+		vel.Y = 1
 	}
 
 	mask := ecs.MakeComponentMask(positionComponentID, velocityComponentID)
 
-	for b.Loop() {
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
 		query := world.Query(mask)
 		for query.Next() {
 			pos := (*comps.Position)(query.Component(positionComponentID))
 			vel := (*comps.Velocity)(query.Component(velocityComponentID))
 			pos.X += vel.X
 			pos.Y += vel.Y
+		}
+	}
+	b.StopTimer()
+
+	query := world.Query(mask)
+	for query.Next() {
+		pos := (*comps.Position)(query.Component(positionComponentID))
+		if pos.X == 0 || pos.Y == 0 {
+			panic("assertion failed")
 		}
 	}
 }
