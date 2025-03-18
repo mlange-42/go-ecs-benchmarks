@@ -3,11 +3,11 @@ package query32arch
 import (
 	"testing"
 
-	"github.com/mlange-42/arche/ecs"
+	"github.com/mlange-42/ark/ecs"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
 )
 
-func runArche(b *testing.B, n int) {
+func runArk(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
@@ -29,25 +29,25 @@ func runArche(b *testing.B, n int) {
 				ids = append(ids, id)
 			}
 		}
-		world.NewEntity(ids...)
+		world.Unsafe().NewEntity(ids...)
 
 		ids = ids[:0]
 	}
 
-	filter := ecs.All(posID, velID)
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
+	b.StartTimer()
 
 	for b.Loop() {
-		query := world.Query(&filter)
+		query := filter.Query()
 		for query.Next() {
-			pos := (*comps.Position)(query.Get(posID))
-			vel := (*comps.Velocity)(query.Get(velID))
+			pos, vel := query.Get()
 			pos.X += vel.X
 			pos.Y += vel.Y
 		}
 	}
 }
 
-func runArcheRegistered(b *testing.B, n int) {
+func runArkRegistered(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
@@ -69,19 +69,18 @@ func runArcheRegistered(b *testing.B, n int) {
 				ids = append(ids, id)
 			}
 		}
-		world.NewEntity(ids...)
+		world.Unsafe().NewEntity(ids...)
 
 		ids = ids[:0]
 	}
 
-	filter := ecs.All(posID, velID)
-	cf := world.Cache().Register(&filter)
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world).Register()
+	b.StartTimer()
 
 	for b.Loop() {
-		query := world.Query(&cf)
+		query := filter.Query()
 		for query.Next() {
-			pos := (*comps.Position)(query.Get(posID))
-			vel := (*comps.Velocity)(query.Get(velID))
+			pos, vel := query.Get()
 			pos.X += vel.X
 			pos.Y += vel.Y
 		}
