@@ -26,8 +26,7 @@ func runGGEcs(b *testing.B, n int) {
 
 	mask := ecs.MakeComponentMask(positionComponentID, velocityComponentID)
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query := world.Query(mask)
 		for query.Next() {
 			pos := (*comps.Position)(query.Component(positionComponentID))
@@ -36,7 +35,6 @@ func runGGEcs(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
-	b.StopTimer()
 
 	query := world.Query(mask)
 	for query.Next() {
