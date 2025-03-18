@@ -35,7 +35,6 @@ func runArk(b *testing.B, n int) {
 	}
 
 	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
-	b.StartTimer()
 
 	for b.Loop() {
 		query := filter.Query()
@@ -75,7 +74,6 @@ func runArkRegistered(b *testing.B, n int) {
 	}
 
 	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world).Register()
-	b.StartTimer()
 
 	for b.Loop() {
 		query := filter.Query()

@@ -3,15 +3,15 @@ package query256arch
 import (
 	"testing"
 
-	"github.com/mlange-42/arche/ecs"
+	"github.com/mlange-42/ark/ecs"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
 )
 
-func runArche(b *testing.B, n int) {
+func runArk(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
-	velID := ecs.ComponentID[comps.Velocity](&world)
+	_ = ecs.ComponentID[comps.Velocity](&world)
 	c1ID := ecs.ComponentID[comps.C1](&world)
 	c2ID := ecs.ComponentID[comps.C2](&world)
 	c3ID := ecs.ComponentID[comps.C3](&world)
@@ -23,7 +23,8 @@ func runArche(b *testing.B, n int) {
 
 	extraIDs := []ecs.ID{c1ID, c2ID, c3ID, c4ID, c5ID, c6ID, c7ID, c8ID}
 
-	world.Batch().New(n, posID, velID)
+	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
+	mapper.NewBatchFn(n, nil)
 
 	ids := []ecs.ID{}
 	for i := range n * 4 {
@@ -34,29 +35,28 @@ func runArche(b *testing.B, n int) {
 				ids = append(ids, id)
 			}
 		}
-		world.NewEntity(ids...)
+		world.Unsafe().NewEntity(ids...)
 
 		ids = ids[:0]
 	}
 
-	filter := ecs.All(posID, velID)
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
 
 	for b.Loop() {
-		query := world.Query(&filter)
+		query := filter.Query()
 		for query.Next() {
-			pos := (*comps.Position)(query.Get(posID))
-			vel := (*comps.Velocity)(query.Get(velID))
+			pos, vel := query.Get()
 			pos.X += vel.X
 			pos.Y += vel.Y
 		}
 	}
 }
 
-func runArcheRegistered(b *testing.B, n int) {
+func runArkRegistered(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
-	velID := ecs.ComponentID[comps.Velocity](&world)
+	_ = ecs.ComponentID[comps.Velocity](&world)
 	c1ID := ecs.ComponentID[comps.C1](&world)
 	c2ID := ecs.ComponentID[comps.C2](&world)
 	c3ID := ecs.ComponentID[comps.C3](&world)
@@ -68,7 +68,8 @@ func runArcheRegistered(b *testing.B, n int) {
 
 	extraIDs := []ecs.ID{c1ID, c2ID, c3ID, c4ID, c5ID, c6ID, c7ID, c8ID}
 
-	world.Batch().New(n, posID, velID)
+	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
+	mapper.NewBatchFn(n, nil)
 
 	ids := []ecs.ID{}
 	for i := range n * 4 {
@@ -79,19 +80,17 @@ func runArcheRegistered(b *testing.B, n int) {
 				ids = append(ids, id)
 			}
 		}
-		world.NewEntity(ids...)
+		world.Unsafe().NewEntity(ids...)
 
 		ids = ids[:0]
 	}
 
-	filter := ecs.All(posID, velID)
-	cf := world.Cache().Register(&filter)
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world).Register()
 
 	for b.Loop() {
-		query := world.Query(&cf)
+		query := filter.Query()
 		for query.Next() {
-			pos := (*comps.Position)(query.Get(posID))
-			vel := (*comps.Velocity)(query.Get(velID))
+			pos, vel := query.Get()
 			pos.X += vel.X
 			pos.Y += vel.Y
 		}
