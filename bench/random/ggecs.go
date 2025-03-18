@@ -10,6 +10,7 @@ import (
 	"github.com/mlange-42/go-ecs-benchmarks/bench/util"
 )
 
+// Component IDs
 const (
 	positionComponentID ecs.ComponentID = iota
 	velocityComponentID

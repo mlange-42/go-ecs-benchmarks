@@ -178,7 +178,6 @@ ${delete10comp}
 ### Create world
 
 - Create a new world
-- Register two components (if applicable)
 
 ${new_world}
 

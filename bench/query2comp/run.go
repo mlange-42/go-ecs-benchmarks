@@ -4,7 +4,7 @@ import (
 	"github.com/mlange-42/go-ecs-benchmarks/bench/util"
 )
 
-// Benchmarks queries.
+// Benchmarks runs the benchmarks.
 func Benchmarks() util.Benchmarks {
 	return util.Benchmarks{
 		Benches: []util.Benchmark{

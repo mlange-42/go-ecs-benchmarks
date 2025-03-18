@@ -9,9 +9,8 @@ import (
 
 func runUot(b *testing.B, n int) {
 	var world *ecs.World
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		world = ecs.NewWorld()
 	}
-	b.StopTimer()
 	assert.NotNil(b, world)
 }
