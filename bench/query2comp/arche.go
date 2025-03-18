@@ -8,7 +8,6 @@ import (
 )
 
 func runArche(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
@@ -17,9 +16,8 @@ func runArche(b *testing.B, n int) {
 	ecs.NewBuilder(&world, posID, velID).NewBatch(n)
 
 	filter := ecs.All(posID, velID)
-	b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query := world.Query(&filter)
 		for query.Next() {
 			pos := (*comps.Position)(query.Get(posID))
