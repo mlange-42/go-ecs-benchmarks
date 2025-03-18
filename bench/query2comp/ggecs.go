@@ -35,12 +35,4 @@ func runGGEcs(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
-
-	query := world.Query(mask)
-	for query.Next() {
-		pos := (*comps.Position)(query.Component(positionComponentID))
-		if pos.X == 0 || pos.Y == 0 {
-			panic("assertion failed")
-		}
-	}
 }

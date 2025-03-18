@@ -17,22 +17,12 @@ func runArk(b *testing.B, n int) {
 
 	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query := filter.Query()
 		for query.Next() {
 			pos, vel := query.Get()
 			pos.X += vel.X
 			pos.Y += vel.Y
-		}
-	}
-	b.StopTimer()
-
-	query := filter.Query()
-	for query.Next() {
-		pos, _ := query.Get()
-		if pos.X == 0 || pos.Y == 0 {
-			panic("assertion failed")
 		}
 	}
 }

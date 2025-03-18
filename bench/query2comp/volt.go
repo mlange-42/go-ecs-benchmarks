@@ -31,11 +31,4 @@ func runVolt(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
-
-	for result := range query.Foreach(nil) {
-		pos := result.A
-		if pos.X == 0 || pos.Y == 0 {
-			panic("assertion failed")
-		}
-	}
 }

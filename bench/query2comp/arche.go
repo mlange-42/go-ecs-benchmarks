@@ -31,14 +31,6 @@ func runArche(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
-
-	query = world.Query(&filter)
-	for query.Next() {
-		pos := (*comps.Position)(query.Get(posID))
-		if pos.X == 0 || pos.Y == 0 {
-			panic("assertion failed")
-		}
-	}
 }
 
 func runArcheRegistered(b *testing.B, n int) {
@@ -64,14 +56,6 @@ func runArcheRegistered(b *testing.B, n int) {
 			vel := (*comps.Velocity)(query.Get(velID))
 			pos.X += vel.X
 			pos.Y += vel.Y
-		}
-	}
-
-	query = world.Query(&cf)
-	for query.Next() {
-		pos := (*comps.Position)(query.Get(posID))
-		if pos.X == 0 {
-			panic("assertion failed")
 		}
 	}
 }

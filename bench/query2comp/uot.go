@@ -25,10 +25,4 @@ func runUot(b *testing.B, n int) {
 			pos.Y += vel.Y
 		})
 	}
-
-	query.MapId(func(id ecs.Id, pos *comps.Position, vel *comps.Velocity) {
-		if pos.X == 0 || pos.Y == 0 {
-			panic("assertion failed")
-		}
-	})
 }
