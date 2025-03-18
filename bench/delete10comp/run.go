@@ -9,6 +9,8 @@ func Benchmarks() util.Benchmarks {
 		Benches: []util.Benchmark{
 			{Name: "Arche", F: runArche},
 			{Name: "Arche (batch)", F: runArcheBatched},
+			{Name: "Ark", F: runArk},
+			{Name: "Ark (batch)", F: runArkBatched},
 			{Name: "Donburi", F: runDonburi},
 			{Name: "ggecs", F: runGGEcs},
 			{Name: "uot", F: runUot},
