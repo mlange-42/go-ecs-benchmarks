@@ -4,11 +4,14 @@ import (
 	"github.com/mlange-42/go-ecs-benchmarks/bench/util"
 )
 
+// Benchmarks runs the benchmarks.
 func Benchmarks() util.Benchmarks {
 	return util.Benchmarks{
 		Benches: []util.Benchmark{
 			{Name: "Arche", F: runArche},
 			{Name: "Arche (batch)", F: runArcheBatched},
+			{Name: "Ark", F: runArk},
+			{Name: "Ark (batch)", F: runArkBatched},
 			{Name: "Donburi", F: runDonburi},
 			{Name: "ggecs", F: runGGEcs},
 			{Name: "uot", F: runUot},

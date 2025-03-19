@@ -10,7 +10,6 @@ import (
 )
 
 func runDonburi(b *testing.B, n int) {
-	b.StopTimer()
 	world := donburi.NewWorld()
 
 	var position = donburi.NewComponentType[comps.Position]()
@@ -39,9 +38,8 @@ func runDonburi(b *testing.B, n int) {
 	}
 
 	query := donburi.NewQuery(filter.Contains(position, velocity))
-	b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query.Each(world, func(entry *donburi.Entry) {
 			pos := position.Get(entry)
 			vel := velocity.Get(entry)

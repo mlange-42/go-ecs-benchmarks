@@ -8,20 +8,18 @@ import (
 )
 
 func runUot(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld()
 
 	for i := 0; i < n; i++ {
 		id := world.NewId()
 		ecs.Write(world, id,
 			ecs.C(comps.Position{}),
-			ecs.C(comps.Velocity{}),
+			ecs.C(comps.Velocity{X: 1, Y: 1}),
 		)
 	}
 	query := ecs.Query2[comps.Position, comps.Velocity](world)
-	b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query.MapId(func(id ecs.Id, pos *comps.Position, vel *comps.Velocity) {
 			pos.X += vel.X
 			pos.Y += vel.Y

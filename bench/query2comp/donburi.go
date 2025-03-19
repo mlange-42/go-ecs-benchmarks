@@ -9,20 +9,22 @@ import (
 )
 
 func runDonburi(b *testing.B, n int) {
-	b.StopTimer()
 	world := donburi.NewWorld()
 
 	var position = donburi.NewComponentType[comps.Position]()
 	var velocity = donburi.NewComponentType[comps.Velocity]()
 
 	for i := 0; i < n; i++ {
-		world.Create(position, velocity)
+		e := world.Create(position, velocity)
+		entry := world.Entry(e)
+		vel := (*comps.Position)(entry.Component(velocity))
+		vel.X = 1
+		vel.Y = 1
 	}
 
 	query := donburi.NewQuery(filter.Contains(position, velocity))
-	b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query.Each(world, func(entry *donburi.Entry) {
 			pos := position.Get(entry)
 			vel := velocity.Get(entry)
