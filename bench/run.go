@@ -21,7 +21,7 @@ import (
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query32arch"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/random"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/util"
-	"github.com/shirou/gopsutil/cpu"
+	"github.com/shirou/gopsutil/v4/cpu"
 )
 
 var benchmarks = map[string]func() util.Benchmarks{
@@ -43,6 +43,7 @@ var benchmarks = map[string]func() util.Benchmarks{
 	"new_world": newworld.Benchmarks,
 }
 
+// RunAll runs all benchmarks.
 func RunAll() {
 	if err := os.Mkdir("results", os.ModePerm); err != nil && !os.IsExist(err) {
 		log.Fatal(err)
@@ -55,6 +56,7 @@ func RunAll() {
 	}
 }
 
+// Run runs selected benchmarks.
 func Run(benches []string) {
 	if err := os.Mkdir("results", os.ModePerm); err != nil && !os.IsExist(err) {
 		log.Fatal(err)

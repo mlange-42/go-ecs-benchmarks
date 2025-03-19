@@ -58,8 +58,6 @@ Each of these `N` entities has some combination of components
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-> Volt is left out here, as it is not flexible enough for the required automated setup.
-
 ![query32arch](query32arch.svg)
 
 ${query32arch}
@@ -73,8 +71,6 @@ Another `4 * N` entities with `Position` and some combination of 8 components
 `C1`, ..., `C8`, so these entities are fragmented over up to 256 archetypes.
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
-
-> Volt is left out here, as it is not flexible enough for the required automated setup.
 
 ![query256arch](query256arch.svg)
 
