@@ -8,15 +8,17 @@ import (
 )
 
 func runSimpleECS(b *testing.B, n int) {
-	b.StopTimer()
-	p := ecs.New(n)
-	ecs.Register2[comps.Position, comps.Velocity](p)
-	b.StartTimer()
-	for range n {
-		e := ecs.NewEntity(p)
-		ecs.Add2(p, e,
-			comps.Position{},
-			comps.Velocity{X: 1, Y: 1},
-		)
+	for b.Loop() {
+		b.StopTimer()
+		world := ecs.New(1024)
+		ecs.Register2[comps.Position, comps.Velocity](world)
+		b.StartTimer()
+		for range n {
+			e := ecs.NewEntity(world)
+			ecs.Add2(world, e,
+				comps.Position{},
+				comps.Velocity{X: 1, Y: 1},
+			)
+		}
 	}
 }

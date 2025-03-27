@@ -19,15 +19,15 @@ func runSimpleECS(b *testing.B, n int) {
 			comps.Position{},
 		)
 	}
-	POSITION := ecs.GetStorage[comps.Position](world)
-	entities := POSITION.And(nil)
+	stPosition := ecs.GetStorage[comps.Position](world)
+	entities := stPosition.And(nil)
 	rand.Shuffle(n, util.Swap(entities))
 	
 
 	sum := 0.0
 	for b.Loop() {
 		for _, e := range entities {
-			pos := POSITION.Get(e)
+			pos := stPosition.Get(e)
 			sum += pos.X
 		}
 	}

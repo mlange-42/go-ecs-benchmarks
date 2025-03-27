@@ -8,7 +8,7 @@ import (
 )
 
 func runSimpleECS(b *testing.B, n int) {
-	p := ecs.New(n)
+	p := ecs.New(1024).EnableGrowing()
 	for range n {
 		e := ecs.NewEntity(p)
 		ecs.Add2(p, e,
@@ -29,7 +29,7 @@ func runSimpleECS(b *testing.B, n int) {
 }
 // modify pointers instead of copying components
 func runSimpleECS_Ptr(b *testing.B, n int) {
-	p := ecs.New(n)
+	p := ecs.New(1024).EnableGrowing()
 	for range n {
 		e := ecs.NewEntity(p)
 		ecs.Add2(p, e,

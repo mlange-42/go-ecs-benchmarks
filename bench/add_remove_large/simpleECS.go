@@ -10,8 +10,7 @@ import (
 func runSimpleECS(b *testing.B, n int) {
 	b.StopTimer()
 	world := ecs.New(n)
-	ecs.Register[comps.Position](world)
-
+	// arrays will be initialized to n length, eliminating memory allocations
 	for range n {
 		e := ecs.NewEntity(world)
 		ecs.Add3(world, e, comps.Position{}, comps.C1{}, comps.C2{})
