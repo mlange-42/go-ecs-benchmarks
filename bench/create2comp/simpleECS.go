@@ -8,10 +8,11 @@ import (
 )
 
 func runSimpleECS(b *testing.B, n int) {
+	b.StopTimer()
+	world := ecs.New(n)
+	ecs.Register2[comps.Position,comps.Velocity](world)
 	for b.Loop() {
 		b.StartTimer()
-		world := ecs.New(1024).EnableGrowing()
-		b.StopTimer()
 		for range n {
 			e := ecs.NewEntity(world)
 			ecs.Add2(world, e,
@@ -19,5 +20,9 @@ func runSimpleECS(b *testing.B, n int) {
 				comps.Velocity{X: 1, Y: 1},
 			)
 		}
+		b.StopTimer()
+		entities := ecs.GetStorage[comps.Position](world).
+			And(ecs.GetStorage[comps.Velocity](world))
+		ecs.Kill(world, entities...)
 	}
 }

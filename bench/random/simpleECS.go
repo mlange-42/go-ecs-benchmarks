@@ -23,7 +23,6 @@ func runSimpleECS(b *testing.B, n int) {
 	entities := stPosition.And(nil)
 	rand.Shuffle(n, util.Swap(entities))
 	
-
 	sum := 0.0
 	for b.Loop() {
 		for _, e := range entities {
