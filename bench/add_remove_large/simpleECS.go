@@ -10,7 +10,7 @@ import (
 func runSimpleECS(b *testing.B, n int) {
 	b.StopTimer()
 	world := ecs.New(n)
-	ecs.Register2[comps.Position, comps.Velocity](world)
+	ecs.Register[comps.Position](world)
 
 	for range n {
 		e := ecs.NewEntity(world)

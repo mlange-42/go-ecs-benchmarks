@@ -16,15 +16,14 @@ func runSimpleECS(b *testing.B, n int) {
 			comps.Velocity{X: 1, Y: 1},
 		)
 	}
-	POSITION, VELOCITY := ecs.GetStorage2[comps.Position, comps.Velocity](p)
-	query := POSITION.And(VELOCITY)
+	stPosition, stVelocity := ecs.GetStorage2[comps.Position, comps.Velocity](p)
 	for b.Loop() {
-		for _, e := range query {
+		for _, e := range stPosition.And(stVelocity){
 			pos, vel :=
-				POSITION.Get(e), VELOCITY.Get(e)
+				stPosition.Get(e), stVelocity.Get(e)
 			pos.X += vel.X
 			pos.Y += vel.Y
-			POSITION.Update(e, pos)
+			stPosition.Update(e, pos)
 		}
 	}
 }
@@ -38,12 +37,11 @@ func runSimpleECS_Ptr(b *testing.B, n int) {
 			comps.Velocity{X: 1, Y: 1},
 		)
 	}
-	POSITION, VELOCITY := ecs.GetStorage2[comps.Position, comps.Velocity](p)
-	query := POSITION.And(VELOCITY)
+	stPosition, stVelocity := ecs.GetStorage2[comps.Position, comps.Velocity](p)
 	for b.Loop() {
-		for _, e := range query {
+		for _, e := range stPosition.And(stVelocity) {
 			pos, vel :=
-				POSITION.GetPtrUnsafe(e), VELOCITY.GetPtrUnsafe(e)
+				stPosition.GetPtrUnsafe(e), stVelocity.GetPtrUnsafe(e)
 			pos.X += vel.X
 			pos.Y += vel.Y
 		}
