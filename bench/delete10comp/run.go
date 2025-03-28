@@ -17,7 +17,6 @@ func Benchmarks() util.Benchmarks {
 			{Name: "uot", F: runUot},
 			{Name: "Volt", F: runVolt},
 			{Name: "Simple ECS", F: runSimpleECS},
-			{Name: "Simple ECS (batch)", F: runSimpleECS_Batch},
 		},
 		N: []int{
 			1, 4, 16, 64, 256, 1024, 16_000, 256_000, 1_000_000,

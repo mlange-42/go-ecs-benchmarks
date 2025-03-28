@@ -8,11 +8,9 @@ import (
 )
 
 func runSimpleECS(b *testing.B, n int) {
+	world := ecs.New(1024).EnableGrowing()
+	ecs.Register2[comps.Position, comps.Velocity](world)
 	for b.Loop() {
-		b.StopTimer()
-		world := ecs.New(1024).EnableGrowing()
-		ecs.Register2[comps.Position, comps.Velocity](world)
-		b.StartTimer()
 		for range n {
 			e := ecs.NewEntity(world)
 			ecs.Add2(world, e,

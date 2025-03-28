@@ -8,7 +8,6 @@ import (
 )
 
 func runSimpleECS(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.New(n)
 	// arrays will be initialized to n length, eliminating memory allocations
 	for range n {
@@ -16,16 +15,18 @@ func runSimpleECS(b *testing.B, n int) {
 		ecs.Add3(world, e, comps.Position{}, comps.C1{}, comps.C2{})
 		ecs.Add3(world, e, comps.C3{}, comps.C4{}, comps.C5{})
 		ecs.Add3(world, e, comps.C6{}, comps.C7{}, comps.C8{})
-		ecs.Add(world, e, comps.C9{})
+		ecs.Add2(world, e, comps.C9{}, comps.C10{})
 	}
-	b.StartTimer()
+	stPosition, stVelocity := ecs.GetStorage2[comps.Position, comps.Velocity](world)
 	for b.Loop() {
-		entities := ecs.GetStorage[comps.Position](world).And(nil)
-		for _, e := range entities {
+		for _, e := range stPosition.And(nil) {
 			ecs.Add(world, e, comps.Velocity{})
 		}
-		for _, e := range entities {
+		// getting entities again is unnesessary, this is to just make it fair
+		for _, e := range stVelocity.And(stPosition) {
 			ecs.Remove[comps.Velocity](world, e)
 		}
 	}
+	entities := stPosition.And(stVelocity)
+	ecs.Kill(world, entities...)
 }

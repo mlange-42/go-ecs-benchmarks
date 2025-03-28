@@ -8,22 +8,23 @@ import (
 )
 
 func runSimpleECS(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.New(n)
 	ecs.Register2[comps.Position, comps.Velocity](world)
-
 	for range n {
 		e := ecs.NewEntity(world)
 		ecs.Add(world, e, comps.Position{})
 	}
-	b.StartTimer()
+	stPosition, stVelocity := ecs.GetStorage2[comps.Position, comps.Velocity](world)
 	for b.Loop() {
-		entities := ecs.GetStorage[comps.Position](world).And(nil)
-		for _, e := range entities {
+		for _, e := range stPosition.And(nil) {
 			ecs.Add(world, e, comps.Velocity{})
 		}
-		for _, e := range entities {
+		// getting entities again is unnesessary, this is to just make it fair
+		for _, e := range stVelocity.And(stPosition) {
 			ecs.Remove[comps.Velocity](world, e)
 		}
 	}
+	entities := stPosition.And(stVelocity)
+	ecs.Kill(world, entities...)
+
 }

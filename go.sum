@@ -1,7 +1,5 @@
-github.com/BrownNPC/simple-ecs v1.2.3 h1:whSTi22hbj1zgtdJhpvB07/o3mp4vus3mivoOeRs3ig=
-github.com/BrownNPC/simple-ecs v1.2.3/go.mod h1:za2tJyb/GgSyo40nG1nxohU4ThHNP+pzDmAz4KkahiU=
-github.com/BrownNPC/simple-ecs v1.2.5 h1:jdIiAM0KnOynTVtY6qdvXu0nJS89vIwpdKRgA6IvG5M=
-github.com/BrownNPC/simple-ecs v1.2.5/go.mod h1:za2tJyb/GgSyo40nG1nxohU4ThHNP+pzDmAz4KkahiU=
+github.com/BrownNPC/simple-ecs v1.2.6 h1:0UGWw03poZRhO+TiqkfkqADGlcr8bxPdaf3zuwT8BDs=
+github.com/BrownNPC/simple-ecs v1.2.6/go.mod h1:za2tJyb/GgSyo40nG1nxohU4ThHNP+pzDmAz4KkahiU=
 github.com/akmonengine/volt v1.6.0 h1:iIKXjmsg3qXcFIs7IpnAogHsAf1zVOEsl1fuH46k9Ds=
 github.com/akmonengine/volt v1.6.0/go.mod h1:likSLaycVpILyqN47YGK6URulliNqwxHXeqc55FyfCo=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
