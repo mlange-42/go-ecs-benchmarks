@@ -8,7 +8,6 @@ import (
 )
 
 func runSimpleECS(b *testing.B, n int) {
-	b.StopTimer()
 	// initialize arrays to N length to avoid memory allocs
 	world := ecs.New(n)
 	ecs.Register2[comps.Position, comps.Velocity](world)
@@ -17,7 +16,6 @@ func runSimpleECS(b *testing.B, n int) {
 
 	entities := make([]ecs.Entity, 0, n)
 	for b.Loop() {
-		b.StartTimer()
 		for range n {
 			e := ecs.NewEntity(world)
 			ecs.Add3(world, e,
@@ -30,8 +28,7 @@ func runSimpleECS(b *testing.B, n int) {
 			ecs.Add3(world, e, comps.C7{}, comps.C8{}, comps.C9{})
 			entities = append(entities, e)
 		}
-		b.StopTimer()
-		ecs.Kill(world, entities...)
-		entities = entities[:0]
 	}
+	ecs.Kill(world, entities...)
+	entities = entities[:0]
 }
