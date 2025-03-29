@@ -14,6 +14,7 @@ func Benchmarks() util.Benchmarks {
 			{Name: "ggecs", F: runGGEcs},
 			{Name: "uot", F: runUot},
 			{Name: "Volt", F: runVolt},
+			{Name: "Simple ECS", F: runSimpleECS},
 		},
 		N: []int{
 			1,
