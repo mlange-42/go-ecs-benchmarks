@@ -20,6 +20,7 @@ Candidates are always displayed in alphabetical order.
 
 In case you develop or use a Go ECS that is not in the list and that want to see here,
 please open an issue or make a pull request.
+See the section on [Contributing](#contributing) for details.
 
 In case you are a developer or user of an implementation included here,
 feel free to check the benchmarked code for any possible improvements.
@@ -344,3 +345,18 @@ To create the plots, run `plot/plot.py`. The following packages are required:
 pip install -r ./plot/requirements.txt
 python plot/plot.py
 ```
+
+## Contributing
+
+Developers of ECS frameworks are welcome to add their implementation to the benchmarks.
+However, there are a few (quality) criteria that need to be fulfilled for inclusion:
+
+- All benchmarks must be implemented, which means that the ECS must have the required features
+- The ECS must be working properly and not exhibit serious flaws; it will undergo a basic review by maintainers
+- The ECS must be sufficiently documented so that it can be used without reading the code
+- There must be at least basic unit tests
+- Unit tests must be run in the CI of the repository
+- The ECS *must not* be tightly coupled to a particular game engine, particularly graphics stuff
+
+Developers of included frameworks are encouraged to review the benchmarks,
+and to fix (or point to) misuse or potential optimizations.
