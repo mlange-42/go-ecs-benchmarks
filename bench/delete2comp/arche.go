@@ -8,7 +8,6 @@ import (
 )
 
 func runArche(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
@@ -22,8 +21,7 @@ func runArche(b *testing.B, n int) {
 		entities = append(entities, query.Entity())
 	}
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		for _, e := range entities {
 			world.RemoveEntity(e)
 		}
@@ -43,11 +41,11 @@ func runArche(b *testing.B, n int) {
 				entities = append(entities, query.Entity())
 			}
 		}
+		b.StartTimer()
 	}
 }
 
 func runArcheBatched(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	posID := ecs.ComponentID[comps.Position](&world)
@@ -58,10 +56,10 @@ func runArcheBatched(b *testing.B, n int) {
 
 	world.Batch().New(n, ids...)
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		world.Batch().RemoveEntities(&filter)
 		b.StopTimer()
 		world.Batch().New(n, ids...)
+		b.StartTimer()
 	}
 }
