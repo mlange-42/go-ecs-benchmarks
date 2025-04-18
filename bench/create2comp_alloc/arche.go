@@ -8,7 +8,7 @@ import (
 )
 
 func runArche(b *testing.B, n int) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		b.StopTimer()
 		world := ecs.NewWorld(1024)
 
@@ -20,12 +20,11 @@ func runArche(b *testing.B, n int) {
 		for range n {
 			world.NewEntity(ids...)
 		}
-		b.StopTimer()
 	}
 }
 
 func runArcheBatched(b *testing.B, n int) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		b.StopTimer()
 		world := ecs.NewWorld(1024)
 
@@ -35,6 +34,5 @@ func runArcheBatched(b *testing.B, n int) {
 
 		b.StartTimer()
 		ecs.NewBuilder(&world, ids...).NewBatch(n)
-		b.StopTimer()
 	}
 }

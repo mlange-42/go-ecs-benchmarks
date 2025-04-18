@@ -11,7 +11,7 @@ import (
 type voltConfig = volt.ComponentConfig[volt.ComponentInterface]
 
 func runVolt(b *testing.B, n int) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		b.StopTimer()
 		world := volt.CreateWorld(1024)
 
@@ -25,6 +25,5 @@ func runVolt(b *testing.B, n int) {
 				panic("Volt crashed")
 			}
 		}
-		b.StopTimer()
 	}
 }

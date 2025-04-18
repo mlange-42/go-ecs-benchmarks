@@ -9,13 +9,12 @@ import (
 )
 
 func runDonburi(b *testing.B, n int) {
-	b.StopTimer()
 	allIDs := []component.IComponentType{
 		donburi.NewComponentType[comps.Position](),
 		donburi.NewComponentType[comps.Velocity](),
 	}
 
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		b.StopTimer()
 		world := donburi.NewWorld()
 
@@ -23,6 +22,5 @@ func runDonburi(b *testing.B, n int) {
 		for range n {
 			world.Create(allIDs...)
 		}
-		b.StopTimer()
 	}
 }
