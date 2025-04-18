@@ -8,7 +8,6 @@ import (
 )
 
 func runUot(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld()
 
 	queryPos := ecs.Query1[comps.Position](world)
@@ -57,10 +56,7 @@ func runUot(b *testing.B, n int) {
 
 	entities = entities[:0]
 
-	b.StartTimer()
-
-	for i := 0; i < b.N; i++ {
-
+	for b.Loop() {
 		queryPos.MapId(func(id ecs.Id, pos *comps.Position) {
 			entities = append(entities, id)
 		})
