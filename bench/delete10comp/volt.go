@@ -11,7 +11,6 @@ import (
 type voltConfig = volt.ComponentConfig[volt.ComponentInterface]
 
 func runVolt(b *testing.B, n int) {
-	b.StopTimer()
 	world := volt.CreateWorld(1024)
 
 	volt.RegisterComponent[comps.C1](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
@@ -38,13 +37,11 @@ func runVolt(b *testing.B, n int) {
 		entities = append(entities, e)
 	}
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		for _, e := range entities {
 			world.RemoveEntity(e)
 		}
 		b.StopTimer()
-
 		entities = entities[:0]
 		for id := range n {
 			e, err := volt.CreateEntityWithComponents8(world, strconv.Itoa(id),
@@ -57,5 +54,6 @@ func runVolt(b *testing.B, n int) {
 			volt.AddComponents2(world, e, comps.C9{}, comps.C10{})
 			entities = append(entities, e)
 		}
+		b.StartTimer()
 	}
 }

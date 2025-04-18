@@ -9,8 +9,6 @@ import (
 )
 
 func runDonburi(b *testing.B, n int) {
-	b.StopTimer()
-
 	allIDs := []component.IComponentType{
 		donburi.NewComponentType[comps.C1](),
 		donburi.NewComponentType[comps.C2](),
@@ -36,8 +34,7 @@ func runDonburi(b *testing.B, n int) {
 	}
 	entities = entities[:0]
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		for range n {
 			e := world.Create(allIDs...)
 			entities = append(entities, e)
@@ -47,5 +44,6 @@ func runDonburi(b *testing.B, n int) {
 			world.Remove(e)
 		}
 		entities = entities[:0]
+		b.StartTimer()
 	}
 }

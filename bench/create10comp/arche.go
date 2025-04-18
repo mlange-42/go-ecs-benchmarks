@@ -8,7 +8,6 @@ import (
 )
 
 func runArche(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	ids := []ecs.ID{
@@ -29,8 +28,7 @@ func runArche(b *testing.B, n int) {
 
 	entities := make([]ecs.Entity, 0, n)
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		for range n {
 			e := world.NewEntity(ids...)
 			// Just for fairness, because the others need to do that, too.
@@ -48,11 +46,11 @@ func runArche(b *testing.B, n int) {
 		}
 
 		entities = entities[:0]
+		b.StartTimer()
 	}
 }
 
 func runArcheBatched(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	ids := []ecs.ID{
@@ -71,10 +69,10 @@ func runArcheBatched(b *testing.B, n int) {
 	ecs.NewBuilder(&world, ids...).NewBatch(n)
 	world.Batch().RemoveEntities(ecs.All(ids...))
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		ecs.NewBuilder(&world, ids...).NewBatch(n)
 		b.StopTimer()
 		world.Batch().RemoveEntities(ecs.All(ids...))
+		b.StartTimer()
 	}
 }

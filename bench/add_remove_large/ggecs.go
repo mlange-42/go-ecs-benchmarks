@@ -24,7 +24,6 @@ const (
 )
 
 func runGGEcs(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 	world.Register(ecs.NewComponentRegistry[comps.Position](PositionComponentID))
 	world.Register(ecs.NewComponentRegistry[comps.Velocity](VelocityComponentID))
@@ -74,9 +73,7 @@ func runGGEcs(b *testing.B, n int) {
 	}
 	entities = entities[:0]
 
-	b.StartTimer()
-
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query := world.Query(posMask)
 		for query.Next() {
 			entities = append(entities, query.Entity())

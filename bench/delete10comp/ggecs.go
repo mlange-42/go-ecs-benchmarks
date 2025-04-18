@@ -22,7 +22,6 @@ const (
 )
 
 func runGGEcs(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 	world.Register(ecs.NewComponentRegistry[comps.C1](C1ID))
 	world.Register(ecs.NewComponentRegistry[comps.C2](C2ID))
@@ -46,17 +45,16 @@ func runGGEcs(b *testing.B, n int) {
 		entities = append(entities, e)
 	}
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		for _, e := range entities {
 			world.RemEntity(e)
 		}
 		b.StopTimer()
-
 		entities = entities[:0]
 		for range n {
 			e := world.NewEntity(allIDs...)
 			entities = append(entities, e)
 		}
+		b.StartTimer()
 	}
 }

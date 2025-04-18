@@ -8,7 +8,7 @@ import (
 )
 
 func runUot(b *testing.B, n int) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		b.StopTimer()
 		world := ecs.NewWorld()
 
@@ -22,6 +22,5 @@ func runUot(b *testing.B, n int) {
 			id := world.NewId()
 			ecs.Write(world, id, allIDs...)
 		}
-		b.StopTimer()
 	}
 }
