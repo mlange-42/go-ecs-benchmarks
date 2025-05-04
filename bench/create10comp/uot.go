@@ -8,7 +8,6 @@ import (
 )
 
 func runUot(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld()
 
 	allIDs := []ecs.Component{
@@ -35,8 +34,7 @@ func runUot(b *testing.B, n int) {
 	}
 	entities = entities[:0]
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		for range n {
 			id := world.NewId()
 			ecs.Write(world, id, allIDs...)
@@ -47,5 +45,6 @@ func runUot(b *testing.B, n int) {
 			ecs.Delete(world, e)
 		}
 		entities = entities[:0]
+		b.StartTimer()
 	}
 }

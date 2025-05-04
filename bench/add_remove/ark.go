@@ -8,7 +8,6 @@ import (
 )
 
 func runArk(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	posMap := ecs.NewMap1[comps.Position](&world)
@@ -43,9 +42,7 @@ func runArk(b *testing.B, n int) {
 
 	entities = entities[:0]
 
-	b.StartTimer()
-
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		query1 = filterPos.Query()
 		for query1.Next() {
 			entities = append(entities, query1.Entity())
@@ -70,7 +67,6 @@ func runArk(b *testing.B, n int) {
 }
 
 func runArkBatched(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	posMap := ecs.NewMap1[comps.Position](&world)
@@ -85,9 +81,7 @@ func runArkBatched(b *testing.B, n int) {
 	velMap.AddBatchFn(filterPos.Batch(), nil)
 	velMap.RemoveBatch(filterPosVel.Batch(), nil)
 
-	b.StartTimer()
-
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		velMap.AddBatchFn(filterPos.Batch(), nil)
 		velMap.RemoveBatch(filterPosVel.Batch(), nil)
 	}

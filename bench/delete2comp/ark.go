@@ -8,7 +8,6 @@ import (
 )
 
 func runArk(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
@@ -18,8 +17,7 @@ func runArk(b *testing.B, n int) {
 		entities = append(entities, entity)
 	})
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		for _, e := range entities {
 			world.RemoveEntity(e)
 		}
@@ -38,11 +36,11 @@ func runArk(b *testing.B, n int) {
 				entities = append(entities, entity)
 			})
 		}
+		b.StartTimer()
 	}
 }
 
 func runArkBatched(b *testing.B, n int) {
-	b.StopTimer()
 	world := ecs.NewWorld(1024)
 
 	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
@@ -50,10 +48,10 @@ func runArkBatched(b *testing.B, n int) {
 
 	mapper.NewBatchFn(n, nil)
 
-	for i := 0; i < b.N; i++ {
-		b.StartTimer()
+	for b.Loop() {
 		world.RemoveEntities(filter.Batch(), nil)
 		b.StopTimer()
 		mapper.NewBatchFn(n, nil)
+		b.StartTimer()
 	}
 }

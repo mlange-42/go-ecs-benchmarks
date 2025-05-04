@@ -9,7 +9,6 @@ import (
 )
 
 func runDonburi(b *testing.B, n int) {
-	b.StopTimer()
 	world := donburi.NewWorld()
 
 	var position = donburi.NewComponentType[comps.Position]()
@@ -30,9 +29,7 @@ func runDonburi(b *testing.B, n int) {
 		entry.RemoveComponent(velocity)
 	})
 
-	b.StartTimer()
-
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		queryPos.Each(world, func(entry *donburi.Entry) {
 			entry.AddComponent(velocity)
 		})
