@@ -357,6 +357,7 @@ However, there are a few (quality) criteria that need to be fulfilled for inclus
 - There must be at least basic unit tests
 - Unit tests must be run in the CI of the repository
 - The ECS *must not* be tightly coupled to a particular game engine, particularly graphics stuff
+- There must be tagged release versions; only tagged versions will be included here
 
 Developers of included frameworks are encouraged to review the benchmarks,
 and to fix (or point to) misuse or potential optimizations.
