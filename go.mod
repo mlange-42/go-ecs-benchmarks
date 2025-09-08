@@ -1,12 +1,12 @@
 module github.com/mlange-42/go-ecs-benchmarks
 
-go 1.24.2
+go 1.25.1
 
 require (
 	github.com/akmonengine/volt v1.6.0
 	github.com/marioolofo/go-gameengine-ecs v0.9.0
 	github.com/mlange-42/arche v0.15.3
-	github.com/mlange-42/ark v0.4.2
+	github.com/mlange-42/ark v0.4.9-0.20250908112321-e5bb04ae539e
 	github.com/shirou/gopsutil/v4 v4.25.2
 	github.com/stretchr/testify v1.10.0
 	github.com/unitoftime/ecs v0.0.3
