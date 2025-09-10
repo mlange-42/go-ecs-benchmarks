@@ -16,15 +16,16 @@ colors = {
     "Arche": default_colors[0],
     "Arche (batch)": default_colors[1],
     "Arche (cached)": default_colors[1],
-    "Ark": default_colors[7],
-    "Ark (batch)": default_colors[8],
-    "Ark (cached)": default_colors[8],
+    "Ark": default_colors[0],
+    "Ark (batch)": default_colors[1],
+    "Ark (cached)": default_colors[1],
     "Donburi": default_colors[2],
-    "Ento": default_colors[3],  # TODO: remove
     "ggecs": default_colors[4],
     "uot": default_colors[5],
     "Volt": default_colors[6],
 }
+
+exclude = {"Arche", "Arche (batch)", "Arche (cached)"}
 
 
 def plot_all():
@@ -76,6 +77,8 @@ def plot_bars(data: pd.DataFrame, ax, legend: bool):
     max_value = data.max()[1:].max()
 
     for i, col in enumerate(cols):
+        if col in exclude:
+            continue
         col_data = data[col]
         x = np.arange(len(col_data)) + i * width - 0.375
         ax.bar(x, col_data, width=width, color=colors[col], label=col)
@@ -109,6 +112,8 @@ def plot_lines(data: pd.DataFrame, ax, legend: bool):
     width = 1.0 / (1.5 * len(cols))
 
     for i, col in enumerate(cols):
+        if col in exclude:
+            continue
         col_data = data[col]
         ax.plot(data.N, col_data * data.N, color=colors[col], label=col)
 
@@ -134,6 +139,10 @@ def plot_lines(data: pd.DataFrame, ax, legend: bool):
 
 
 def to_markdown(data: pd.DataFrame) -> str:
+    for col in data.columns:
+        if col in exclude:
+            data = data.drop(columns=[col])
+
     s = ""
     s += "| " + " | ".join(data.columns) + " |\n"
     s += "| " + " | ".join(["---"] * len(data.columns)) + " |\n"
