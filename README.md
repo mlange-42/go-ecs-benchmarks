@@ -10,7 +10,7 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 | ECS | Version |
 |-----|---------|
 | [Arche](https://github.com/mlange-42/arche) | v0.15.3 |
-| [Ark](https://github.com/mlange-42/ark) | v0.5.0 |
+| [Ark](https://github.com/mlange-42/ark) | v0.5.1 |
 | [Donburi](https://github.com/yottahmd/donburi) | v1.15.7 |
 | [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 |
 | [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 |
