@@ -2,14 +2,12 @@
 
 Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
-> Disclaimer: This repository is maintained by the author of
-> [Arche](https://github.com/mlange-42/arche) and [Ark](https://github.com/mlange-42/ark).
+> Disclaimer: This repository is maintained by the author of [Ark](https://github.com/mlange-42/ark).
 
 ## Benchmark candidates
 
 | ECS | Version |
 |-----|---------|
-| [Arche](https://github.com/mlange-42/arche) | v0.15.3 |
 | [Ark](https://github.com/mlange-42/ark) | v0.5.1 |
 | [Donburi](https://github.com/yottahmd/donburi) | v1.15.7 |
 | [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 |
@@ -310,8 +308,8 @@ One iteration is performed before the benchmarking starts, to exclude memory all
 Given that all tested projects are on Github, we can use the star history as a proxy here.
 
 <p align="center">
-<a title="Star History Chart" href="https://star-history.com/#mlange-42/arche&mlange-42/ark&yottahmd/donburi&marioolofo/go-gameengine-ecs&unitoftime/ecs&akmonengine/volt&Date">
-<img src="https://api.star-history.com/svg?repos=mlange-42/arche,mlange-42/ark,yottahmd/donburi,marioolofo/go-gameengine-ecs,unitoftime/ecs,akmonengine/volt&type=Date" alt="Star History Chart" width="600"/>
+<a title="Star History Chart" href="https://star-history.com/#mlange-42/ark&yottahmd/donburi&marioolofo/go-gameengine-ecs&unitoftime/ecs&akmonengine/volt&Date">
+<img src="https://api.star-history.com/svg?repos=mlange-42/ark,yottahmd/donburi,marioolofo/go-gameengine-ecs,unitoftime/ecs,akmonengine/volt&type=Date" alt="Star History Chart" width="600"/>
 </a>
 </p>
 

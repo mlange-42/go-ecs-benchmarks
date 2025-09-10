@@ -13,9 +13,9 @@ template = "docs/README-template.md"
 default_colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
 
 colors = {
-    "Arche": default_colors[0],
-    "Arche (batch)": default_colors[1],
-    "Arche (cached)": default_colors[1],
+    # "Arche": default_colors[0],
+    # "Arche (batch)": default_colors[1],
+    # "Arche (cached)": default_colors[1],
     "Ark": default_colors[7],
     "Ark (batch)": default_colors[8],
     "Ark (cached)": default_colors[8],
