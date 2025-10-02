@@ -14,56 +14,25 @@ func runArche(b *testing.B, n int) {
 	velID := ecs.ComponentID[comps.Velocity](&world)
 	ids := []ecs.ID{velID}
 
-	ecs.NewBuilder(&world, posID).NewBatch(n)
-
-	filterPos := ecs.All(posID)
-	filterPosVel := ecs.All(posID, velID)
-
 	entities := make([]ecs.Entity, 0, n)
-
-	// Iterate once for more fairness
-	query := world.Query(&filterPos)
-	for query.Next() {
-		entities = append(entities, query.Entity())
+	for range n {
+		entities = append(entities, world.NewEntity(posID))
 	}
-
+	// Iterate once for more fairness
 	for _, e := range entities {
 		world.Add(e, ids...)
 	}
-
-	entities = entities[:0]
-	query = world.Query(&filterPosVel)
-	for query.Next() {
-		entities = append(entities, query.Entity())
-	}
-
 	for _, e := range entities {
 		world.Remove(e, ids...)
 	}
 
-	entities = entities[:0]
-
 	for b.Loop() {
-		query := world.Query(&filterPos)
-		for query.Next() {
-			entities = append(entities, query.Entity())
-		}
-
 		for _, e := range entities {
 			world.Add(e, ids...)
 		}
-
-		entities = entities[:0]
-		query = world.Query(&filterPosVel)
-		for query.Next() {
-			entities = append(entities, query.Entity())
-		}
-
 		for _, e := range entities {
 			world.Remove(e, ids...)
 		}
-
-		entities = entities[:0]
 	}
 }
 
