@@ -16,52 +16,27 @@ func runVolt(b *testing.B, n int) {
 	volt.RegisterComponent[comps.Position](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
 	volt.RegisterComponent[comps.Velocity](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
 
+	entities := make([]volt.EntityId, 0, n)
 	for i := 0; i < n; i++ {
 		e := world.CreateEntity(strconv.Itoa(i))
 		volt.AddComponent(world, e, comps.Position{})
+		entities = append(entities, e)
 	}
-
-	posMask := volt.CreateQuery1[comps.Position](world, volt.QueryConfiguration{})
-	posVelMask := volt.CreateQuery2[comps.Position, comps.Velocity](world, volt.QueryConfiguration{})
-
-	entities := make([]volt.EntityId, 0, n)
 
 	// Iterate once for more fairness
-	for result := range posMask.Foreach(nil) {
-		entities = append(entities, result.EntityId)
-	}
-
 	for _, e := range entities {
 		volt.AddComponent(world, e, comps.Velocity{})
 	}
-
-	entities = entities[:0]
-	for result := range posVelMask.Foreach(nil) {
-		entities = append(entities, result.EntityId)
-	}
-
 	for _, e := range entities {
 		volt.RemoveComponent[comps.Velocity](world, e)
 	}
-	entities = entities[:0]
 
 	for b.Loop() {
-		for result := range posMask.Foreach(nil) {
-			entities = append(entities, result.EntityId)
-		}
-
 		for _, e := range entities {
 			volt.AddComponent(world, e, comps.Velocity{})
 		}
-
-		entities = entities[:0]
-		for result := range posVelMask.Foreach(nil) {
-			entities = append(entities, result.EntityId)
-		}
-
 		for _, e := range entities {
 			volt.RemoveComponent[comps.Velocity](world, e)
 		}
-		entities = entities[:0]
 	}
 }

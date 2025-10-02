@@ -39,59 +39,28 @@ func runGGEcs(b *testing.B, n int) {
 	world.Register(ecs.NewComponentRegistry[comps.C9](C9ID))
 	world.Register(ecs.NewComponentRegistry[comps.C10](C10ID))
 
+	entities := make([]ecs.EntityID, 0, n)
 	for i := 0; i < n; i++ {
-		_ = world.NewEntity(
+		entities = append(entities, world.NewEntity(
 			PositionComponentID,
 			C1ID, C2ID, C3ID, C4ID, C5ID,
 			C6ID, C7ID, C8ID, C9ID, C10ID,
-		)
+		))
 	}
-
-	posMask := ecs.MakeComponentMask(PositionComponentID)
-	posVelMask := ecs.MakeComponentMask(PositionComponentID, VelocityComponentID)
-
-	entities := make([]ecs.EntityID, 0, n)
-
 	// Iterate once for more fairness
-	query := world.Query(posMask)
-	for query.Next() {
-		entities = append(entities, query.Entity())
-	}
-
 	for _, e := range entities {
 		world.AddComponent(e, VelocityComponentID)
 	}
-
-	entities = entities[:0]
-	query = world.Query(posVelMask)
-	for query.Next() {
-		entities = append(entities, query.Entity())
-	}
-
 	for _, e := range entities {
 		world.RemComponent(e, VelocityComponentID)
 	}
-	entities = entities[:0]
 
 	for b.Loop() {
-		query := world.Query(posMask)
-		for query.Next() {
-			entities = append(entities, query.Entity())
-		}
-
 		for _, e := range entities {
 			world.AddComponent(e, VelocityComponentID)
 		}
-
-		entities = entities[:0]
-		query = world.Query(posVelMask)
-		for query.Next() {
-			entities = append(entities, query.Entity())
-		}
-
 		for _, e := range entities {
 			world.RemComponent(e, VelocityComponentID)
 		}
-		entities = entities[:0]
 	}
 }

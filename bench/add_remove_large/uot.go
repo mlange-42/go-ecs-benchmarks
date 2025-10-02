@@ -10,10 +10,9 @@ import (
 func runUot(b *testing.B, n int) {
 	world := ecs.NewWorld()
 
-	queryPos := ecs.Query1[comps.Position](world)
-	queryPosVel := ecs.Query2[comps.Position, comps.Velocity](world)
 	comp := ecs.C(comps.Velocity{})
 
+	entities := make([]ecs.Id, 0, n)
 	for i := 0; i < n; i++ {
 		id := world.NewId()
 		ecs.Write(world, id,
@@ -29,54 +28,27 @@ func runUot(b *testing.B, n int) {
 			ecs.C(comps.C9{}),
 			ecs.C(comps.C10{}),
 		)
+		entities = append(entities, id)
 	}
 
-	entities := make([]ecs.Id, 0, n)
-
 	// Iterate once for more fairness
-	queryPos.MapId(func(id ecs.Id, pos *comps.Position) {
-		entities = append(entities, id)
-	})
-
 	for _, e := range entities {
 		ecs.Write(world, e,
 			ecs.C(comps.Velocity{}),
 		)
 	}
-
-	entities = entities[:0]
-
-	queryPosVel.MapId(func(id ecs.Id, pos *comps.Position, vel *comps.Velocity) {
-		entities = append(entities, id)
-	})
-
 	for _, e := range entities {
 		ecs.DeleteComponent(world, e, comp)
 	}
 
-	entities = entities[:0]
-
 	for b.Loop() {
-		queryPos.MapId(func(id ecs.Id, pos *comps.Position) {
-			entities = append(entities, id)
-		})
-
 		for _, e := range entities {
 			ecs.Write(world, e,
 				ecs.C(comps.Velocity{}),
 			)
 		}
-
-		entities = entities[:0]
-
-		queryPosVel.MapId(func(id ecs.Id, pos *comps.Position, vel *comps.Velocity) {
-			entities = append(entities, id)
-		})
-
 		for _, e := range entities {
 			ecs.DeleteComponent(world, e, comp)
 		}
-
-		entities = entities[:0]
 	}
 }

@@ -129,8 +129,8 @@ ${create10comp}
 
 `N` entities with component `Position`.
 
-- Query all `[Position]` entities and add `Velocity`.
-- Query all `[Position, Velocity]` entities and remove `Velocity`.
+- Add `Velocity` to all entities.
+- Remove `Velocity` from all entities.
 
 One iteration is performed before the benchmarking starts, to exclude memory allocation.
 
@@ -142,8 +142,8 @@ ${add_remove}
 
 `N` entities with component `Position` and 10 further components `C1`, ..., `C10`.
 
-- Query all `[Position]` entities and add `Velocity`.
-- Query all `[Position, Velocity]` entities and remove `Velocity`.
+- Add `Velocity` to all entities.
+- Remove `Velocity` from all entities.
 
 One iteration is performed before the benchmarking starts, to exclude memory allocation.
 

@@ -18,56 +18,27 @@ func runArk(b *testing.B, n int) {
 		comps.C6, comps.C7, comps.C8, comps.C9, comps.C10,
 	](&world)
 
-	mapper.NewBatchFn(n, nil)
-
-	filterPos := ecs.NewFilter1[comps.Position](&world)
-	filterPosVel := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
-
 	entities := make([]ecs.Entity, 0, n)
-
+	mapper.NewBatchFn(n, func(entity ecs.Entity, a *comps.Position, b *comps.C1,
+		c *comps.C2, d *comps.C3, e *comps.C4, f *comps.C5, g *comps.C6,
+		h *comps.C7, i *comps.C8, j *comps.C9, k *comps.C10) {
+		entities = append(entities, entity)
+	})
 	// Iterate once for more fairness
-	query1 := filterPos.Query()
-	for query1.Next() {
-		entities = append(entities, query1.Entity())
-	}
-
 	for _, e := range entities {
 		velMap.AddFn(e, nil)
 	}
-
-	entities = entities[:0]
-	query2 := filterPosVel.Query()
-	for query2.Next() {
-		entities = append(entities, query2.Entity())
-	}
-
 	for _, e := range entities {
 		velMap.Remove(e)
 	}
 
-	entities = entities[:0]
-
 	for b.Loop() {
-		query1 = filterPos.Query()
-		for query1.Next() {
-			entities = append(entities, query1.Entity())
-		}
-
 		for _, e := range entities {
 			velMap.AddFn(e, nil)
 		}
-
-		entities = entities[:0]
-		query2 = filterPosVel.Query()
-		for query2.Next() {
-			entities = append(entities, query2.Entity())
-		}
-
 		for _, e := range entities {
 			velMap.Remove(e)
 		}
-
-		entities = entities[:0]
 	}
 }
 
