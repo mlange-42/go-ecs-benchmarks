@@ -6,7 +6,6 @@ import (
 	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/component"
-	"github.com/yohamta/donburi/filter"
 )
 
 func runDonburi(b *testing.B, n int) {
@@ -29,27 +28,25 @@ func runDonburi(b *testing.B, n int) {
 		donburi.NewComponentType[comps.C10](),
 	}
 
-	for i := 0; i < n; i++ {
-		world.Create(allIDs...)
+	entities := make([]donburi.Entity, 0, n)
+	for range n {
+		entities = append(entities, world.Create(allIDs...))
 	}
 
-	queryPos := donburi.NewQuery(filter.Contains(position))
-	queryPosVel := donburi.NewQuery(filter.Contains(position, velocity))
-
 	// Iterate once for more fairness
-	queryPos.Each(world, func(entry *donburi.Entry) {
-		entry.AddComponent(velocity)
-	})
-	queryPosVel.Each(world, func(entry *donburi.Entry) {
-		entry.RemoveComponent(velocity)
-	})
+	for _, e := range entities {
+		donburi.Add(world.Entry(e), velocity, &comps.Velocity{})
+	}
+	for _, e := range entities {
+		donburi.Remove[comps.Velocity](world.Entry(e), velocity)
+	}
 
 	for b.Loop() {
-		queryPos.Each(world, func(entry *donburi.Entry) {
-			entry.AddComponent(velocity)
-		})
-		queryPosVel.Each(world, func(entry *donburi.Entry) {
-			entry.RemoveComponent(velocity)
-		})
+		for _, e := range entities {
+			donburi.Add(world.Entry(e), velocity, &comps.Velocity{})
+		}
+		for _, e := range entities {
+			donburi.Remove[comps.Velocity](world.Entry(e), velocity)
+		}
 	}
 }

@@ -17,9 +17,6 @@ func runDonburi(b *testing.B, n int) {
 	for range n {
 		entities = append(entities, world.Create(position))
 	}
-	for _, e := range entities {
-		donburi.Add(world.Entry(e), position, &comps.Position{})
-	}
 
 	// Iterate once for more fairness
 	for _, e := range entities {
