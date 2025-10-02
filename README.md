@@ -208,8 +208,8 @@ to exclude things like archetype creation and memory allocation.
 
 `N` entities with component `Position`.
 
-- Query all `[Position]` entities and add `Velocity`.
-- Query all `[Position, Velocity]` entities and remove `Velocity`.
+- Add `Velocity` to all entities.
+- Remove `Velocity` from all entities.
 
 One iteration is performed before the benchmarking starts, to exclude memory allocation.
 
@@ -232,8 +232,8 @@ One iteration is performed before the benchmarking starts, to exclude memory all
 
 `N` entities with component `Position` and 10 further components `C1`, ..., `C10`.
 
-- Query all `[Position]` entities and add `Velocity`.
-- Query all `[Position, Velocity]` entities and remove `Velocity`.
+- Add `Velocity` to all entities.
+- Remove `Velocity` from all entities.
 
 One iteration is performed before the benchmarking starts, to exclude memory allocation.
 
