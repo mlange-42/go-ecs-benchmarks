@@ -6,13 +6,13 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
 ## Benchmark candidates
 
-| ECS | Version |
-|-----|---------|
-| [Ark](https://github.com/mlange-42/ark) | v0.5.1 |
-| [Donburi](https://github.com/yottahmd/donburi) | v1.15.7 |
-| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 |
-| [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 |
-| [Volt](https://github.com/akmonengine/volt) | v1.6.0 |
+| ECS | Version | Latest |
+|-----|---------|--------|
+| [Ark](https://github.com/mlange-42/ark) | v0.5.1 | ![GitHub Tag](https://img.shields.io/github/v/tag/mlange-42/ark?color=blue) |
+| [Donburi](https://github.com/yottahmd/donburi) | v1.15.7 | ![GitHub Tag](https://img.shields.io/github/v/tag/yottahmd/donburi?color=blue) |
+| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 | ![GitHub Tag](https://img.shields.io/github/v/tag/marioolofo/go-gameengine-ecs?color=blue) |
+| [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 | ![GitHub Tag](https://img.shields.io/github/v/tag/unitoftime/ecs?color=blue) |
+| [Volt](https://github.com/akmonengine/volt) | v1.6.0 | ![GitHub Tag](https://img.shields.io/github/v/tag/akmonengine/volt?color=blue) |
 
 Candidates are always displayed in alphabetical order.
 
