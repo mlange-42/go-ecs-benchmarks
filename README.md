@@ -24,6 +24,19 @@ In case you are a developer or user of an implementation included here,
 feel free to check the benchmarked code for any possible improvements.
 Open an issue if you want a version update.
 
+## Features
+
+| ECS | Basic | Relations | Events<sup>[1]</sup> | Batches<sup>[2]</sup> | Command buffer |
+|-----|:-----:|:---------:|:-------:|:-------:|:--------------:|
+| [Ark](https://github.com/mlange-42/ark) | ✅ | ✅ | ❌ | ✅ | ❌ |
+| [Donburi](https://github.com/yottahmd/donburi) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| [unitoftime/ecs](https://github.com/unitoftime/ecs) | ✅ | ❌ | ❌ | ❌ | ✅ |
+| [Volt](https://github.com/akmonengine/volt) | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+[1] ECS lifecycle events, allowing to react to entity creation, component addition, ...  
+[2] Faster batch operations for entity creation etc.
+
 ## Benchmarks
 
 Last run: Thu, 02 Oct 2025 20:54:43 UTC  
