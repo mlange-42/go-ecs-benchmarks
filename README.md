@@ -26,13 +26,13 @@ Open an issue if you want a version update.
 
 ## Features
 
-| ECS | Basic | Relations | Events<sup>[1]</sup> | Batches<sup>[2]</sup> | Command buffer |
-|-----|:-----:|:---------:|:-------:|:-------:|:--------------:|
-| [Ark](https://github.com/mlange-42/ark) | ✅ | ✅ | ❌ | ✅ | ❌ |
-| [Donburi](https://github.com/yottahmd/donburi) | ✅ | ❌ | ❌ | ❌ | ❌ |
-| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | ✅ | ❌ | ❌ | ❌ | ❌ |
-| [unitoftime/ecs](https://github.com/unitoftime/ecs) | ✅ | ❌ | ❌ | ❌ | ✅ |
-| [Volt](https://github.com/akmonengine/volt) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| ECS | Type-safe API | ID-based API | Relations | Events<sup>[1]</sup> | Batches<sup>[2]</sup> | Command buffer |
+|-----|:-------------:|:------------:|:---------:|:-------:|:-------:|:--------------:|
+| [Ark](https://github.com/mlange-42/ark) | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ |
+| [Donburi](https://github.com/yottahmd/donburi) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| [unitoftime/ecs](https://github.com/unitoftime/ecs) | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| [Volt](https://github.com/akmonengine/volt) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 [1] ECS lifecycle events, allowing to react to entity creation, component addition, ...  
 [2] Faster batch operations for entity creation etc.
