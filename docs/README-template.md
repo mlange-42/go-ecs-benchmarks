@@ -6,13 +6,15 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
 ## Benchmark candidates
 
-| ECS | Version |
-|-----|---------|
-| [Ark](https://github.com/mlange-42/ark) | v0.5.1 |
-| [Donburi](https://github.com/yottahmd/donburi) | v1.15.7 |
-| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 |
-| [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 |
-| [Volt](https://github.com/akmonengine/volt) | v1.6.0 |
+## Benchmark candidates
+
+| ECS | Version | Latest |
+|-----|---------|--------|
+| [Ark](https://github.com/mlange-42/ark) | v0.5.1 | ![GitHub Tag](https://img.shields.io/github/v/tag/mlange-42/ark?color=blue) |
+| [Donburi](https://github.com/yottahmd/donburi) | v1.15.7 | ![GitHub Tag](https://img.shields.io/github/v/tag/yottahmd/donburi?color=blue) |
+| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 | ![GitHub Tag](https://img.shields.io/github/v/tag/marioolofo/go-gameengine-ecs?color=blue) |
+| [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 | ![GitHub Tag](https://img.shields.io/github/v/tag/unitoftime/ecs?color=blue) |
+| [Volt](https://github.com/akmonengine/volt) | v1.6.0 | ![GitHub Tag](https://img.shields.io/github/v/tag/akmonengine/volt?color=blue) |
 
 Candidates are always displayed in alphabetical order.
 
@@ -23,6 +25,19 @@ See the section on [Contributing](#contributing) for details.
 In case you are a developer or user of an implementation included here,
 feel free to check the benchmarked code for any possible improvements.
 Open an issue if you want a version update.
+
+## Features
+
+| ECS | Basic | Relations | Events<sup>[1]</sup> | Batches<sup>[2]</sup> | Command buffer |
+|-----|:-----:|:---------:|:-------:|:-------:|:--------------:|
+| [Ark](https://github.com/mlange-42/ark) | ✅ | ✅ | ❌ | ✅ | ❌ |
+| [Donburi](https://github.com/yottahmd/donburi) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| [go-gameengine-ecs](https://github.com/marioolofo/go-gameengine-ecs) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| [unitoftime/ecs](https://github.com/unitoftime/ecs) | ✅ | ❌ | ❌ | ❌ | ✅ |
+| [Volt](https://github.com/akmonengine/volt) | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+[1] ECS lifecycle events, allowing to react to entity creation, component addition, ...  
+[2] Faster batch operations for entity creation etc.
 
 ## Benchmarks
 
