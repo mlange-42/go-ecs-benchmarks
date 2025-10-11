@@ -54,7 +54,7 @@ jobs:
       - uses: ./.github/actions/setup-go
       - name: Run benchmarks
         run: |
-          go run . -test.benchtime=0.1s -count=3 \
+          go run . -test.benchtime=0.1s \
               create2comp \
               create2comp_alloc \
               create10comp \
@@ -73,7 +73,7 @@ jobs:
       - uses: ./.github/actions/setup-go
       - name: Run benchmarks
         run: |
-          go run . -test.benchtime=0.1s -count=3 \
+          go run . -test.benchtime=0.1s \
               delete2comp \
               delete10comp \
 
