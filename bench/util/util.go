@@ -19,7 +19,7 @@ type Benchmark struct {
 	F    func(b *testing.B, n int)
 }
 
-func RunBenchmarks(name string, benchmarks Benchmarks, format func(Benchmarks) string) {
+func RunBenchmarks(name string, benchmarks Benchmarks, count int, format func(Benchmarks) string) {
 	fmt.Println("Running", name)
 
 	benchmarks.time = make([][]float64, len(benchmarks.Benches))
@@ -33,10 +33,16 @@ func RunBenchmarks(name string, benchmarks Benchmarks, format func(Benchmarks) s
 		for j := range benchmarks.Benches {
 			bench := &benchmarks.Benches[j]
 			fmt.Printf("       %-20s", bench.Name)
-			res := testing.Benchmark(func(b *testing.B) {
-				bench.F(b, n)
-			})
-			nanos := float64(res.T.Nanoseconds()) / float64(res.N*n)
+			var tSum int64
+			var nSum int
+			for range count {
+				res := testing.Benchmark(func(b *testing.B) {
+					bench.F(b, n)
+				})
+				tSum += res.T.Nanoseconds()
+				nSum += res.N
+			}
+			nanos := float64(tSum) / float64(nSum*n)
 			benchmarks.time[j][i] = nanos
 			fmt.Printf("%12s\n", toTime(nanos))
 		}

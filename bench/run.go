@@ -44,7 +44,7 @@ var benchmarks = map[string]func() util.Benchmarks{
 }
 
 // RunAll runs all benchmarks.
-func RunAll() {
+func RunAll(count int) {
 	if err := os.Mkdir("results", os.ModePerm); err != nil && !os.IsExist(err) {
 		log.Fatal(err)
 	}
@@ -52,12 +52,12 @@ func RunAll() {
 		log.Fatal(err)
 	}
 	for name, fn := range benchmarks {
-		util.RunBenchmarks(name, fn(), util.ToCSV)
+		util.RunBenchmarks(name, fn(), count, util.ToCSV)
 	}
 }
 
 // Run runs selected benchmarks.
-func Run(benches []string) {
+func Run(benches []string, count int) {
 	if err := os.Mkdir("results", os.ModePerm); err != nil && !os.IsExist(err) {
 		log.Fatal(err)
 	}
@@ -72,7 +72,7 @@ func Run(benches []string) {
 	}
 
 	for _, b := range benches {
-		util.RunBenchmarks(b, benchmarks[b](), util.ToCSV)
+		util.RunBenchmarks(b, benchmarks[b](), count, util.ToCSV)
 	}
 }
 
