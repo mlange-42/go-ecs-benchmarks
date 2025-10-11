@@ -9,14 +9,16 @@ import (
 
 func main() {
 	testing.Init()
+
+	count := flag.Int("count", 1, "number of times to run the benchmark")
 	flag.Parse()
 
 	args := flag.Args()
 
 	if len(args) == 0 {
-		bench.RunAll()
+		bench.RunAll(*count)
 		return
 	}
 
-	bench.Run(args)
+	bench.Run(args, *count)
 }
