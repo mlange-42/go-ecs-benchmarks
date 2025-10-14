@@ -1,6 +1,7 @@
 package query32arch
 
 import (
+	"runtime"
 	"testing"
 
 	ecs "github.com/marioolofo/go-gameengine-ecs"
@@ -47,7 +48,7 @@ func runGGEcs(b *testing.B, n int) {
 
 	mask := ecs.MakeComponentMask(PositionComponentID, VelocityComponentID)
 
-	for b.Loop() {
+	loop := func() {
 		query := world.Query(mask)
 		for query.Next() {
 			pos := (*comps.Position)(query.Component(PositionComponentID))
@@ -56,4 +57,15 @@ func runGGEcs(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
+	for b.Loop() {
+		loop()
+	}
+
+	sum := 0.0
+	query := world.Query(mask)
+	for query.Next() {
+		pos := (*comps.Position)(query.Component(PositionComponentID))
+		sum += pos.X + pos.Y
+	}
+	runtime.KeepAlive(sum)
 }

@@ -1,6 +1,7 @@
 package query256arch
 
 import (
+	"runtime"
 	"strconv"
 	"testing"
 
@@ -44,7 +45,7 @@ func runVolt(b *testing.B, n int) {
 
 	query := volt.CreateQuery2[comps.Position, comps.Velocity](world, volt.QueryConfiguration{})
 
-	for b.Loop() {
+	loop := func() {
 		for result := range query.Foreach(nil) {
 			pos := result.A
 			vel := result.B
@@ -52,4 +53,14 @@ func runVolt(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
+	for b.Loop() {
+		loop()
+	}
+
+	sum := 0.0
+	for result := range query.Foreach(nil) {
+		pos := result.A
+		sum += pos.X + pos.Y
+	}
+	runtime.KeepAlive(sum)
 }

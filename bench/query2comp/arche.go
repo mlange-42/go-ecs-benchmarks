@@ -22,6 +22,7 @@ func runArche(b *testing.B, n int) {
 	}
 
 	filter := ecs.All(posID, velID)
+
 	loop := func() {
 		query := world.Query(&filter)
 		for query.Next() {
