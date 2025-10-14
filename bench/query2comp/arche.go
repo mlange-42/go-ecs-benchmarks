@@ -1,6 +1,7 @@
 package query2comp
 
 import (
+	"runtime"
 	"testing"
 
 	"github.com/mlange-42/arche/ecs"
@@ -21,8 +22,7 @@ func runArche(b *testing.B, n int) {
 	}
 
 	filter := ecs.All(posID, velID)
-
-	for b.Loop() {
+	loop := func() {
 		query := world.Query(&filter)
 		for query.Next() {
 			pos := (*comps.Position)(query.Get(posID))
@@ -31,6 +31,18 @@ func runArche(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
+
+	for b.Loop() {
+		loop()
+	}
+
+	sum := 0.0
+	query = world.Query(&filter)
+	for query.Next() {
+		pos := (*comps.Position)(query.Get(posID))
+		sum += pos.X + pos.Y
+	}
+	runtime.KeepAlive(sum)
 }
 
 func runArcheRegistered(b *testing.B, n int) {
@@ -49,7 +61,7 @@ func runArcheRegistered(b *testing.B, n int) {
 	filter := ecs.All(posID, velID)
 	cf := world.Cache().Register(&filter)
 
-	for b.Loop() {
+	loop := func() {
 		query := world.Query(&cf)
 		for query.Next() {
 			pos := (*comps.Position)(query.Get(posID))
@@ -58,4 +70,16 @@ func runArcheRegistered(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
+
+	for b.Loop() {
+		loop()
+	}
+
+	sum := 0.0
+	query = world.Query(&cf)
+	for query.Next() {
+		pos := (*comps.Position)(query.Get(posID))
+		sum += pos.X + pos.Y
+	}
+	runtime.KeepAlive(sum)
 }
