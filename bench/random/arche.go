@@ -23,14 +23,16 @@ func runArche(b *testing.B, n int) {
 	rand.Shuffle(n, util.Swap(entities))
 
 	sum := 0.0
-	loop := func() {
+	loop := func() float64 {
+		sum := 0.0
 		for _, e := range entities {
 			pos := (*comps.Position)(world.Get(e, posID))
 			sum += pos.X
 		}
+		return sum
 	}
 	for b.Loop() {
-		loop()
+		sum += loop()
 	}
 	if sum > 0 {
 		log.Fatal("error")
