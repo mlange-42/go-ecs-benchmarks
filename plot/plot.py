@@ -53,7 +53,7 @@ def plot_all():
             f.write(md)
 
     readme = update_readme(template, template_vars)
-    with open(os.path.join(results_dir, "README.md"), "w") as f:
+    with open(os.path.join(results_dir, "README.md"), "w", encoding="utf-8") as f:
         f.write(readme)
 
 
@@ -85,6 +85,7 @@ def plot_bars(data: pd.DataFrame, ax, legend: bool):
 
     ax.set_ylabel("Time per entity")
     ax.set_yscale("log")
+    ax.set_ylim(0.5, None)
 
     if max_value > 400:
         ax.set_yticks([1, 10, 100, 1000])
@@ -170,7 +171,7 @@ def to_time(v: float) -> str:
 
 
 def update_readme(template_file: str, values: dict) -> str:
-    with open(template_file, "r") as file:
+    with open(template_file, "r", encoding="utf-8") as file:
         file_content = file.read()
 
     s = Template(file_content)

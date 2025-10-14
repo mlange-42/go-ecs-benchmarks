@@ -1,6 +1,7 @@
 package query2comp
 
 import (
+	"runtime"
 	"testing"
 
 	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
@@ -19,10 +20,19 @@ func runUot(b *testing.B, n int) {
 	}
 	query := ecs.Query2[comps.Position, comps.Velocity](world)
 
-	for b.Loop() {
+	loop := func() {
 		query.MapId(func(id ecs.Id, pos *comps.Position, vel *comps.Velocity) {
 			pos.X += vel.X
 			pos.Y += vel.Y
 		})
 	}
+	for b.Loop() {
+		loop()
+	}
+
+	sum := 0.0
+	query.MapId(func(id ecs.Id, pos *comps.Position, vel *comps.Velocity) {
+		sum += pos.X + pos.Y
+	})
+	runtime.KeepAlive(sum)
 }

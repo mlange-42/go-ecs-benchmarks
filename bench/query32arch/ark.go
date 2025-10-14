@@ -1,6 +1,7 @@
 package query32arch
 
 import (
+	"runtime"
 	"testing"
 
 	"github.com/mlange-42/ark/ecs"
@@ -36,7 +37,7 @@ func runArk(b *testing.B, n int) {
 
 	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
 
-	for b.Loop() {
+	loop := func() {
 		query := filter.Query()
 		for query.Next() {
 			pos, vel := query.Get()
@@ -44,6 +45,17 @@ func runArk(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
+	for b.Loop() {
+		loop()
+	}
+
+	sum := 0.0
+	query := filter.Query()
+	for query.Next() {
+		pos, _ := query.Get()
+		sum += pos.X + pos.Y
+	}
+	runtime.KeepAlive(sum)
 }
 
 func runArkRegistered(b *testing.B, n int) {
@@ -75,7 +87,7 @@ func runArkRegistered(b *testing.B, n int) {
 
 	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world).Register()
 
-	for b.Loop() {
+	loop := func() {
 		query := filter.Query()
 		for query.Next() {
 			pos, vel := query.Get()
@@ -83,4 +95,15 @@ func runArkRegistered(b *testing.B, n int) {
 			pos.Y += vel.Y
 		}
 	}
+	for b.Loop() {
+		loop()
+	}
+
+	sum := 0.0
+	query := filter.Query()
+	for query.Next() {
+		pos, _ := query.Get()
+		sum += pos.X + pos.Y
+	}
+	runtime.KeepAlive(sum)
 }

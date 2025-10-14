@@ -1,6 +1,7 @@
 package query256arch
 
 import (
+	"runtime"
 	"testing"
 
 	"github.com/mlange-42/go-ecs-benchmarks/bench/comps"
@@ -44,7 +45,7 @@ func runDonburi(b *testing.B, n int) {
 
 	query := donburi.NewQuery(filter.Contains(position, velocity))
 
-	for b.Loop() {
+	loop := func() {
 		query.Each(world, func(entry *donburi.Entry) {
 			pos := position.Get(entry)
 			vel := velocity.Get(entry)
@@ -53,4 +54,14 @@ func runDonburi(b *testing.B, n int) {
 			pos.Y += vel.Y
 		})
 	}
+	for b.Loop() {
+		loop()
+	}
+
+	sum := 0.0
+	query.Each(world, func(entry *donburi.Entry) {
+		pos := position.Get(entry)
+		sum += pos.X + pos.Y
+	})
+	runtime.KeepAlive(sum)
 }

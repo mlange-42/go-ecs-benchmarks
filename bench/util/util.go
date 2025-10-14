@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"runtime"
 	"strings"
 	"testing"
 )
@@ -41,6 +42,7 @@ func RunBenchmarks(name string, benchmarks Benchmarks, count int, format func(Be
 				})
 				tSum += res.T.Nanoseconds()
 				nSum += res.N
+				runtime.GC()
 			}
 			nanos := float64(tSum) / float64(nSum*n)
 			benchmarks.time[j][i] = nanos

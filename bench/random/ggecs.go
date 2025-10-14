@@ -28,11 +28,16 @@ func runGGEcs(b *testing.B, n int) {
 	rand.Shuffle(n, util.Swap(entities))
 
 	sum := 0.0
-	for b.Loop() {
+	loop := func() float64 {
+		sum := 0.0
 		for _, e := range entities {
 			pos := (*comps.Position)(world.Component(e, positionComponentID))
 			sum += pos.X
 		}
+		return sum
+	}
+	for b.Loop() {
+		sum += loop()
 	}
 	if sum > 0 {
 		log.Fatal("error")
