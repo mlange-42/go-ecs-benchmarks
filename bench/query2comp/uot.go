@@ -1,6 +1,7 @@
 package query2comp
 
 import (
+	"fmt"
 	"runtime"
 	"testing"
 
@@ -11,6 +12,12 @@ import (
 func runUot(b *testing.B, n int) {
 	world := ecs.NewWorld()
 
+	for i := 0; i < n*10; i++ {
+		id := world.NewId()
+		ecs.Write(world, id,
+			ecs.C(comps.Position{}),
+		)
+	}
 	for i := 0; i < n; i++ {
 		id := world.NewId()
 		ecs.Write(world, id,
@@ -34,5 +41,8 @@ func runUot(b *testing.B, n int) {
 	query.MapId(func(id ecs.Id, pos *comps.Position, vel *comps.Velocity) {
 		sum += pos.X + pos.Y
 	})
+	if sum != float64(n*b.N*2) {
+		panic(fmt.Sprintf("Expected sum %d, got %.2f", n*b.N*2, sum))
+	}
 	runtime.KeepAlive(sum)
 }
