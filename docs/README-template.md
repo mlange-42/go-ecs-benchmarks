@@ -62,6 +62,10 @@ The initial capacity of the world is set to 1024 where this is supported.
 
 ${query2comp}
 
+> **Note:** Donburi, unitoftime/ecs, and Volt use a callback-based approach for their query loops.
+As a result, iteration speed may degrade if the callback contains complex logic
+and the Go compiler is unable to inline it.
+
 ### Query fragmented, inner
 
 Query where the matching entities are fragmented over 32 archetypes.
@@ -76,6 +80,10 @@ Each of these `N` entities has some combination of components
 
 ${query32arch}
 
+> **Note:** Donburi, unitoftime/ecs, and Volt use a callback-based approach for their query loops.
+As a result, iteration speed may degrade if the callback contains complex logic
+and the Go compiler is unable to inline it.
+
 ### Query fragmented, outer
 
 Query where there are 256 non-matching archetypes.
@@ -89,6 +97,10 @@ Another `4 * N` entities with `Position` and some combination of 8 components
 ![query256arch](query256arch.svg)
 
 ${query256arch}
+
+> **Note:** Donburi, unitoftime/ecs, and Volt use a callback-based approach for their query loops.
+As a result, iteration speed may degrade if the callback contains complex logic
+and the Go compiler is unable to inline it.
 
 ### Component random access
 
