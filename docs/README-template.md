@@ -55,6 +55,7 @@ The initial capacity of the world is set to 1024 where this is supported.
 ### Query
 
 `N` entities with components `Position` and `Velocity`.
+10x `N` entities with components `Position`.
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 

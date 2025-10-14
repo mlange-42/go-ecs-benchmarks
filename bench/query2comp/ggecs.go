@@ -1,6 +1,7 @@
 package query2comp
 
 import (
+	"fmt"
 	"runtime"
 	"testing"
 
@@ -19,6 +20,9 @@ func runGGEcs(b *testing.B, n int) {
 	world.Register(ecs.NewComponentRegistry[comps.Position](positionComponentID))
 	world.Register(ecs.NewComponentRegistry[comps.Velocity](velocityComponentID))
 
+	for i := 0; i < n*10; i++ {
+		world.NewEntity(positionComponentID)
+	}
 	for i := 0; i < n; i++ {
 		e := world.NewEntity(positionComponentID, velocityComponentID)
 		vel := (*comps.Velocity)(world.Component(e, velocityComponentID))
@@ -46,6 +50,9 @@ func runGGEcs(b *testing.B, n int) {
 	for query.Next() {
 		pos := (*comps.Position)(query.Component(positionComponentID))
 		sum += pos.X + pos.Y
+	}
+	if sum != float64(n*b.N*2) {
+		panic(fmt.Sprintf("Expected sum %d, got %.2f", n*b.N*2, sum))
 	}
 	runtime.KeepAlive(sum)
 }

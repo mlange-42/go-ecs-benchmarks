@@ -1,6 +1,7 @@
 package query2comp
 
 import (
+	"fmt"
 	"runtime"
 	"testing"
 
@@ -15,10 +16,13 @@ func runDonburi(b *testing.B, n int) {
 	var position = donburi.NewComponentType[comps.Position]()
 	var velocity = donburi.NewComponentType[comps.Velocity]()
 
+	for i := 0; i < n*10; i++ {
+		world.Create(position)
+	}
 	for i := 0; i < n; i++ {
 		e := world.Create(position, velocity)
 		entry := world.Entry(e)
-		vel := (*comps.Position)(entry.Component(velocity))
+		vel := (*comps.Velocity)(entry.Component(velocity))
 		vel.X = 1
 		vel.Y = 1
 	}
@@ -43,5 +47,8 @@ func runDonburi(b *testing.B, n int) {
 		pos := position.Get(entry)
 		sum += pos.X + pos.Y
 	})
+	if sum != float64(n*b.N*2) {
+		panic(fmt.Sprintf("Expected sum %d, got %.2f", n*b.N*2, sum))
+	}
 	runtime.KeepAlive(sum)
 }

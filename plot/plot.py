@@ -75,6 +75,7 @@ def plot_bars(data: pd.DataFrame, ax, legend: bool):
     cols = data.columns[1:]
     width = 1.0 / (1.5 * len(cols))
     max_value = data.max()[1:].max()
+    min_value = data.min()[1:].min()
 
     for i, col in enumerate(cols):
         if col in exclude:
@@ -85,7 +86,11 @@ def plot_bars(data: pd.DataFrame, ax, legend: bool):
 
     ax.set_ylabel("Time per entity")
     ax.set_yscale("log")
-    ax.set_ylim(0.5, None)
+
+    if min_value > 5:
+        ax.set_ylim(5, None)
+    else:
+        ax.set_ylim(0.5, None)
 
     if max_value > 400:
         ax.set_yticks([1, 10, 100, 1000])

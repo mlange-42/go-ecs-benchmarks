@@ -1,6 +1,7 @@
 package query2comp
 
 import (
+	"fmt"
 	"runtime"
 	"testing"
 
@@ -14,6 +15,7 @@ func runArche(b *testing.B, n int) {
 	posID := ecs.ComponentID[comps.Position](&world)
 	velID := ecs.ComponentID[comps.Velocity](&world)
 
+	ecs.NewBuilder(&world, posID).NewBatch(n * 10)
 	query := ecs.NewBuilder(&world, posID, velID).NewBatchQ(n)
 	for query.Next() {
 		vel := (*comps.Velocity)(query.Get(velID))
@@ -43,6 +45,9 @@ func runArche(b *testing.B, n int) {
 		pos := (*comps.Position)(query.Get(posID))
 		sum += pos.X + pos.Y
 	}
+	if sum != float64(n*b.N*2) {
+		panic(fmt.Sprintf("Expected sum %d, got %.2f", n*b.N*2, sum))
+	}
 	runtime.KeepAlive(sum)
 }
 
@@ -52,6 +57,7 @@ func runArcheRegistered(b *testing.B, n int) {
 	posID := ecs.ComponentID[comps.Position](&world)
 	velID := ecs.ComponentID[comps.Velocity](&world)
 
+	ecs.NewBuilder(&world, posID).NewBatch(n * 10)
 	query := ecs.NewBuilder(&world, posID, velID).NewBatchQ(n)
 	for query.Next() {
 		vel := (*comps.Velocity)(query.Get(velID))
@@ -81,6 +87,9 @@ func runArcheRegistered(b *testing.B, n int) {
 	for query.Next() {
 		pos := (*comps.Position)(query.Get(posID))
 		sum += pos.X + pos.Y
+	}
+	if sum != float64(n*b.N*2) {
+		panic(fmt.Sprintf("Expected sum %d, got %.2f", n*b.N*2, sum))
 	}
 	runtime.KeepAlive(sum)
 }

@@ -1,6 +1,7 @@
 package query2comp
 
 import (
+	"fmt"
 	"runtime"
 	"testing"
 
@@ -11,10 +12,13 @@ import (
 func runArk(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
-	for range n {
-		_ = mapper.NewEntity(&comps.Position{}, &comps.Velocity{X: 1, Y: 1})
-	}
+	ecs.NewMap1[comps.Position](&world).
+		NewBatchFn(n*10, nil)
+
+	ecs.NewMap2[comps.Position, comps.Velocity](&world).
+		NewBatchFn(n, func(e ecs.Entity, p *comps.Position, v *comps.Velocity) {
+			v.X, v.Y = 1, 1
+		})
 
 	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
 
@@ -36,16 +40,22 @@ func runArk(b *testing.B, n int) {
 		pos, _ := query.Get()
 		sum += pos.X + pos.Y
 	}
+	if sum != float64(n*b.N*2) {
+		panic(fmt.Sprintf("Expected sum %d, got %.2f", n*b.N*2, sum))
+	}
 	runtime.KeepAlive(sum)
 }
 
 func runArkRegistered(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
-	for range n {
-		_ = mapper.NewEntity(&comps.Position{}, &comps.Velocity{X: 1, Y: 1})
-	}
+	ecs.NewMap1[comps.Position](&world).
+		NewBatchFn(n*10, nil)
+
+	ecs.NewMap2[comps.Position, comps.Velocity](&world).
+		NewBatchFn(n, func(e ecs.Entity, p *comps.Position, v *comps.Velocity) {
+			v.X, v.Y = 1, 1
+		})
 
 	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world).Register()
 
@@ -66,6 +76,9 @@ func runArkRegistered(b *testing.B, n int) {
 	for query.Next() {
 		pos, _ := query.Get()
 		sum += pos.X + pos.Y
+	}
+	if sum != float64(n*b.N*2) {
+		panic(fmt.Sprintf("Expected sum %d, got %.2f", n*b.N*2, sum))
 	}
 	runtime.KeepAlive(sum)
 }
