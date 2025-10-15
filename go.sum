@@ -15,8 +15,8 @@ github.com/marioolofo/go-gameengine-ecs v0.9.0 h1:J0awhWBm7CVmtDa62ouA3X7uuUTS+z
 github.com/marioolofo/go-gameengine-ecs v0.9.0/go.mod h1:oigfVORaCpMEaktM5fmk/jScla/M7dEMCnJlyZmYiLo=
 github.com/mlange-42/arche v0.15.3 h1:vonT1aCIHmu3nnCopzmhzOP5+J2NswVTexa2UDyek34=
 github.com/mlange-42/arche v0.15.3/go.mod h1:bX5PDzTbf2pEIlwnjRu3IpVqduLsxve4rUblXV0Byj0=
-github.com/mlange-42/ark v0.6.1 h1:7Trx9ZADNCZc9TlWAxAhIkgwVVMc8/19T9knK5U46II=
-github.com/mlange-42/ark v0.6.1/go.mod h1:gkS9cuklENPTmSjL2z4DcJgJsIVqF1yNwFlx48Hz/Sw=
+github.com/mlange-42/ark v0.6.3 h1:xZvIdIFFlY8wLEj8fRaRRN65Wzwjp5gadsPoTRXztMk=
+github.com/mlange-42/ark v0.6.3/go.mod h1:gkS9cuklENPTmSjL2z4DcJgJsIVqF1yNwFlx48Hz/Sw=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c h1:ncq/mPwQF4JjgDlrVEn3C11VoGHZN7m8qihwgMEtzYw=
