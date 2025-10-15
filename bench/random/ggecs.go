@@ -28,17 +28,16 @@ func runGGEcs(b *testing.B, n int) {
 	rand.Shuffle(n, util.Swap(entities))
 
 	sum := 0.0
-	loop := func() float64 {
-		sum := 0.0
+	// Don't use b.Loop and callback, as we do not want to measure
+	// the cost of calling the non-inlined callback.
+	b.ResetTimer()
+	for range b.N {
 		for _, e := range entities {
 			pos := (*comps.Position)(world.Component(e, positionComponentID))
 			sum += pos.X
 		}
-		return sum
 	}
-	for b.Loop() {
-		sum += loop()
-	}
+	b.StopTimer()
 	if sum > 0 {
 		log.Fatal("error")
 	}
