@@ -6,9 +6,11 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
 ## Benchmark candidates
 
+## Benchmark candidates
+
 | ECS | Tested | Latest | Activity |
 |-----|--------|--------|----------|
-| [Ark](https://github.com/mlange-42/ark) | v0.5.1 | ![GitHub Tag](https://img.shields.io/github/v/tag/mlange-42/ark?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/mlange-42/ark?label=date) | ![Last commit](https://img.shields.io/github/last-commit/mlange-42/ark) |
+| [Ark](https://github.com/mlange-42/ark) | v0.6.1 | ![GitHub Tag](https://img.shields.io/github/v/tag/mlange-42/ark?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/mlange-42/ark?label=date) | ![Last commit](https://img.shields.io/github/last-commit/mlange-42/ark) |
 | [Donburi](https://github.com/yottahmd/donburi) | v1.15.7 | ![GitHub Tag](https://img.shields.io/github/v/tag/yottahmd/donburi?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/yottahmd/donburi?label=date) | ![Last commit](https://img.shields.io/github/last-commit/yottahmd/donburi) |
 | [go‑gameengine‑ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 | ![GitHub Tag](https://img.shields.io/github/v/tag/marioolofo/go-gameengine-ecs?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/marioolofo/go-gameengine-ecs?label=date) | ![Last commit](https://img.shields.io/github/last-commit/marioolofo/go-gameengine-ecs) |
 | [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 | ![GitHub Tag](https://img.shields.io/github/v/tag/unitoftime/ecs?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/unitoftime/ecs?label=date) | ![Last commit](https://img.shields.io/github/last-commit/unitoftime/ecs) |
@@ -28,7 +30,7 @@ Open an issue if you want a version update.
 
 | ECS | Type-safe API | ID-based API | Relations | Events<sup>[1]</sup> | Batches<sup>[2]</sup> | Command buffer |
 |-----|:-------------:|:------------:|:---------:|:-------:|:-------:|:--------------:|
-| [Ark](https://github.com/mlange-42/ark) | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ |
+| [Ark](https://github.com/mlange-42/ark) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
 | [Donburi](https://github.com/yottahmd/donburi) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | [go‑gameengine‑ecs](https://github.com/marioolofo/go-gameengine-ecs) | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
 | [unitoftime/ecs](https://github.com/unitoftime/ecs) | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
@@ -39,7 +41,7 @@ Open an issue if you want a version update.
 
 ## Benchmarks
 
-Last run: Thu, 02 Oct 2025 20:54:43 UTC  
+Last run: Wed, 15 Oct 2025 16:10:15 UTC  
 CPU: AMD EPYC 7763 64-Core Processor
 
 
@@ -55,23 +57,28 @@ The initial capacity of the world is set to 1024 where this is supported.
 ### Query
 
 `N` entities with components `Position` and `Velocity`.
+10x `N` entities with components `Position`.
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query2comp](https://github.com/user-attachments/assets/bad1e06b-4849-4993-aebb-5c0ca4de79ba)
+![query2comp](https://github.com/user-attachments/assets/0a46269c-0661-48fa-ad42-3439c87da1ff)
 
 | N | Ark | Ark (cached) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 57.85ns | 50.47ns | 62.40ns | 45.62ns | 16.23ns | 178.72ns |
-| 4 | 17.36ns | 14.65ns | 29.52ns | 15.82ns | 6.40ns | 48.42ns |
-| 16 | 6.53ns | 6.10ns | 20.49ns | 10.01ns | 3.99ns | 15.69ns |
-| 64 | 4.27ns | 4.16ns | 18.51ns | 8.79ns | 3.44ns | 7.60ns |
-| 256 | 3.64ns | 3.62ns | 19.05ns | 8.25ns | 3.20ns | 5.48ns |
-| 1k | 3.49ns | 3.54ns | 19.20ns | 8.19ns | 3.15ns | 4.93ns |
-| 16k | 3.48ns | 3.49ns | 20.13ns | 8.13ns | 3.18ns | 4.77ns |
-| 256k | 3.48ns | 3.49ns | 21.50ns | 8.14ns | 3.18ns | 4.78ns |
-| 1M | 3.49ns | 3.50ns | 25.51ns | 8.14ns | 3.20ns | 4.76ns |
+| 1 | 64.99ns | 58.45ns | 62.26ns | 47.90ns | 18.19ns | 113.37ns |
+| 4 | 18.11ns | 16.34ns | 29.53ns | 15.34ns | 7.09ns | 29.75ns |
+| 16 | 6.01ns | 5.46ns | 20.82ns | 7.78ns | 4.35ns | 8.10ns |
+| 64 | 2.81ns | 2.65ns | 19.00ns | 6.02ns | 3.71ns | 2.97ns |
+| 256 | 2.02ns | 1.99ns | 19.17ns | 5.49ns | 3.52ns | 1.71ns |
+| 1k | 1.91ns | 1.93ns | 20.07ns | 5.36ns | 3.49ns | 1.40ns |
+| 16k | 1.96ns | 1.96ns | 20.71ns | 5.36ns | 3.49ns | 1.28ns |
+| 256k | 1.94ns | 1.94ns | 24.90ns | 5.35ns | 3.49ns | 1.27ns |
+| 1M | 2.04ns | 2.04ns | 30.53ns | 5.36ns | 3.52ns | 1.35ns |
 
+
+> **Note:** Donburi, unitoftime/ecs, and Volt use a callback-based approach for their query loops.
+As a result, iteration speed may degrade if the callback contains complex logic
+and the Go compiler is unable to inline it.
 
 ### Query fragmented, inner
 
@@ -83,20 +90,24 @@ Each of these `N` entities has some combination of components
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query32arch](https://github.com/user-attachments/assets/540a4560-3393-4edc-a1b1-6ef1979a9e08)
+![query32arch](https://github.com/user-attachments/assets/f58295f7-6ab9-409e-952c-198530ecfd0e)
 
 | N | Ark | Ark (cached) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 57.84ns | 49.85ns | 62.18ns | 45.14ns | 16.22ns | 194.53ns |
-| 4 | 29.43ns | 21.58ns | 32.14ns | 20.72ns | 14.63ns | 99.10ns |
-| 16 | 21.99ns | 14.91ns | 26.24ns | 14.99ns | 28.37ns | 72.16ns |
-| 64 | 13.09ns | 8.84ns | 22.11ns | 11.14ns | 14.53ns | 35.68ns |
-| 256 | 5.68ns | 4.58ns | 21.29ns | 9.19ns | 6.04ns | 12.92ns |
-| 1k | 4.02ns | 3.71ns | 22.16ns | 8.80ns | 3.94ns | 7.06ns |
-| 16k | 3.57ns | 3.55ns | 29.30ns | 8.51ns | 3.28ns | 5.04ns |
-| 256k | 3.50ns | 3.49ns | 65.23ns | 8.45ns | 3.20ns | 4.78ns |
-| 1M | 3.53ns | 3.51ns | 100.88ns | 8.47ns | 3.22ns | 4.78ns |
+| 1 | 64.02ns | 57.15ns | 59.87ns | 44.30ns | 17.78ns | 114.29ns |
+| 4 | 31.65ns | 24.23ns | 32.74ns | 19.11ns | 15.08ns | 74.42ns |
+| 16 | 23.94ns | 15.46ns | 25.65ns | 12.41ns | 30.10ns | 64.24ns |
+| 64 | 13.13ns | 8.72ns | 23.22ns | 8.38ns | 15.04ns | 31.57ns |
+| 256 | 4.85ns | 3.67ns | 20.96ns | 5.85ns | 6.33ns | 9.14ns |
+| 1k | 2.69ns | 2.34ns | 22.17ns | 5.47ns | 4.35ns | 3.44ns |
+| 16k | 2.10ns | 1.87ns | 29.94ns | 5.38ns | 3.59ns | 1.50ns |
+| 256k | 1.93ns | 1.78ns | 78.60ns | 5.35ns | 3.49ns | 1.29ns |
+| 1M | 2.06ns | 1.89ns | 105.88ns | 5.37ns | 3.52ns | 1.39ns |
 
+
+> **Note:** Donburi, unitoftime/ecs, and Volt use a callback-based approach for their query loops.
+As a result, iteration speed may degrade if the callback contains complex logic
+and the Go compiler is unable to inline it.
 
 ### Query fragmented, outer
 
@@ -108,20 +119,24 @@ Another `4 * N` entities with `Position` and some combination of 8 components
 
 - Query all `[Position, Velocity]` entities, and add the velocity vector to the position vector.
 
-![query256arch](https://github.com/user-attachments/assets/fd6bf4fe-f34a-4a61-bc18-c4486d106c00)
+![query256arch](https://github.com/user-attachments/assets/ec7cc347-9de0-455f-aa49-7ddc969f25bb)
 
 | N | Ark | Ark (cached) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 58.11ns | 50.12ns | 61.68ns | 56.93ns | 16.21ns | 207.65ns |
-| 4 | 16.57ns | 14.90ns | 28.86ns | 27.28ns | 9.58ns | 78.85ns |
-| 16 | 6.66ns | 6.14ns | 22.00ns | 21.52ns | 4.66ns | 45.42ns |
-| 64 | 4.52ns | 4.15ns | 18.63ns | 20.08ns | 3.59ns | 43.01ns |
-| 256 | 3.95ns | 3.62ns | 19.08ns | 11.26ns | 3.24ns | 14.26ns |
-| 1k | 3.85ns | 3.50ns | 19.43ns | 8.91ns | 3.16ns | 7.07ns |
-| 16k | 3.80ns | 3.49ns | 21.89ns | 8.21ns | 3.18ns | 4.97ns |
-| 256k | 3.79ns | 3.49ns | 21.97ns | 8.14ns | 3.22ns | 4.76ns |
-| 1M | 3.81ns | 3.49ns | 26.53ns | 8.15ns | 3.20ns | 4.78ns |
+| 1 | 65.22ns | 58.60ns | 62.97ns | 55.14ns | 17.77ns | 137.48ns |
+| 4 | 17.96ns | 16.34ns | 29.19ns | 25.21ns | 9.43ns | 64.34ns |
+| 16 | 5.98ns | 5.36ns | 20.77ns | 18.73ns | 4.86ns | 48.73ns |
+| 64 | 2.75ns | 2.57ns | 18.79ns | 17.24ns | 3.85ns | 51.06ns |
+| 256 | 1.97ns | 1.91ns | 20.62ns | 8.42ns | 3.54ns | 13.77ns |
+| 1k | 1.79ns | 1.78ns | 20.37ns | 6.16ns | 3.50ns | 4.42ns |
+| 16k | 1.79ns | 1.77ns | 20.83ns | 5.41ns | 3.48ns | 1.51ns |
+| 256k | 1.77ns | 1.77ns | 23.24ns | 5.36ns | 3.49ns | 1.28ns |
+| 1M | 1.87ns | 1.89ns | 29.70ns | 5.37ns | 3.51ns | 1.39ns |
 
+
+> **Note:** Donburi, unitoftime/ecs, and Volt use a callback-based approach for their query loops.
+As a result, iteration speed may degrade if the callback contains complex logic
+and the Go compiler is unable to inline it.
 
 ### Component random access
 
@@ -131,19 +146,19 @@ All entities are collected into a slice, and the slice is shuffled.
 * Iterate the shuffled entities.
 * For each entity, get its `Position` and sum up their `X` fields.
 
-![random](https://github.com/user-attachments/assets/6e7e3c1c-092a-480a-855f-4c8d0a24e267)
+![random](https://github.com/user-attachments/assets/cf708bbf-f83a-4a81-b1fc-5250528ff970)
 
 | N | Ark | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 4.95ns | 9.14ns | 8.45ns | 37.23ns | 38.52ns |
-| 4 | 4.57ns | 8.75ns | 8.24ns | 36.96ns | 38.60ns |
-| 16 | 4.44ns | 8.67ns | 14.18ns | 37.13ns | 39.31ns |
-| 64 | 4.49ns | 8.87ns | 13.81ns | 38.59ns | 39.04ns |
-| 256 | 4.44ns | 8.99ns | 14.01ns | 40.44ns | 39.81ns |
-| 1k | 4.57ns | 13.52ns | 17.97ns | 41.51ns | 41.82ns |
-| 16k | 7.55ns | 36.18ns | 29.02ns | 58.59ns | 64.22ns |
-| 256k | 13.79ns | 140.54ns | 52.61ns | 136.21ns | 201.90ns |
-| 1M | 64.96ns | 257.07ns | 167.69ns | 247.43ns | 309.79ns |
+| 1 | 2.86ns | 7.95ns | 8.43ns | 36.65ns | 38.14ns |
+| 4 | 3.00ns | 8.02ns | 8.25ns | 36.45ns | 38.36ns |
+| 16 | 2.76ns | 8.05ns | 13.74ns | 36.77ns | 38.76ns |
+| 64 | 2.76ns | 8.31ns | 13.99ns | 39.22ns | 38.32ns |
+| 256 | 2.78ns | 8.74ns | 14.42ns | 41.17ns | 39.39ns |
+| 1k | 2.85ns | 12.24ns | 18.56ns | 41.50ns | 41.63ns |
+| 16k | 5.47ns | 38.99ns | 30.28ns | 58.77ns | 65.81ns |
+| 256k | 8.35ns | 83.60ns | 50.89ns | 120.52ns | 173.76ns |
+| 1M | 38.69ns | 249.60ns | 154.63ns | 234.55ns | 269.18ns |
 
 
 ### Create entities
@@ -154,19 +169,19 @@ The operation is performed once before benchmarking,
 to exclude memory allocation, archetype creation etc.
 See the benchmark below for entity creation with allocation.
 
-![create2comp](https://github.com/user-attachments/assets/01d52fb5-13a3-4a3b-b9ff-7c02bd1af6f1)
+![create2comp](https://github.com/user-attachments/assets/98baca11-43b1-4e46-9ce9-90e78d4a708e)
 
 | N | Ark | Ark (batch) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 252.34ns | 278.46ns | 1.01us | 393.66ns | 424.61ns | 823.02ns |
-| 4 | 114.99ns | 75.58ns | 498.21ns | 165.38ns | 203.47ns | 395.17ns |
-| 16 | 67.32ns | 25.11ns | 287.53ns | 129.55ns | 134.41ns | 254.89ns |
-| 64 | 54.79ns | 12.97ns | 256.78ns | 116.72ns | 120.90ns | 219.98ns |
-| 256 | 58.85ns | 10.16ns | 212.08ns | 107.41ns | 95.64ns | 198.84ns |
-| 1k | 46.33ns | 8.69ns | 196.11ns | 115.59ns | 272.78ns | 209.08ns |
-| 16k | 40.13ns | 7.56ns | 209.98ns | 117.59ns | 285.51ns | 216.53ns |
-| 256k | 40.37ns | 7.82ns | 207.01ns | 127.10ns | 319.38ns | 257.19ns |
-| 1M | 40.47ns | 7.63ns | 188.12ns | 190.90ns | 428.36ns | 352.27ns |
+| 1 | 237.75ns | 227.28ns | 1.02us | 375.31ns | 456.04ns | 805.67ns |
+| 4 | 100.43ns | 65.50ns | 498.97ns | 178.06ns | 214.59ns | 382.89ns |
+| 16 | 68.86ns | 23.47ns | 335.97ns | 144.83ns | 145.36ns | 259.12ns |
+| 64 | 55.15ns | 12.89ns | 284.96ns | 118.50ns | 137.24ns | 253.03ns |
+| 256 | 47.53ns | 10.26ns | 225.07ns | 112.15ns | 88.43ns | 190.09ns |
+| 1k | 39.32ns | 9.79ns | 208.67ns | 110.85ns | 282.84ns | 204.34ns |
+| 16k | 34.45ns | 7.78ns | 218.36ns | 118.95ns | 286.51ns | 221.05ns |
+| 256k | 34.45ns | 7.59ns | 203.10ns | 118.20ns | 300.58ns | 225.54ns |
+| 1M | 34.37ns | 7.73ns | 190.83ns | 167.80ns | 412.72ns | 333.44ns |
 
 
 ### Create entities, allocating
@@ -180,19 +195,19 @@ As soon as things stabilize, the benchmarks for entity creation without allocati
 Low `N` values might be biased by things like archetype creation and memory allocation,
 which is handled differently by different implementations.
 
-![create2comp_alloc](https://github.com/user-attachments/assets/7e9c7ea1-b800-454d-96fb-6ca879296257)
+![create2comp_alloc](https://github.com/user-attachments/assets/ca2adb50-a0c1-40c5-b2a0-b99d88cd57ab)
 
 | N | Ark | Ark (batch) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 8.00us | 7.97us | 4.45us | 19.38us | 3.17us | 1.84us |
-| 4 | 2.10us | 1.95us | 1.36us | 5.00us | 1.05us | 805.39ns |
-| 16 | 554.15ns | 514.05ns | 628.96ns | 1.39us | 383.95ns | 423.12ns |
-| 64 | 184.50ns | 135.87ns | 404.76ns | 494.52ns | 224.77ns | 288.24ns |
-| 256 | 86.30ns | 44.48ns | 300.09ns | 255.69ns | 171.10ns | 255.71ns |
-| 1k | 56.59ns | 20.15ns | 304.95ns | 244.13ns | 154.51ns | 219.76ns |
-| 16k | 65.42ns | 38.06ns | 395.85ns | 258.18ns | 186.18ns | 392.18ns |
-| 256k | 100.06ns | 45.86ns | 432.06ns | 605.70ns | 260.30ns | 453.41ns |
-| 1M | 79.92ns | 28.74ns | 451.06ns | 1.35us | 305.77ns | 553.73ns |
+| 1 | 7.29us | 7.34us | 4.53us | 16.85us | 3.31us | 1.79us |
+| 4 | 1.92us | 1.83us | 1.39us | 3.85us | 1.06us | 802.05ns |
+| 16 | 522.03ns | 478.10ns | 641.57ns | 1.24us | 387.69ns | 418.88ns |
+| 64 | 168.18ns | 130.44ns | 415.96ns | 498.59ns | 220.99ns | 285.80ns |
+| 256 | 79.70ns | 45.03ns | 366.53ns | 283.41ns | 168.01ns | 251.56ns |
+| 1k | 51.81ns | 20.14ns | 310.84ns | 199.75ns | 154.54ns | 236.66ns |
+| 16k | 56.78ns | 40.32ns | 434.91ns | 243.79ns | 174.07ns | 402.50ns |
+| 256k | 100.78ns | 45.32ns | 488.14ns | 584.53ns | 243.61ns | 475.76ns |
+| 1M | 74.34ns | 34.81ns | 460.18ns | 1.40us | 285.96ns | 533.75ns |
 
 
 ### Create large entities
@@ -202,19 +217,19 @@ which is handled differently by different implementations.
 The operation is performed once before benchmarking,
 to exclude things like archetype creation and memory allocation.
 
-![create10comp](https://github.com/user-attachments/assets/2b8bbac2-a2be-43f2-9eea-cac2142af236)
+![create10comp](https://github.com/user-attachments/assets/3b3d7a67-7d2f-431a-b765-264d864aa2b0)
 
 | N | Ark | Ark (batch) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 367.73ns | 412.67ns | 1.86us | 479.85ns | 657.75ns | 3.05us |
-| 4 | 169.92ns | 117.00ns | 1.21us | 253.33ns | 368.79ns | 1.87us |
-| 16 | 115.47ns | 34.40ns | 985.80ns | 224.06ns | 301.52ns | 1.55us |
-| 64 | 109.79ns | 15.74ns | 797.45ns | 190.69ns | 276.89ns | 1.39us |
-| 256 | 93.15ns | 10.81ns | 713.92ns | 181.72ns | 229.22ns | 1.39us |
-| 1k | 86.11ns | 8.67ns | 734.90ns | 162.53ns | 478.22ns | 1.40us |
-| 16k | 81.24ns | 7.70ns | 754.09ns | 170.99ns | 485.36ns | 1.37us |
-| 256k | 81.36ns | 7.78ns | 772.26ns | 171.56ns | 558.76ns | 1.46us |
-| 1M | 81.11ns | 7.62ns | 759.29ns | 229.28ns | 643.40ns | 1.53us |
+| 1 | 320.50ns | 305.86ns | 1.91us | 485.13ns | 720.97ns | 3.07us |
+| 4 | 148.92ns | 88.73ns | 1.20us | 255.58ns | 419.22ns | 2.16us |
+| 16 | 94.33ns | 29.00ns | 1.08us | 221.05ns | 276.73ns | 1.52us |
+| 64 | 79.22ns | 13.91ns | 781.82ns | 213.26ns | 281.97ns | 1.35us |
+| 256 | 78.79ns | 10.61ns | 739.30ns | 159.97ns | 223.79ns | 1.26us |
+| 1k | 69.73ns | 8.76ns | 774.23ns | 162.48ns | 470.15ns | 1.29us |
+| 16k | 67.49ns | 7.84ns | 764.18ns | 167.01ns | 484.08ns | 1.29us |
+| 256k | 67.34ns | 9.22ns | 722.32ns | 177.66ns | 558.92ns | 1.37us |
+| 1M | 67.29ns | 7.63ns | 715.23ns | 239.13ns | 652.26ns | 1.41us |
 
 
 ### Add/remove component
@@ -226,19 +241,19 @@ to exclude things like archetype creation and memory allocation.
 
 One iteration is performed before the benchmarking starts, to exclude memory allocation.
 
-![add_remove](https://github.com/user-attachments/assets/84ad054e-92fe-4ae5-9d7e-1c38edc8bf9c)
+![add_remove](https://github.com/user-attachments/assets/93412c4f-a25d-41b9-ac27-306475dd14df)
 
 | N | Ark | Ark (batch) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 100.99ns | 496.22ns | 421.58ns | 514.61ns | 340.52ns | 441.44ns |
-| 4 | 112.76ns | 133.56ns | 435.68ns | 523.06ns | 351.66ns | 451.88ns |
-| 16 | 115.11ns | 44.37ns | 440.44ns | 561.19ns | 354.19ns | 447.27ns |
-| 64 | 111.58ns | 22.85ns | 433.79ns | 545.95ns | 369.50ns | 447.49ns |
-| 256 | 111.56ns | 10.24ns | 432.18ns | 552.25ns | 378.80ns | 453.02ns |
-| 1k | 117.24ns | 7.00ns | 434.01ns | 571.75ns | 740.21ns | 460.31ns |
-| 16k | 112.67ns | 7.93ns | 492.54ns | 603.05ns | 798.73ns | 510.04ns |
-| 256k | 112.83ns | 9.55ns | 478.57ns | 824.94ns | 1.32us | 832.72ns |
-| 1M | 112.42ns | 10.30ns | 468.15ns | 987.98ns | 1.44us | 986.77ns |
+| 1 | 95.71ns | 199.08ns | 407.38ns | 506.36ns | 339.35ns | 439.44ns |
+| 4 | 100.52ns | 63.83ns | 422.69ns | 515.95ns | 344.50ns | 446.39ns |
+| 16 | 102.20ns | 27.68ns | 431.82ns | 552.36ns | 338.57ns | 440.64ns |
+| 64 | 100.85ns | 20.82ns | 428.43ns | 546.92ns | 348.67ns | 442.46ns |
+| 256 | 100.86ns | 11.18ns | 426.38ns | 552.57ns | 362.28ns | 448.81ns |
+| 1k | 101.44ns | 8.69ns | 425.79ns | 569.88ns | 735.14ns | 457.73ns |
+| 16k | 106.75ns | 9.49ns | 486.27ns | 599.52ns | 816.03ns | 515.63ns |
+| 256k | 103.40ns | 10.34ns | 479.08ns | 882.60ns | 1.34us | 886.93ns |
+| 1M | 101.90ns | 11.97ns | 476.83ns | 985.86ns | 1.41us | 995.48ns |
 
 
 ### Add/remove component, large entity
@@ -250,19 +265,19 @@ One iteration is performed before the benchmarking starts, to exclude memory all
 
 One iteration is performed before the benchmarking starts, to exclude memory allocation.
 
-![add_remove_large](https://github.com/user-attachments/assets/a3826438-1601-48fd-9c6b-802e252699bd)
+![add_remove_large](https://github.com/user-attachments/assets/6c5c17d0-9522-4bef-917c-c4a401513ce3)
 
 | N | Ark | Ark (batch) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 346.99ns | 760.90ns | 1.03us | 993.10ns | 806.44ns | 1.83us |
-| 4 | 402.21ns | 255.29ns | 1.06us | 1.02us | 807.24ns | 1.77us |
-| 16 | 392.15ns | 133.93ns | 1.04us | 1.04us | 835.30ns | 1.73us |
-| 64 | 394.75ns | 98.50ns | 1.04us | 1.03us | 841.08ns | 1.75us |
-| 256 | 386.36ns | 35.98ns | 1.05us | 1.04us | 884.15ns | 1.74us |
-| 1k | 399.30ns | 19.22ns | 1.11us | 1.06us | 1.43us | 1.86us |
-| 16k | 415.55ns | 26.82ns | 1.24us | 1.15us | 1.47us | 2.15us |
-| 256k | 600.10ns | 47.77ns | 1.30us | 1.65us | 2.06us | 2.92us |
-| 1M | 508.95ns | 46.71ns | 1.46us | 1.78us | 2.21us | 2.94us |
+| 1 | 342.10ns | 470.62ns | 1.06us | 931.31ns | 805.83ns | 1.71us |
+| 4 | 393.24ns | 187.73ns | 1.08us | 956.42ns | 827.33ns | 1.62us |
+| 16 | 386.54ns | 118.22ns | 1.07us | 976.11ns | 816.44ns | 1.64us |
+| 64 | 396.02ns | 96.22ns | 1.05us | 955.84ns | 854.08ns | 1.63us |
+| 256 | 382.84ns | 36.84ns | 1.07us | 956.80ns | 885.61ns | 1.63us |
+| 1k | 424.76ns | 20.66ns | 1.15us | 983.18ns | 1.44us | 1.70us |
+| 16k | 414.22ns | 24.85ns | 1.30us | 1.13us | 1.51us | 2.03us |
+| 256k | 556.85ns | 45.27ns | 1.46us | 1.57us | 2.00us | 2.69us |
+| 1M | 491.22ns | 46.25ns | 1.39us | 1.74us | 2.19us | 2.80us |
 
 
 ### Delete entities
@@ -271,19 +286,19 @@ One iteration is performed before the benchmarking starts, to exclude memory all
 
 * Delete all entities
 
-![delete2comp](https://github.com/user-attachments/assets/b15a5082-e55a-4671-9a4d-0d3e3d121351)
+![delete2comp](https://github.com/user-attachments/assets/7411de37-3ee8-45c4-86fb-1b32f1dc8477)
 
 | N | Ark | Ark (batch) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 155.88ns | 724.96ns | 261.06ns | 355.10ns | 204.99ns | 462.39ns |
-| 4 | 75.48ns | 203.77ns | 111.90ns | 162.99ns | 85.26ns | 231.12ns |
-| 16 | 42.08ns | 60.55ns | 71.38ns | 137.40ns | 51.45ns | 175.39ns |
-| 64 | 35.73ns | 28.83ns | 59.51ns | 108.96ns | 44.17ns | 146.29ns |
-| 256 | 31.05ns | 11.87ns | 56.66ns | 106.59ns | 44.31ns | 131.51ns |
-| 1k | 29.43ns | 7.23ns | 51.37ns | 104.31ns | 35.84ns | 130.03ns |
-| 16k | 25.13ns | 6.40ns | 52.29ns | 116.22ns | 50.38ns | 154.30ns |
-| 256k | 24.26ns | 6.34ns | 53.72ns | 161.54ns | 101.20ns | 247.52ns |
-| 1M | 24.56ns | 7.46ns | 55.44ns | 289.13ns | 216.68ns | 356.69ns |
+| 1 | 175.98ns | 311.37ns | 264.61ns | 443.81ns | 224.26ns | 583.17ns |
+| 4 | 85.29ns | 90.17ns | 111.85ns | 182.35ns | 86.07ns | 269.82ns |
+| 16 | 49.15ns | 33.85ns | 72.18ns | 141.25ns | 53.59ns | 187.08ns |
+| 64 | 40.22ns | 20.10ns | 60.16ns | 105.41ns | 42.34ns | 169.61ns |
+| 256 | 36.16ns | 9.19ns | 57.75ns | 109.63ns | 44.25ns | 138.52ns |
+| 1k | 27.72ns | 6.19ns | 57.93ns | 104.82ns | 36.65ns | 132.46ns |
+| 16k | 27.29ns | 5.57ns | 51.85ns | 116.46ns | 50.73ns | 152.70ns |
+| 256k | 26.98ns | 5.36ns | 54.30ns | 150.84ns | 81.16ns | 210.03ns |
+| 1M | 27.12ns | 6.55ns | 51.45ns | 253.49ns | 157.71ns | 338.31ns |
 
 
 ### Delete large entities
@@ -292,19 +307,19 @@ One iteration is performed before the benchmarking starts, to exclude memory all
 
 * Delete all entities
 
-![delete10comp](https://github.com/user-attachments/assets/34268a33-a978-4a32-8e71-7373502ba119)
+![delete10comp](https://github.com/user-attachments/assets/c2041e75-f778-4cd7-9cd4-ff8f5613a5e8)
 
 | N | Ark | Ark (batch) | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 229.15ns | 891.11ns | 420.12ns | 524.77ns | 182.16ns | 846.91ns |
-| 4 | 153.43ns | 278.74ns | 213.60ns | 262.49ns | 80.64ns | 507.87ns |
-| 16 | 113.58ns | 108.11ns | 162.10ns | 238.49ns | 50.06ns | 468.63ns |
-| 64 | 127.99ns | 71.69ns | 158.36ns | 191.47ns | 42.19ns | 334.24ns |
-| 256 | 87.16ns | 21.27ns | 124.53ns | 160.23ns | 38.82ns | 312.59ns |
-| 1k | 79.17ns | 9.57ns | 145.00ns | 166.62ns | 35.00ns | 314.43ns |
-| 16k | 77.39ns | 8.61ns | 142.24ns | 179.67ns | 50.26ns | 334.87ns |
-| 256k | 90.10ns | 14.91ns | 159.28ns | 299.00ns | 94.69ns | 505.80ns |
-| 1M | 88.21ns | 15.57ns | 134.15ns | 401.77ns | 204.70ns | 644.24ns |
+| 1 | 263.41ns | 403.77ns | 432.97ns | 557.02ns | 190.42ns | 929.54ns |
+| 4 | 165.99ns | 140.61ns | 205.92ns | 266.08ns | 77.86ns | 521.50ns |
+| 16 | 146.53ns | 74.24ns | 151.28ns | 234.29ns | 48.79ns | 492.06ns |
+| 64 | 137.64ns | 53.99ns | 151.11ns | 209.35ns | 42.85ns | 355.11ns |
+| 256 | 107.04ns | 18.42ns | 120.52ns | 146.75ns | 47.64ns | 314.01ns |
+| 1k | 82.01ns | 8.19ns | 140.82ns | 161.82ns | 35.13ns | 316.34ns |
+| 16k | 85.08ns | 7.92ns | 137.53ns | 173.99ns | 50.46ns | 337.56ns |
+| 256k | 89.93ns | 12.43ns | 163.50ns | 262.07ns | 76.40ns | 484.97ns |
+| 1M | 92.92ns | 14.74ns | 229.20ns | 375.41ns | 166.48ns | 674.11ns |
 
 
 ### Create world
@@ -313,7 +328,7 @@ One iteration is performed before the benchmarking starts, to exclude memory all
 
 | N | Ark | Donburi | ggecs | uot | Volt |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 15.30us | 2.33us | 213.60us | 2.14us | 32.74us |
+| 1 | 25.73us | 2.61us | 220.57us | 2.43us | 43.46us |
 
 
 ### Popularity
