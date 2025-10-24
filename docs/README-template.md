@@ -6,8 +6,6 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
 ## Benchmark candidates
 
-## Benchmark candidates
-
 | ECS | Tested | Latest | Activity |
 |-----|--------|--------|----------|
 | [Ark](https://github.com/mlange-42/ark) | v0.6.3 | ![GitHub Tag](https://img.shields.io/github/v/tag/mlange-42/ark?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/mlange-42/ark?label=date) | ![Last commit](https://img.shields.io/github/last-commit/mlange-42/ark) |
