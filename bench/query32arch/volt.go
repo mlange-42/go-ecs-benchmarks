@@ -2,7 +2,6 @@ package query32arch
 
 import (
 	"runtime"
-	"strconv"
 	"testing"
 
 	"github.com/akmonengine/volt"
@@ -23,7 +22,7 @@ func runVolt(b *testing.B, n int) {
 
 	var ids []volt.ComponentIdConf
 	for i := 0; i < n; i++ {
-		e := world.CreateEntity(strconv.Itoa(i))
+		e := world.CreateEntity()
 
 		ids = append(ids, volt.ComponentIdConf{ComponentId: comps.PositionId}, volt.ComponentIdConf{ComponentId: comps.VelocityId})
 		for j, id := range extraComps {

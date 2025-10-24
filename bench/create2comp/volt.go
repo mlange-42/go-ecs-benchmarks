@@ -1,7 +1,6 @@
 package create2comp
 
 import (
-	"strconv"
 	"testing"
 
 	"github.com/akmonengine/volt"
@@ -17,8 +16,8 @@ func runVolt(b *testing.B, n int) {
 	volt.RegisterComponent[comps.Velocity](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
 
 	entities := make([]volt.EntityId, 0, n)
-	for id := range n {
-		e, err := volt.CreateEntityWithComponents2(world, strconv.Itoa(id), comps.Position{}, comps.Velocity{})
+	for range n {
+		e, err := volt.CreateEntityWithComponents2(world, comps.Position{}, comps.Velocity{})
 		if err != nil {
 			panic("Volt crashed")
 		}
@@ -30,8 +29,8 @@ func runVolt(b *testing.B, n int) {
 	entities = entities[:0]
 
 	for b.Loop() {
-		for id := range n {
-			e, err := volt.CreateEntityWithComponents2(world, strconv.Itoa(id), comps.Position{}, comps.Velocity{})
+		for range n {
+			e, err := volt.CreateEntityWithComponents2(world, comps.Position{}, comps.Velocity{})
 			if err != nil {
 				panic("Volt crashed")
 			}

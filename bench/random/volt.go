@@ -3,7 +3,6 @@ package random
 import (
 	"log"
 	"math/rand/v2"
-	"strconv"
 	"testing"
 
 	"github.com/akmonengine/volt"
@@ -20,7 +19,7 @@ func runVolt(b *testing.B, n int) {
 
 	entities := make([]volt.EntityId, 0, n)
 	for i := 0; i < n; i++ {
-		e := world.CreateEntity(strconv.Itoa(i))
+		e := world.CreateEntity()
 		volt.AddComponent(world, e, comps.Position{})
 		entities = append(entities, e)
 	}
