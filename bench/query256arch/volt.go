@@ -2,7 +2,6 @@ package query256arch
 
 import (
 	"runtime"
-	"strconv"
 	"testing"
 
 	"github.com/akmonengine/volt"
@@ -24,8 +23,8 @@ func runVolt(b *testing.B, n int) {
 	volt.RegisterComponent[comps.C8](world, &volt.ComponentConfig[comps.C8]{BuilderFn: func(component any, configuration any) {}})
 	extraComps := []volt.ComponentId{comps.C1Id, comps.C2Id, comps.C3Id, comps.C4Id, comps.C5Id, comps.C6Id, comps.C7Id, comps.C8Id}
 
-	for r := range n {
-		volt.CreateEntityWithComponents2(world, strconv.Itoa(r), comps.Position{}, comps.Velocity{})
+	for range n {
+		volt.CreateEntityWithComponents2(world, comps.Position{}, comps.Velocity{})
 	}
 
 	var ids []volt.ComponentIdConf
@@ -38,7 +37,7 @@ func runVolt(b *testing.B, n int) {
 			}
 		}
 
-		e := world.CreateEntity(strconv.Itoa(n + i))
+		e := world.CreateEntity()
 		world.AddComponents(e, ids...)
 		ids = ids[:0]
 	}

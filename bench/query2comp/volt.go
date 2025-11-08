@@ -3,7 +3,6 @@ package query2comp
 import (
 	"fmt"
 	"runtime"
-	"strconv"
 	"testing"
 
 	"github.com/akmonengine/volt"
@@ -19,11 +18,11 @@ func runVolt(b *testing.B, n int) {
 	volt.RegisterComponent[comps.Velocity](world, &voltConfig{BuilderFn: func(component any, configuration any) {}})
 
 	for i := 0; i < n*10; i++ {
-		e := world.CreateEntity(strconv.Itoa(i))
+		e := world.CreateEntity()
 		volt.AddComponent(world, e, comps.Position{})
 	}
 	for i := 0; i < n; i++ {
-		e := world.CreateEntity(strconv.Itoa(i))
+		e := world.CreateEntity()
 		volt.AddComponents2(world, e, comps.Position{}, comps.Velocity{X: 1, Y: 1})
 	}
 
