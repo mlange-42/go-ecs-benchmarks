@@ -6,7 +6,7 @@ require (
 	github.com/akmonengine/volt v1.7.0
 	github.com/marioolofo/go-gameengine-ecs v0.9.0
 	github.com/mlange-42/arche v0.15.3
-	github.com/mlange-42/ark v0.6.3
+	github.com/mlange-42/ark v0.6.5-0.20251113121327-f47a07df0575
 	github.com/shirou/gopsutil/v4 v4.25.2
 	github.com/stretchr/testify v1.10.0
 	github.com/unitoftime/ecs v0.0.3
