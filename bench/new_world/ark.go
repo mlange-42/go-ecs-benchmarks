@@ -8,7 +8,7 @@ import (
 )
 
 func runArk(b *testing.B, n int) {
-	var world ecs.World
+	var world *ecs.World
 	for b.Loop() {
 		world = ecs.NewWorld()
 	}
