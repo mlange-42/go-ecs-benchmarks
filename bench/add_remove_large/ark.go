@@ -10,13 +10,13 @@ import (
 func runArk(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	velMap := ecs.NewMap1[comps.Velocity](&world)
+	velMap := ecs.NewMap1[comps.Velocity](world)
 
 	mapper := ecs.NewMap11[
 		comps.Position,
 		comps.C1, comps.C2, comps.C3, comps.C4, comps.C5,
 		comps.C6, comps.C7, comps.C8, comps.C9, comps.C10,
-	](&world)
+	](world)
 
 	entities := make([]ecs.Entity, 0, n)
 	mapper.NewBatchFn(n, func(entity ecs.Entity, a *comps.Position, b *comps.C1,
@@ -45,18 +45,18 @@ func runArk(b *testing.B, n int) {
 func runArkBatched(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	velMap := ecs.NewMap1[comps.Velocity](&world)
+	velMap := ecs.NewMap1[comps.Velocity](world)
 
 	mapper := ecs.NewMap11[
 		comps.Position,
 		comps.C1, comps.C2, comps.C3, comps.C4, comps.C5,
 		comps.C6, comps.C7, comps.C8, comps.C9, comps.C10,
-	](&world)
+	](world)
 
 	mapper.NewBatchFn(n, nil)
 
-	filterPos := ecs.NewFilter1[comps.Position](&world)
-	filterPosVel := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
+	filterPos := ecs.NewFilter1[comps.Position](world)
+	filterPosVel := ecs.NewFilter2[comps.Position, comps.Velocity](world)
 
 	// Iterate once for more fairness
 	velMap.AddBatchFn(filterPos.Batch(), nil)

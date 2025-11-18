@@ -13,7 +13,7 @@ import (
 func runArk(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	mapper := ecs.NewMap[comps.Position](&world)
+	mapper := ecs.NewMap[comps.Position](world)
 	entities := make([]ecs.Entity, 0, n)
 	for range n {
 		e := mapper.NewEntity(&comps.Position{})

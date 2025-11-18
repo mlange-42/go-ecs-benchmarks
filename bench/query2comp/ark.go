@@ -12,15 +12,15 @@ import (
 func runArk(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	ecs.NewMap1[comps.Position](&world).
+	ecs.NewMap1[comps.Position](world).
 		NewBatchFn(n*10, nil)
 
-	ecs.NewMap2[comps.Position, comps.Velocity](&world).
+	ecs.NewMap2[comps.Position, comps.Velocity](world).
 		NewBatchFn(n, func(e ecs.Entity, p *comps.Position, v *comps.Velocity) {
 			v.X, v.Y = 1, 1
 		})
 
-	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](world)
 
 	loop := func() {
 		query := filter.Query()
@@ -49,15 +49,15 @@ func runArk(b *testing.B, n int) {
 func runArkRegistered(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	ecs.NewMap1[comps.Position](&world).
+	ecs.NewMap1[comps.Position](world).
 		NewBatchFn(n*10, nil)
 
-	ecs.NewMap2[comps.Position, comps.Velocity](&world).
+	ecs.NewMap2[comps.Position, comps.Velocity](world).
 		NewBatchFn(n, func(e ecs.Entity, p *comps.Position, v *comps.Velocity) {
 			v.X, v.Y = 1, 1
 		})
 
-	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world).Register()
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](world).Register()
 
 	loop := func() {
 		query := filter.Query()

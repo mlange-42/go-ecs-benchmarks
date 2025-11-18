@@ -11,20 +11,20 @@ import (
 func runArk(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	posID := ecs.ComponentID[comps.Position](&world)
-	_ = ecs.ComponentID[comps.Velocity](&world)
-	c1ID := ecs.ComponentID[comps.C1](&world)
-	c2ID := ecs.ComponentID[comps.C2](&world)
-	c3ID := ecs.ComponentID[comps.C3](&world)
-	c4ID := ecs.ComponentID[comps.C4](&world)
-	c5ID := ecs.ComponentID[comps.C5](&world)
-	c6ID := ecs.ComponentID[comps.C6](&world)
-	c7ID := ecs.ComponentID[comps.C7](&world)
-	c8ID := ecs.ComponentID[comps.C8](&world)
+	posID := ecs.ComponentID[comps.Position](world)
+	_ = ecs.ComponentID[comps.Velocity](world)
+	c1ID := ecs.ComponentID[comps.C1](world)
+	c2ID := ecs.ComponentID[comps.C2](world)
+	c3ID := ecs.ComponentID[comps.C3](world)
+	c4ID := ecs.ComponentID[comps.C4](world)
+	c5ID := ecs.ComponentID[comps.C5](world)
+	c6ID := ecs.ComponentID[comps.C6](world)
+	c7ID := ecs.ComponentID[comps.C7](world)
+	c8ID := ecs.ComponentID[comps.C8](world)
 
 	extraIDs := []ecs.ID{c1ID, c2ID, c3ID, c4ID, c5ID, c6ID, c7ID, c8ID}
 
-	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
+	mapper := ecs.NewMap2[comps.Position, comps.Velocity](world)
 	mapper.NewBatchFn(n, nil)
 
 	ids := []ecs.ID{}
@@ -41,7 +41,7 @@ func runArk(b *testing.B, n int) {
 		ids = ids[:0]
 	}
 
-	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](world)
 
 	loop := func() {
 		query := filter.Query()
@@ -67,20 +67,20 @@ func runArk(b *testing.B, n int) {
 func runArkRegistered(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	posID := ecs.ComponentID[comps.Position](&world)
-	_ = ecs.ComponentID[comps.Velocity](&world)
-	c1ID := ecs.ComponentID[comps.C1](&world)
-	c2ID := ecs.ComponentID[comps.C2](&world)
-	c3ID := ecs.ComponentID[comps.C3](&world)
-	c4ID := ecs.ComponentID[comps.C4](&world)
-	c5ID := ecs.ComponentID[comps.C5](&world)
-	c6ID := ecs.ComponentID[comps.C6](&world)
-	c7ID := ecs.ComponentID[comps.C7](&world)
-	c8ID := ecs.ComponentID[comps.C8](&world)
+	posID := ecs.ComponentID[comps.Position](world)
+	_ = ecs.ComponentID[comps.Velocity](world)
+	c1ID := ecs.ComponentID[comps.C1](world)
+	c2ID := ecs.ComponentID[comps.C2](world)
+	c3ID := ecs.ComponentID[comps.C3](world)
+	c4ID := ecs.ComponentID[comps.C4](world)
+	c5ID := ecs.ComponentID[comps.C5](world)
+	c6ID := ecs.ComponentID[comps.C6](world)
+	c7ID := ecs.ComponentID[comps.C7](world)
+	c8ID := ecs.ComponentID[comps.C8](world)
 
 	extraIDs := []ecs.ID{c1ID, c2ID, c3ID, c4ID, c5ID, c6ID, c7ID, c8ID}
 
-	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
+	mapper := ecs.NewMap2[comps.Position, comps.Velocity](world)
 	mapper.NewBatchFn(n, nil)
 
 	ids := []ecs.ID{}
@@ -97,7 +97,7 @@ func runArkRegistered(b *testing.B, n int) {
 		ids = ids[:0]
 	}
 
-	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world).Register()
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](world).Register()
 
 	loop := func() {
 		query := filter.Query()
