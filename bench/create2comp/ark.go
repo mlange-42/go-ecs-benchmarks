@@ -10,8 +10,8 @@ import (
 func runArk(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
-	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
+	mapper := ecs.NewMap2[comps.Position, comps.Velocity](world)
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](world)
 
 	mapper.NewBatchFn(n, nil)
 	world.RemoveEntities(filter.Batch(), nil)
@@ -43,8 +43,8 @@ func runArk(b *testing.B, n int) {
 func runArkBatched(b *testing.B, n int) {
 	world := ecs.NewWorld(1024)
 
-	mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
-	filter := ecs.NewFilter2[comps.Position, comps.Velocity](&world)
+	mapper := ecs.NewMap2[comps.Position, comps.Velocity](world)
+	filter := ecs.NewFilter2[comps.Position, comps.Velocity](world)
 
 	mapper.NewBatchFn(n, nil)
 	world.RemoveEntities(filter.Batch(), nil)

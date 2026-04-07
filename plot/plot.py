@@ -18,7 +18,7 @@ colors = {
     "Arche (cached)": default_colors[1],
     "Ark": default_colors[0],
     "Ark (batch)": default_colors[1],
-    "Ark (cached)": default_colors[1],
+    "Ark (tables)": default_colors[1],
     "Donburi": default_colors[2],
     "ggecs": default_colors[4],
     "uot": default_colors[5],

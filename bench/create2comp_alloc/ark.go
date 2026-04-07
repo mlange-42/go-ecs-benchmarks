@@ -12,7 +12,7 @@ func runArk(b *testing.B, n int) {
 		b.StopTimer()
 		world := ecs.NewWorld(1024)
 
-		mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
+		mapper := ecs.NewMap2[comps.Position, comps.Velocity](world)
 
 		b.StartTimer()
 		for range n {
@@ -26,7 +26,7 @@ func runArkBatched(b *testing.B, n int) {
 		b.StopTimer()
 		world := ecs.NewWorld(1024)
 
-		mapper := ecs.NewMap2[comps.Position, comps.Velocity](&world)
+		mapper := ecs.NewMap2[comps.Position, comps.Velocity](world)
 
 		b.StartTimer()
 		mapper.NewBatchFn(n, nil)

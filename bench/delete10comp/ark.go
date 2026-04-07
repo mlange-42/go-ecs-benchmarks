@@ -13,8 +13,8 @@ func runArk(b *testing.B, n int) {
 	mapper := ecs.NewMap10[
 		comps.C1, comps.C2, comps.C3, comps.C4, comps.C5,
 		comps.C6, comps.C7, comps.C8, comps.C9, comps.C10,
-	](&world)
-	filter := ecs.NewFilter0(&world)
+	](world)
+	filter := ecs.NewFilter0(world)
 
 	entities := make([]ecs.Entity, 0, n)
 
@@ -54,8 +54,8 @@ func runArkBatched(b *testing.B, n int) {
 	mapper := ecs.NewMap10[
 		comps.C1, comps.C2, comps.C3, comps.C4, comps.C5,
 		comps.C6, comps.C7, comps.C8, comps.C9, comps.C10,
-	](&world)
-	filter := ecs.NewFilter0(&world)
+	](world)
+	filter := ecs.NewFilter0(world)
 
 	mapper.NewBatchFn(n, nil)
 
