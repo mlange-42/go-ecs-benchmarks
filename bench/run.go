@@ -19,15 +19,17 @@ import (
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query256arch"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query2comp"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/query32arch"
+	"github.com/mlange-42/go-ecs-benchmarks/bench/query_noinline"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/random"
 	"github.com/mlange-42/go-ecs-benchmarks/bench/util"
 	"github.com/shirou/gopsutil/v4/cpu"
 )
 
 var benchmarks = map[string]func() util.Benchmarks{
-	"query2comp":   query2comp.Benchmarks,
-	"query32arch":  query32arch.Benchmarks,
-	"query256arch": query256arch.Benchmarks,
+	"query2comp":     query2comp.Benchmarks,
+	"query_noinline": query_noinline.Benchmarks,
+	"query32arch":    query32arch.Benchmarks,
+	"query256arch":   query256arch.Benchmarks,
 
 	"random": random.Benchmarks,
 

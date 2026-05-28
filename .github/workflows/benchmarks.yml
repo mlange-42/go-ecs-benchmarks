@@ -17,6 +17,7 @@ jobs:
         run: |
           go run . -test.benchtime=1s -count=3 \
               query2comp \
+              query_noinline \
               query32arch \
               query256arch \
 
