@@ -8,7 +8,7 @@ Comparative benchmarks for Go Entity Component System (ECS) implementations.
 
 | ECS | Tested | Latest | Activity |
 |-----|--------|--------|----------|
-| [Ark](https://github.com/mlange-42/ark) | v0.8.0 | ![GitHub Tag](https://img.shields.io/github/v/tag/mlange-42/ark?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/mlange-42/ark?label=date) | ![Last commit](https://img.shields.io/github/last-commit/mlange-42/ark) |
+| [Ark](https://github.com/mlange-42/ark) | v0.8.3 | ![GitHub Tag](https://img.shields.io/github/v/tag/mlange-42/ark?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/mlange-42/ark?label=date) | ![Last commit](https://img.shields.io/github/last-commit/mlange-42/ark) |
 | [Donburi](https://github.com/yohamta0/donburi-ecs) | v1.15.7 | ![GitHub Tag](https://img.shields.io/github/v/tag/yohamta0/donburi-ecs?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/yohamta0/donburi-ecs?label=date) | ![Last commit](https://img.shields.io/github/last-commit/yohamta0/donburi-ecs) |
 | [go‑gameengine‑ecs](https://github.com/marioolofo/go-gameengine-ecs) | v0.9.0 | ![GitHub Tag](https://img.shields.io/github/v/tag/marioolofo/go-gameengine-ecs?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/marioolofo/go-gameengine-ecs?label=date) | ![Last commit](https://img.shields.io/github/last-commit/marioolofo/go-gameengine-ecs) |
 | [unitoftime/ecs](https://github.com/unitoftime/ecs) | v0.0.3 | ![GitHub Tag](https://img.shields.io/github/v/tag/unitoftime/ecs?color=blue) ![GitHub Release Date](https://img.shields.io/github/release-date/unitoftime/ecs?label=date) | ![Last commit](https://img.shields.io/github/last-commit/unitoftime/ecs) |
@@ -231,7 +231,7 @@ The benchmarks can take up to one hour to complete.
 To run a selection of benchmarks, add their names as arguments:
 
 ```shell
-go run . query2comp query1in10 query32arch
+go run . query2comp query32arch
 ```
 
 To create the plots, run `plot/plot.py`. The following packages are required:
